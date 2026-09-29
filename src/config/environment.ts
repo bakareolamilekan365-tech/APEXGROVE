@@ -1,0 +1,1 @@
+export const environment = { isDemo: true } as const;

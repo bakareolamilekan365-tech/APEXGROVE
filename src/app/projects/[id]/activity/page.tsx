@@ -1,0 +1,1 @@
+export default function ProjectActivityPage() { return <main><h1>Activity</h1></main>; }

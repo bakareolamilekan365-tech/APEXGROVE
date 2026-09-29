@@ -1,0 +1,1 @@
+export type Verification = { id: string };

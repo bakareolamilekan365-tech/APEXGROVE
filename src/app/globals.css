@@ -1,0 +1,4 @@
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Georgia, serif; color: #17352f; background: #f4f1e8; }
+main { max-width: 72rem; margin: 0 auto; padding: 4rem 2rem; }

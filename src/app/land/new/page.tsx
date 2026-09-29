@@ -1,0 +1,1 @@
+export default function NewLandPage() { return <main><h1>Add land</h1></main>; }

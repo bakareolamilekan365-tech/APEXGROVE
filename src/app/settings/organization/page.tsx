@@ -1,0 +1,1 @@
+export default function OrganizationSettingsPage() { return <main><h1>Organization settings</h1></main>; }

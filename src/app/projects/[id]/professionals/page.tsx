@@ -1,0 +1,1 @@
+export default function ProjectProfessionalsPage() { return <main><h1>Professionals</h1></main>; }

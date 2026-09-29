@@ -1,0 +1,1 @@
+export function updateSupabaseSession() { throw new Error("Supabase middleware is not configured yet."); }

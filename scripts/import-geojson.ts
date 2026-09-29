@@ -1,0 +1,1 @@
+console.log("GeoJSON import script placeholder.");
