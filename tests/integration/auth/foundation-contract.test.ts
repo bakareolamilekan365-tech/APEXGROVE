@@ -14,14 +14,20 @@ describe("auth foundation migration contract", () => {
   });
 
   it("defines organization ownership and audit persistence", () => {
-    expect(migration("003_organizations.sql")).toContain("organization_owner_on_create");
+    expect(migration("003_organizations.sql")).toContain(
+      "organization_owner_on_create",
+    );
     expect(migration("012_audit_logs.sql")).toContain("public.audit_logs");
   });
 
   it("enables row-level security for foundation tables", () => {
     const sql = migration("013_rls_policies.sql");
-    expect(sql).toContain("alter table public.profiles enable row level security");
-    expect(sql).toContain("alter table public.organizations enable row level security");
+    expect(sql).toContain(
+      "alter table public.profiles enable row level security",
+    );
+    expect(sql).toContain(
+      "alter table public.organizations enable row level security",
+    );
     expect(sql).toContain("Admins can view audit logs");
   });
 });

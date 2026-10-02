@@ -16,10 +16,11 @@ export default function LoginPage() {
     setError(null);
     setIsSubmitting(true);
 
-    const { error: signInError } = await createSupabaseClient().auth.signInWithPassword({
-      email,
-      password,
-    });
+    const { error: signInError } =
+      await createSupabaseClient().auth.signInWithPassword({
+        email,
+        password,
+      });
 
     if (signInError) {
       setError(signInError.message);
@@ -36,13 +37,29 @@ export default function LoginPage() {
       <h1>Sign in</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
-        <input id="email" type="email" value={email} onChange={(event) => setEmail(event.target.value)} required />
+        <input
+          id="email"
+          type="email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          required
+        />
         <label htmlFor="password">Password</label>
-        <input id="password" type="password" value={password} onChange={(event) => setPassword(event.target.value)} required />
+        <input
+          id="password"
+          type="password"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+          required
+        />
         {error ? <p role="alert">{error}</p> : null}
-        <button type="submit" disabled={isSubmitting}>{isSubmitting ? "Signing in..." : "Sign in"}</button>
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Signing in..." : "Sign in"}
+        </button>
       </form>
-      <p><a href="/register">Create an account</a></p>
+      <p>
+        <a href="/register">Create an account</a>
+      </p>
     </main>
   );
 }

@@ -12,7 +12,9 @@ export default function RolePage() {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const { data: { user } } = await createSupabaseClient().auth.getUser();
+    const {
+      data: { user },
+    } = await createSupabaseClient().auth.getUser();
     if (!user) {
       router.push("/login");
       return;
@@ -37,8 +39,16 @@ export default function RolePage() {
       <h1>Choose your role</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="role">I am joining as</label>
-        <select id="role" value={role} onChange={(event) => setRole(event.target.value as AccountRole)}>
-          {accountRoles.map((option) => <option key={option} value={option}>{option}</option>)}
+        <select
+          id="role"
+          value={role}
+          onChange={(event) => setRole(event.target.value as AccountRole)}
+        >
+          {accountRoles.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
         </select>
         {error ? <p role="alert">{error}</p> : null}
         <button type="submit">Continue</button>

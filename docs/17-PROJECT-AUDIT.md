@@ -7,9 +7,9 @@
 
 ## Executive Summary
 
-APEXGROVE has completed its repository, product-definition, design-planning, dependency, testing, security-ignore, and initial Supabase foundation setup. The project is now ready to begin the first real product workflow: authentication and onboarding.
+APEXGROVE has completed its repository, product-definition, design-planning, dependency, testing, security-ignore, and initial Supabase foundation setup. The first authentication and onboarding slice is now implemented locally, and the foundation migrations have been applied to the hosted Supabase project.
 
-The application is **not yet feature-complete**. Many routes and modules are intentional scaffolds, and the hosted Supabase migrations have not yet been applied. No claim of production readiness or official land verification should be made at this stage.
+The application is **not yet feature-complete**. Many routes and modules are intentional scaffolds, and no claim of production readiness or official land verification should be made at this stage.
 
 ## Completed Work
 
@@ -51,13 +51,22 @@ The application is **not yet feature-complete**. Many routes and modules are int
   - Organization ownership
   - Audit logs
   - Initial row-level security policies
+- Applied the 13 local migrations to the hosted Supabase project with `supabase db push`.
+
+### Authentication slice
+
+- Added registration with role metadata.
+- Added email/password login.
+- Added role selection and profile update.
+- Added protected dashboard routing and profile lookup.
+- Added shared role validation.
 
 ### Validation completed
 
 - TypeScript typecheck passes.
 - ESLint passes with a non-blocking TypeScript-version compatibility warning.
-- Unit smoke suites pass: 3 test files, 3 tests.
-- Integration smoke suites pass: 4 test files, 4 tests.
+- Unit suites pass: 4 test files, 5 tests.
+- Integration suites pass: 5 test files, 7 tests.
 - Playwright discovers the four planned E2E flows; they are explicitly skipped until their application features exist.
 - Git worktree is clean and `main` is synchronized with GitHub.
 
@@ -76,6 +85,7 @@ The application is **not yet feature-complete**. Many routes and modules are int
 | `38c10fe` | Install Supabase foundation dependencies              |
 | `a6d2c41` | Add Supabase clients, middleware, and auth foundation |
 | `71369ab` | Ignore Supabase CLI temporary state                   |
+| `c1f387e` | Implement authentication foundation flow              |
 
 ## Current Status by Area
 
@@ -87,9 +97,9 @@ The application is **not yet feature-complete**. Many routes and modules are int
 | Environment setup      | Local configuration present | `.env.local` exists locally and is ignored; values are never stored in Git.                       |
 | Supabase clients       | Foundation complete         | Browser/server clients and middleware are wired.                                                  |
 | Database schema        | Foundation partial          | Auth/profile/organization/audit migrations are real; later domain migrations remain placeholders. |
-| Hosted database        | Pending                     | Migrations have not been applied to the hosted Supabase project.                                  |
-| Authentication UI      | Not started                 | Login, registration, reset, and onboarding pages are still placeholders.                          |
-| Dashboard              | Not started                 | Current dashboard is a route placeholder.                                                         |
+| Hosted database        | Foundation deployed         | All 13 local migrations were applied successfully with `supabase db push`.                        |
+| Authentication UI      | Foundation partial          | Registration, login, role selection, and protected dashboard exist; reset flow remains pending.  |
+| Dashboard              | Foundation partial          | Authenticated profile lookup works; role-specific dashboard modules remain pending.               |
 | Land/GIS               | Not started                 | Demo GeoJSON and map provider are not connected.                                                  |
 | Documents              | Not started                 | Storage buckets, upload, access checks, and versioning are not implemented.                       |
 | Projects/professionals | Not started                 | Workspace and membership workflows are placeholders.                                              |
@@ -98,11 +108,11 @@ The application is **not yet feature-complete**. Many routes and modules are int
 
 ## Open Risks and Required Follow-up
 
-1. Apply and verify the foundation migrations in the hosted Supabase project.
-2. Add real authentication pages and server-side session checks.
-3. Add migration tests for RLS and profile provisioning.
-4. Replace smoke tests with requirement-specific unit and integration tests.
-5. Implement the role-aware dashboard.
+1. Verify signup, email confirmation, login, role selection, and dashboard against the hosted project.
+2. Add migration tests for RLS and profile provisioning against a real database.
+3. Finish password reset and onboarding profile details.
+4. Replace remaining smoke tests with requirement-specific unit and integration tests.
+5. Implement the role-aware dashboard modules.
 6. Add synthetic seed data and clearly label it as `DEMO DATA / NOT OFFICIAL`.
 7. Only then begin the land and GIS workflow.
 

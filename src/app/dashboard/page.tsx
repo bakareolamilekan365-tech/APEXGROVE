@@ -3,7 +3,9 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export default async function DashboardPage() {
   const supabase = await createSupabaseServerClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   if (!user) {
     redirect("/login");
@@ -20,7 +22,10 @@ export default async function DashboardPage() {
       <h1>Dashboard</h1>
       <p>Welcome{profile?.full_name ? `, ${profile.full_name}` : ""}.</p>
       <p>Role: {profile?.account_type ?? "incomplete"}</p>
-      <p>Land discovery and projects will appear here as those modules are implemented.</p>
+      <p>
+        Land discovery and projects will appear here as those modules are
+        implemented.
+      </p>
     </main>
   );
 }

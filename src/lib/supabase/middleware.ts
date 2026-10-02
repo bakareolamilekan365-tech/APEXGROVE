@@ -27,10 +27,19 @@ export async function updateSupabaseSession(request: NextRequest) {
     },
   });
 
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   const pathname = request.nextUrl.pathname;
-  const publicPaths = ["/", "/login", "/register", "/forgot-password", "/auth/callback"];
-  const isPublicPath = publicPaths.includes(pathname) || pathname.startsWith("/api/");
+  const publicPaths = [
+    "/",
+    "/login",
+    "/register",
+    "/forgot-password",
+    "/auth/callback",
+  ];
+  const isPublicPath =
+    publicPaths.includes(pathname) || pathname.startsWith("/api/");
 
   if (!user && !isPublicPath) {
     const loginUrl = request.nextUrl.clone();
