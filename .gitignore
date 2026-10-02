@@ -1,8 +1,43 @@
 node_modules/
 .next/
 out/
-.env.local
-.env*.local
+
+# Environment and local configuration secrets
+.env
+.env.*
+!.env.example
+!.env.*.example
+!**/.env.example
+!**/.env.*.example
+.npmrc
+!.npmrc.example
+
+# Credentials, tokens, and private keys
+secrets/
+**/secrets/
+credentials/
+**/credentials/
+**/*secret*
+**/*secrets*
+**/*credential*
+**/*credentials*
+*.secret
+*.secrets
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.crt
+*.cer
+
+# Local deployment and service state
+.vercel/
+.netlify/
+.firebase/
+.supabase/
+
 playwright-report/
 test-results/
 coverage/
