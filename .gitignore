@@ -37,6 +37,7 @@ credentials/
 .netlify/
 .firebase/
 .supabase/
+supabase/.temp/
 
 playwright-report/
 test-results/
