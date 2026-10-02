@@ -56,7 +56,7 @@ The application is **not yet feature-complete**. Many routes and modules are int
 
 ### Authentication slice
 
-- Added registration with role metadata.
+- Added registration with safe default role provisioning.
 - Added email/password login.
 - Added role selection and profile update.
 - Added protected dashboard routing and profile lookup.
@@ -97,28 +97,51 @@ The application is **not yet feature-complete**. Many routes and modules are int
 | `a6d2c41` | Add Supabase clients, middleware, and auth foundation |
 | `71369ab` | Ignore Supabase CLI temporary state                   |
 | `c1f387e` | Implement authentication foundation flow              |
-| `a21a62f` | Record hosted Supabase foundation deployment        |
+| `a21a62f` | Record hosted Supabase foundation deployment          |
+| `934dc53` | Harden auth roles and complete project audit          |
+| `78a6ff4` | Record successful auth flow verification              |
+| `95ecd74` | Map prototype flow and delivery phases                |
 
 ## Current Status by Area
 
-| Area                   | Status                      | Evidence or limitation                                                                            |
-| ---------------------- | --------------------------- | ------------------------------------------------------------------------------------------------- |
-| Product requirements   | Complete baseline           | Requirements are documented and mapped to test layers.                                            |
-| UX/design planning     | Ready for implementation    | Design gate and flow checklist exist; polished wireframes are still needed.                       |
-| Repository setup       | Complete                    | GitHub `main` is clean and synchronized.                                                          |
-| Environment setup      | Local configuration present | `.env.local` exists locally and is ignored; values are never stored in Git.                       |
-| Supabase clients       | Foundation complete         | Browser/server clients and middleware are wired.                                                  |
-| Database schema        | Foundation partial          | Auth/profile/organization/audit migrations are real; later domain migrations remain placeholders. |
-| Hosted database        | Foundation deployed         | All 14 local migrations were applied successfully with `supabase db push`.                        |
+| Area                   | Status                      | Evidence or limitation                                                                              |
+| ---------------------- | --------------------------- | --------------------------------------------------------------------------------------------------- |
+| Product requirements   | Complete baseline           | Requirements are documented and mapped to test layers.                                              |
+| UX/design planning     | Ready for implementation    | Design gate and flow checklist exist; polished wireframes are still needed.                         |
+| Repository setup       | Complete                    | GitHub `main` is clean and synchronized.                                                            |
+| Environment setup      | Local configuration present | `.env.local` exists locally and is ignored; values are never stored in Git.                         |
+| Supabase clients       | Foundation complete         | Browser/server clients and middleware are wired.                                                    |
+| Database schema        | Foundation partial          | Auth/profile/organization/audit migrations are real; later domain migrations remain placeholders.   |
+| Hosted database        | Foundation deployed         | All 14 local migrations were applied successfully with `supabase db push`.                          |
 | Authentication UI      | Foundation verified         | Registration, login, role selection, and protected dashboard were manually verified; reset pending. |
-| Dashboard              | Foundation partial          | Authenticated profile lookup works; role-specific dashboard modules remain pending.               |
-| Land/GIS               | Not started                 | Demo GeoJSON and map provider are not connected.                                                  |
-| Documents              | Not started                 | Storage buckets, upload, access checks, and versioning are not implemented.                       |
-| Projects/professionals | Not started                 | Workspace and membership workflows are placeholders.                                              |
-| Feasibility            | Not started                 | Calculation domain logic and persistence are not implemented.                                     |
-| E2E coverage           | Reserved                    | Four named flows exist but are skipped until features are connected.                              |
-| Production build       | Passing                     | 36 routes build successfully; Next ESLint plugin detection remains a warning.                    |
-| Dependency security    | Review required             | PostCSS advisories are transitive through Next 15; fixing requires a major Next upgrade.          |
+| Dashboard              | Foundation partial          | Authenticated profile lookup works; role-specific dashboard modules remain pending.                 |
+| Land/GIS               | Not started                 | Demo GeoJSON and map provider are not connected.                                                    |
+| Documents              | Not started                 | Storage buckets, upload, access checks, and versioning are not implemented.                         |
+| Projects/professionals | Not started                 | Workspace and membership workflows are placeholders.                                                |
+| Feasibility            | Not started                 | Calculation domain logic and persistence are not implemented.                                       |
+| E2E coverage           | Reserved                    | Four named flows exist but are skipped until features are connected.                                |
+| Production build       | Passing                     | 36 routes build successfully; Next ESLint plugin detection remains a warning.                       |
+| Dependency security    | Review required             | PostCSS advisories are transitive through Next 15; fixing requires a major Next upgrade.            |
+
+## Foundation Exit Checklist
+
+The prototype foundation is ready to move into land implementation when these remaining gates are complete:
+
+- [x] GitHub repository, branch, ignore rules, and reproducible dependencies
+- [x] Requirements, design plan, prototype flow, and delivery gates documented
+- [x] Supabase project linked and 14 migrations deployed
+- [x] Browser/server clients and session middleware wired
+- [x] Registration, login, role selection, and protected dashboard manually verified
+- [x] Typecheck, lint, unit tests, integration tests, and production build pass
+- [ ] Password reset and email-confirmation recovery flow
+- [ ] Profile onboarding details beyond role selection
+- [ ] Real database tests for RLS, profile provisioning, and organization membership
+- [ ] Private document storage bucket and access policies
+- [ ] Synthetic seed fixtures for users, organizations, and initial dashboard data
+- [ ] Replace foundation smoke tests with requirement-specific tests
+- [ ] Update the audit after all remaining gates pass
+
+Until the unchecked items are complete, feature work should remain limited to foundation support. The first post-foundation implementation slice is Land Discovery and GIS.
 
 ## Open Risks and Required Follow-up
 
