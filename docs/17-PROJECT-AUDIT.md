@@ -52,6 +52,7 @@ The application is **not yet feature-complete**. Many routes and modules are int
   - Audit logs
   - Initial row-level security policies
 - Applied the 13 local migrations to the hosted Supabase project with `supabase db push`.
+- Applied `014_auth_hardening.sql` to the hosted project after the security review.
 
 ### Authentication slice
 
@@ -66,8 +67,11 @@ The application is **not yet feature-complete**. Many routes and modules are int
 - TypeScript typecheck passes.
 - ESLint passes with a non-blocking TypeScript-version compatibility warning.
 - Unit suites pass: 4 test files, 5 tests.
-- Integration suites pass: 5 test files, 7 tests.
+- Integration suites pass: 5 test files, 8 tests.
 - Playwright discovers the four planned E2E flows; they are explicitly skipped until their application features exist.
+- Production build passes and generates 36 routes; the authenticated dashboard is dynamic.
+- Known non-blocking warnings: Next ESLint plugin is not detected by the native flat config, TypeScript 5.9 is newer than the current typescript-eslint support range, and Vite reports a deprecated CJS API.
+- `npm audit --omit=dev` reports transitive PostCSS vulnerabilities; npm proposes a breaking Next 16 upgrade.
 - Git worktree is clean and `main` is synchronized with GitHub.
 
 ## Commit Record
@@ -86,6 +90,7 @@ The application is **not yet feature-complete**. Many routes and modules are int
 | `a6d2c41` | Add Supabase clients, middleware, and auth foundation |
 | `71369ab` | Ignore Supabase CLI temporary state                   |
 | `c1f387e` | Implement authentication foundation flow              |
+| `a21a62f` | Record hosted Supabase foundation deployment        |
 
 ## Current Status by Area
 
@@ -97,7 +102,7 @@ The application is **not yet feature-complete**. Many routes and modules are int
 | Environment setup      | Local configuration present | `.env.local` exists locally and is ignored; values are never stored in Git.                       |
 | Supabase clients       | Foundation complete         | Browser/server clients and middleware are wired.                                                  |
 | Database schema        | Foundation partial          | Auth/profile/organization/audit migrations are real; later domain migrations remain placeholders. |
-| Hosted database        | Foundation deployed         | All 13 local migrations were applied successfully with `supabase db push`.                        |
+| Hosted database        | Foundation deployed         | All 14 local migrations were applied successfully with `supabase db push`.                        |
 | Authentication UI      | Foundation partial          | Registration, login, role selection, and protected dashboard exist; reset flow remains pending.  |
 | Dashboard              | Foundation partial          | Authenticated profile lookup works; role-specific dashboard modules remain pending.               |
 | Land/GIS               | Not started                 | Demo GeoJSON and map provider are not connected.                                                  |
@@ -105,6 +110,8 @@ The application is **not yet feature-complete**. Many routes and modules are int
 | Projects/professionals | Not started                 | Workspace and membership workflows are placeholders.                                              |
 | Feasibility            | Not started                 | Calculation domain logic and persistence are not implemented.                                     |
 | E2E coverage           | Reserved                    | Four named flows exist but are skipped until features are connected.                              |
+| Production build       | Passing                     | 36 routes build successfully; Next ESLint plugin detection remains a warning.                    |
+| Dependency security    | Review required             | PostCSS advisories are transitive through Next 15; fixing requires a major Next upgrade.          |
 
 ## Open Risks and Required Follow-up
 
@@ -113,8 +120,9 @@ The application is **not yet feature-complete**. Many routes and modules are int
 3. Finish password reset and onboarding profile details.
 4. Replace remaining smoke tests with requirement-specific unit and integration tests.
 5. Implement the role-aware dashboard modules.
-6. Add synthetic seed data and clearly label it as `DEMO DATA / NOT OFFICIAL`.
-7. Only then begin the land and GIS workflow.
+6. Decide whether to keep the stable Next 15/PostCSS risk or schedule a tested Next 16 upgrade.
+7. Add synthetic seed data and clearly label it as `DEMO DATA / NOT OFFICIAL`.
+8. Only then begin the land and GIS workflow.
 
 ## Audit Boundary
 

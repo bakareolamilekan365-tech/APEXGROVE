@@ -11,6 +11,7 @@ describe("auth foundation migration contract", () => {
     expect(sql).toContain("create table if not exists public.profiles");
     expect(sql).toContain("on_auth_user_created");
     expect(sql).toContain("public.handle_new_user");
+    expect(sql).toContain("'buyer'");
   });
 
   it("defines organization ownership and audit persistence", () => {
@@ -29,5 +30,11 @@ describe("auth foundation migration contract", () => {
       "alter table public.organizations enable row level security",
     );
     expect(sql).toContain("Admins can view audit logs");
+  });
+
+  it("hardens role assignment against admin escalation", () => {
+    const sql = migration("014_auth_hardening.sql");
+    expect(sql).toContain("public.prevent_profile_role_escalation");
+    expect(sql).toContain("Only an existing administrator can assign the admin role");
   });
 });

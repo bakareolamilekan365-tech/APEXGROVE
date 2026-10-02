@@ -21,7 +21,7 @@ begin
 	values (
 		new.id,
 		nullif(new.raw_user_meta_data ->> 'full_name', ''),
-		coalesce(nullif(new.raw_user_meta_data ->> 'account_type', ''), 'buyer')
+		'buyer'
 	);
 	return new;
 end;

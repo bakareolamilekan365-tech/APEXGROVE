@@ -3,14 +3,12 @@
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createSupabaseClient } from "@/lib/supabase/client";
-import { accountRoles, type AccountRole } from "@/lib/auth/roles";
 
 export default function RegisterPage() {
   const router = useRouter();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [accountType, setAccountType] = useState<AccountRole>("buyer");
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -23,7 +21,7 @@ export default function RegisterPage() {
       await createSupabaseClient().auth.signUp({
         email,
         password,
-        options: { data: { full_name: fullName, account_type: accountType } },
+        options: { data: { full_name: fullName } },
       });
 
     if (signUpError) {
@@ -32,7 +30,7 @@ export default function RegisterPage() {
     }
 
     if (data.session) {
-      router.push("/dashboard");
+      router.push("/onboarding/role");
       router.refresh();
       return;
     }
@@ -68,20 +66,6 @@ export default function RegisterPage() {
           onChange={(event) => setPassword(event.target.value)}
           required
         />
-        <label htmlFor="account-type">I am joining as</label>
-        <select
-          id="account-type"
-          value={accountType}
-          onChange={(event) =>
-            setAccountType(event.target.value as AccountRole)
-          }
-        >
-          {accountRoles.map((role) => (
-            <option key={role} value={role}>
-              {role}
-            </option>
-          ))}
-        </select>
         {message ? <p role="status">{message}</p> : null}
         {error ? <p role="alert">{error}</p> : null}
         <button type="submit">Create account</button>
