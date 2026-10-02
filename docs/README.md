@@ -36,6 +36,7 @@ All synthetic records must be clearly labelled **DEMO DATA / NOT OFFICIAL**.
 15. `14-BUILD-AGENT-INSTRUCTIONS.md`
 16. `15-REQUIREMENTS-AND-TEST-STRATEGY.md`
 17. `16-DESIGN-AND-INTEGRATION-PLAN.md`
+18. `17-PROJECT-AUDIT.md`
 
 ## Important
 
