@@ -1,9 +1,13 @@
+`
+
 # APEXGROVE — Database Schema
 
 ## Database
+
 PostgreSQL with PostGIS.
 
 ## Conventions
+
 - UUID primary keys
 - `created_at`, `updated_at` on mutable entities
 - `created_by` / `updated_by` where appropriate
@@ -13,7 +17,9 @@ PostgreSQL with PostGIS.
 - Geometry columns use an explicitly documented spatial reference system
 
 ## Core tables
+
 ### profiles
+
 - id
 - user_id
 - full_name
@@ -26,6 +32,7 @@ PostgreSQL with PostGIS.
 - updated_at
 
 ### organizations
+
 - id
 - name
 - organization_type
@@ -37,12 +44,14 @@ PostgreSQL with PostGIS.
 - updated_at
 
 ### organization_members
+
 - organization_id
 - user_id
 - role
 - created_at
 
 ### professionals
+
 - id
 - profile_id
 - discipline
@@ -56,6 +65,7 @@ PostgreSQL with PostGIS.
 - updated_at
 
 ### land_parcels
+
 - id
 - reference_code
 - title
@@ -79,6 +89,7 @@ PostgreSQL with PostGIS.
 - updated_at
 
 ### land_listings
+
 - id
 - parcel_id
 - owner_profile_id nullable
@@ -90,6 +101,7 @@ PostgreSQL with PostGIS.
 - updated_at
 
 ### land_documents
+
 - id
 - parcel_id
 - document_type
@@ -101,6 +113,7 @@ PostgreSQL with PostGIS.
 - uploaded_at
 
 ### land_verifications
+
 - id
 - parcel_id
 - status
@@ -112,6 +125,7 @@ PostgreSQL with PostGIS.
 - expires_at nullable
 
 ### land_verification_items
+
 - id
 - verification_id
 - category
@@ -120,6 +134,7 @@ PostgreSQL with PostGIS.
 - evidence_document_id nullable
 
 ### properties
+
 - id
 - parcel_id nullable
 - property_type
@@ -135,6 +150,7 @@ PostgreSQL with PostGIS.
 - updated_at
 
 ### projects
+
 - id
 - name
 - project_type
@@ -150,6 +166,7 @@ PostgreSQL with PostGIS.
 - updated_at
 
 ### project_members
+
 - project_id
 - user_id
 - role
@@ -157,6 +174,7 @@ PostgreSQL with PostGIS.
 - created_at
 
 ### project_documents
+
 - id
 - project_id
 - document_type
@@ -168,6 +186,7 @@ PostgreSQL with PostGIS.
 - created_at
 
 ### professional_services
+
 - id
 - professional_id
 - service_name
@@ -175,6 +194,7 @@ PostgreSQL with PostGIS.
 - active
 
 ### project_professionals
+
 - project_id
 - professional_id
 - role_on_project
@@ -183,6 +203,7 @@ PostgreSQL with PostGIS.
 - created_at
 
 ### feasibility_scenarios
+
 - id
 - project_id
 - name
@@ -202,6 +223,7 @@ PostgreSQL with PostGIS.
 - updated_at
 
 ### notifications
+
 - id
 - user_id
 - type
@@ -211,6 +233,7 @@ PostgreSQL with PostGIS.
 - created_at
 
 ### audit_logs
+
 - id
 - actor_user_id
 - action
@@ -220,7 +243,9 @@ PostgreSQL with PostGIS.
 - created_at
 
 ## Jurisdiction model
+
 Reserve these tables from the start:
+
 - countries
 - regions
 - local_authorities
@@ -230,4 +255,5 @@ Reserve these tables from the start:
 The prototype can seed Abuja/FCT data without encoding Abuja-specific rules into application-wide business logic.
 
 ## Security
+
 Use row-level security policies where appropriate. Private document metadata and storage paths must respect the permissions of the related land/project/entity.

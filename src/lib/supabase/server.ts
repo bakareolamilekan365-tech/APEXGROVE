@@ -6,7 +6,9 @@ export async function createSupabaseServerClient() {
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
   if (!url || !key) {
-    throw new Error("Supabase public environment variables are not configured.");
+    throw new Error(
+      "Supabase public environment variables are not configured.",
+    );
   }
 
   const cookieStore = await cookies();
@@ -18,11 +20,13 @@ export async function createSupabaseServerClient() {
       },
       setAll(cookiesToSet) {
         try {
-          cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
+          cookiesToSet.forEach(({ name, value, options }) =>
+            cookieStore.set(name, value, options),
+          );
         } catch {
           // Server Components cannot always write cookies; middleware refreshes the session.
         }
-      }
-    }
+      },
+    },
   });
 }
