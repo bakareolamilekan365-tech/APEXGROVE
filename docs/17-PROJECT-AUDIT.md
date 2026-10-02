@@ -51,7 +51,7 @@ The application is **not yet feature-complete**. Many routes and modules are int
   - Organization ownership
   - Audit logs
   - Initial row-level security policies
-- Applied the 13 local migrations to the hosted Supabase project with `supabase db push`.
+- Applied the 14 local migrations to the hosted Supabase project with `supabase db push`.
 - Applied `014_auth_hardening.sql` to the hosted project after the security review.
 
 ### Authentication slice
@@ -61,6 +61,13 @@ The application is **not yet feature-complete**. Many routes and modules are int
 - Added role selection and profile update.
 - Added protected dashboard routing and profile lookup.
 - Added shared role validation.
+
+### Manual verification
+
+- Confirmed registration works against the hosted Supabase project.
+- Confirmed login works with the created demo account.
+- Confirmed role selection updates the profile.
+- Confirmed the dashboard loads the authenticated profile and role.
 
 ### Validation completed
 
@@ -72,7 +79,7 @@ The application is **not yet feature-complete**. Many routes and modules are int
 - Production build passes and generates 36 routes; the authenticated dashboard is dynamic.
 - Known non-blocking warnings: Next ESLint plugin is not detected by the native flat config, TypeScript 5.9 is newer than the current typescript-eslint support range, and Vite reports a deprecated CJS API.
 - `npm audit --omit=dev` reports transitive PostCSS vulnerabilities; npm proposes a breaking Next 16 upgrade.
-- Git worktree is clean and `main` is synchronized with GitHub.
+- Manual registration, login, role selection, and dashboard verification passed.
 
 ## Commit Record
 
@@ -103,7 +110,7 @@ The application is **not yet feature-complete**. Many routes and modules are int
 | Supabase clients       | Foundation complete         | Browser/server clients and middleware are wired.                                                  |
 | Database schema        | Foundation partial          | Auth/profile/organization/audit migrations are real; later domain migrations remain placeholders. |
 | Hosted database        | Foundation deployed         | All 14 local migrations were applied successfully with `supabase db push`.                        |
-| Authentication UI      | Foundation partial          | Registration, login, role selection, and protected dashboard exist; reset flow remains pending.  |
+| Authentication UI      | Foundation verified         | Registration, login, role selection, and protected dashboard were manually verified; reset pending. |
 | Dashboard              | Foundation partial          | Authenticated profile lookup works; role-specific dashboard modules remain pending.               |
 | Land/GIS               | Not started                 | Demo GeoJSON and map provider are not connected.                                                  |
 | Documents              | Not started                 | Storage buckets, upload, access checks, and versioning are not implemented.                       |
@@ -115,14 +122,13 @@ The application is **not yet feature-complete**. Many routes and modules are int
 
 ## Open Risks and Required Follow-up
 
-1. Verify signup, email confirmation, login, role selection, and dashboard against the hosted project.
-2. Add migration tests for RLS and profile provisioning against a real database.
-3. Finish password reset and onboarding profile details.
-4. Replace remaining smoke tests with requirement-specific unit and integration tests.
-5. Implement the role-aware dashboard modules.
-6. Decide whether to keep the stable Next 15/PostCSS risk or schedule a tested Next 16 upgrade.
-7. Add synthetic seed data and clearly label it as `DEMO DATA / NOT OFFICIAL`.
-8. Only then begin the land and GIS workflow.
+1. Add migration tests for RLS and profile provisioning against a real database.
+2. Finish password reset and onboarding profile details.
+3. Replace remaining smoke tests with requirement-specific unit and integration tests.
+4. Implement the role-aware dashboard modules.
+5. Decide whether to keep the stable Next 15/PostCSS risk or schedule a tested Next 16 upgrade.
+6. Add synthetic seed data and clearly label it as `DEMO DATA / NOT OFFICIAL`.
+7. Only then begin the land and GIS workflow.
 
 ## Audit Boundary
 
