@@ -18,6 +18,7 @@ The prototype should support this connected workflow:
 All synthetic records must be clearly labelled **DEMO DATA / NOT OFFICIAL**.
 
 ## Reading order
+
 1. `00-PROJECT-CONTEXT.md`
 2. `01-PRD.md`
 3. `02-SYSTEM-ARCHITECTURE.md`
@@ -37,6 +38,7 @@ All synthetic records must be clearly labelled **DEMO DATA / NOT OFFICIAL**.
 17. `16-DESIGN-AND-INTEGRATION-PLAN.md`
 
 ## Important
+
 These documents intentionally separate the huge long-term APEXGROVE vision from the smaller prototype implementation.
 
 The original master prompt can remain as a product-vision document. These files are the operational build specification.

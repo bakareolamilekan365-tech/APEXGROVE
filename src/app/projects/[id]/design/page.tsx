@@ -1,1 +1,7 @@
-export default function ProjectDesignPage() { return <main><h1>Design</h1></main>; }
+export default function ProjectDesignPage() {
+  return (
+    <main>
+      <h1>Design</h1>
+    </main>
+  );
+}

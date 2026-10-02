@@ -1,1 +1,7 @@
-export default function AdminDocumentsPage() { return <main><h1>Manage documents</h1></main>; }
+export default function AdminDocumentsPage() {
+  return (
+    <main>
+      <h1>Manage documents</h1>
+    </main>
+  );
+}

@@ -1,1 +1,7 @@
-export default function RolePage() { return <main><h1>Choose your role</h1></main>; }
+export default function RolePage() {
+  return (
+    <main>
+      <h1>Choose your role</h1>
+    </main>
+  );
+}

@@ -1,1 +1,8 @@
-export default function RegisterPage() { return <main><h1>Register</h1><p>Registration flow planned.</p></main>; }
+export default function RegisterPage() {
+  return (
+    <main>
+      <h1>Register</h1>
+      <p>Registration flow planned.</p>
+    </main>
+  );
+}

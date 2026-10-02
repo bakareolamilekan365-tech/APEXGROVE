@@ -1,1 +1,8 @@
-export default function OnboardingPage() { return <main><h1>Onboarding</h1><p>Role-aware onboarding planned.</p></main>; }
+export default function OnboardingPage() {
+  return (
+    <main>
+      <h1>Onboarding</h1>
+      <p>Role-aware onboarding planned.</p>
+    </main>
+  );
+}

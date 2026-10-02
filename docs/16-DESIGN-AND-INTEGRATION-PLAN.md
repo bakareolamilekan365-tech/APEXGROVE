@@ -59,20 +59,20 @@ Before implementing a module, define:
 
 ### Required now
 
-| Service | Use | Free-first decision | Signup timing |
-| --- | --- | --- | --- |
-| GitHub | Source control and GitHub Actions | Already configured. Public repository Actions are suitable for CI. | Complete |
-| Supabase | PostgreSQL, PostGIS, Auth, private Storage | Use the free project for development/demo. Keep service-role keys server-side. | Phase 0 |
-| Map tile provider | Basemap/vector tiles for MapLibre | Use a free developer tier such as MapTiler Cloud, or a compliant no-signup public provider for local development. Keep the provider behind a map adapter. | Before map implementation |
+| Service           | Use                                        | Free-first decision                                                                                                                                       | Signup timing             |
+| ----------------- | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
+| GitHub            | Source control and GitHub Actions          | Already configured. Public repository Actions are suitable for CI.                                                                                        | Complete                  |
+| Supabase          | PostgreSQL, PostGIS, Auth, private Storage | Use the free project for development/demo. Keep service-role keys server-side.                                                                            | Phase 0                   |
+| Map tile provider | Basemap/vector tiles for MapLibre          | Use a free developer tier such as MapTiler Cloud, or a compliant no-signup public provider for local development. Keep the provider behind a map adapter. | Before map implementation |
 
 ### Useful later, not required for the first design or database work
 
-| Service | Use | Free-first decision |
-| --- | --- | --- |
-| Vercel | Next.js preview/production deployment | Use the free tier when the app shell is ready. Local development does not require an account. |
+| Service                           | Use                                             | Free-first decision                                                                                 |
+| --------------------------------- | ----------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Vercel                            | Next.js preview/production deployment           | Use the free tier when the app shell is ready. Local development does not require an account.       |
 | Resend or Supabase email provider | Transactional email and password-reset delivery | Start with Supabase Auth email for development; add a provider only when real delivery is required. |
-| Sentry | Error monitoring | Add the free tier after the first deployed prototype. Do not block local work on it. |
-| PostHog | Product analytics | Optional and deferred until privacy, consent, and event definitions are approved. |
+| Sentry                            | Error monitoring                                | Add the free tier after the first deployed prototype. Do not block local work on it.                |
+| PostHog                           | Product analytics                               | Optional and deferred until privacy, consent, and event definitions are approved.                   |
 
 ### Do not sign up for yet
 

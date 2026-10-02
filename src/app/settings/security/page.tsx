@@ -1,1 +1,7 @@
-export default function SecuritySettingsPage() { return <main><h1>Security settings</h1></main>; }
+export default function SecuritySettingsPage() {
+  return (
+    <main>
+      <h1>Security settings</h1>
+    </main>
+  );
+}

@@ -1,1 +1,7 @@
-export default function LandDetailPage() { return <main><h1>Land parcel</h1></main>; }
+export default function LandDetailPage() {
+  return (
+    <main>
+      <h1>Land parcel</h1>
+    </main>
+  );
+}

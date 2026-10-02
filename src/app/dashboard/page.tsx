@@ -1,1 +1,8 @@
-export default function DashboardPage() { return <main><h1>Dashboard</h1><p>Role-aware dashboard planned.</p></main>; }
+export default function DashboardPage() {
+  return (
+    <main>
+      <h1>Dashboard</h1>
+      <p>Role-aware dashboard planned.</p>
+    </main>
+  );
+}

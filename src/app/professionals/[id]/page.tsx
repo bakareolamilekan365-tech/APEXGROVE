@@ -1,1 +1,7 @@
-export default function ProfessionalPage() { return <main><h1>Professional profile</h1></main>; }
+export default function ProfessionalPage() {
+  return (
+    <main>
+      <h1>Professional profile</h1>
+    </main>
+  );
+}

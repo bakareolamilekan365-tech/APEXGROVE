@@ -1,1 +1,3 @@
-export function accessDocument() { throw new Error("Document-access function is not implemented yet."); }
+export function accessDocument() {
+  throw new Error("Document-access function is not implemented yet.");
+}

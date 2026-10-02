@@ -6,17 +6,17 @@ This document translates the prototype requirements into testable slices. Work s
 
 ## Requirement Areas
 
-| ID | Requirement area | Acceptance signal | Primary test level |
-| --- | --- | --- | --- |
-| REQ-01 | Authentication and onboarding | A user can register, select a role, sign in, persist a session, and recover a password through the planned flow. | Unit, integration, e2e |
-| REQ-02 | Authorization | Server-side permission checks prevent users from reading or mutating data outside their role and organization. | Unit, integration |
-| REQ-03 | Land discovery and GIS | A user can search demo parcels, filter results, switch list/map views, select a parcel, and view its detail. | Unit, integration, e2e |
-| REQ-04 | Verification | A parcel has a verification lifecycle, checklist, reviewer notes, documents, and audit history without fake official status. | Unit, integration, e2e |
-| REQ-05 | Documents | Private documents support metadata, controlled access, upload, and versioning. | Unit, integration, e2e |
-| REQ-06 | Projects and professionals | A parcel can become a project and professionals can be added to its workspace. | Unit, integration, e2e |
-| REQ-07 | Feasibility | Inputs produce deterministic cost, revenue, margin, and break-even outputs, with scenario comparison. | Unit, integration |
-| REQ-08 | Administration | Authorized administrators can manage core demo records and review audit events. | Integration, e2e |
-| REQ-09 | Quality and safety | The application handles loading, error, empty, responsive, accessible, and secret-management cases. | Integration, e2e, manual |
+| ID     | Requirement area              | Acceptance signal                                                                                                            | Primary test level       |
+| ------ | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
+| REQ-01 | Authentication and onboarding | A user can register, select a role, sign in, persist a session, and recover a password through the planned flow.             | Unit, integration, e2e   |
+| REQ-02 | Authorization                 | Server-side permission checks prevent users from reading or mutating data outside their role and organization.               | Unit, integration        |
+| REQ-03 | Land discovery and GIS        | A user can search demo parcels, filter results, switch list/map views, select a parcel, and view its detail.                 | Unit, integration, e2e   |
+| REQ-04 | Verification                  | A parcel has a verification lifecycle, checklist, reviewer notes, documents, and audit history without fake official status. | Unit, integration, e2e   |
+| REQ-05 | Documents                     | Private documents support metadata, controlled access, upload, and versioning.                                               | Unit, integration, e2e   |
+| REQ-06 | Projects and professionals    | A parcel can become a project and professionals can be added to its workspace.                                               | Unit, integration, e2e   |
+| REQ-07 | Feasibility                   | Inputs produce deterministic cost, revenue, margin, and break-even outputs, with scenario comparison.                        | Unit, integration        |
+| REQ-08 | Administration                | Authorized administrators can manage core demo records and review audit events.                                              | Integration, e2e         |
+| REQ-09 | Quality and safety            | The application handles loading, error, empty, responsive, accessible, and secret-management cases.                          | Integration, e2e, manual |
 
 All demo records must display **DEMO DATA / NOT OFFICIAL**. Planned features must not expose controls that imply they are implemented.
 

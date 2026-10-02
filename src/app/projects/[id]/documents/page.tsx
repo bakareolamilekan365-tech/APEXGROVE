@@ -1,1 +1,7 @@
-export default function ProjectDocumentsPage() { return <main><h1>Project documents</h1></main>; }
+export default function ProjectDocumentsPage() {
+  return (
+    <main>
+      <h1>Project documents</h1>
+    </main>
+  );
+}

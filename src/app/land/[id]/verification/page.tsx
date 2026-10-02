@@ -1,1 +1,7 @@
-export default function LandVerificationPage() { return <main><h1>Land verification</h1></main>; }
+export default function LandVerificationPage() {
+  return (
+    <main>
+      <h1>Land verification</h1>
+    </main>
+  );
+}

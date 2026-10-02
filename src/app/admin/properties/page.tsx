@@ -1,1 +1,7 @@
-export default function AdminPropertiesPage() { return <main><h1>Manage properties</h1></main>; }
+export default function AdminPropertiesPage() {
+  return (
+    <main>
+      <h1>Manage properties</h1>
+    </main>
+  );
+}

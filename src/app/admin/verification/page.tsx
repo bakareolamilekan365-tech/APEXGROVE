@@ -1,1 +1,7 @@
-export default function AdminVerificationPage() { return <main><h1>Manage verification</h1></main>; }
+export default function AdminVerificationPage() {
+  return (
+    <main>
+      <h1>Manage verification</h1>
+    </main>
+  );
+}

@@ -1,6 +1,7 @@
 # APEXGROVE — Initial Implementation Checklist
 
 ## Step 1 — Bootstrap
+
 - [ ] Approve requirements, user flows, wireframes, and design tokens
 - [ ] Create Next.js TypeScript application
 - [ ] Configure linting/formatting
@@ -12,6 +13,7 @@
 - [ ] Configure unit, integration, and E2E test commands
 
 ## Step 2 — Database
+
 - [ ] Create migrations
 - [ ] Enable PostGIS
 - [ ] Create core tables
@@ -21,6 +23,7 @@
 - [ ] Add seed/demo data
 
 ## Step 3 — Identity
+
 - [ ] Auth flows
 - [ ] Profile creation
 - [ ] Role selection
@@ -28,6 +31,7 @@
 - [ ] Role-aware dashboard
 
 ## Step 4 — Land + GIS
+
 - [ ] Parcel data model
 - [ ] Import demo GeoJSON
 - [ ] Map page
@@ -36,6 +40,7 @@
 - [ ] Parcel detail page
 
 ## Step 5 — Verification + documents
+
 - [ ] Verification record creation
 - [ ] Checklist UI
 - [ ] Status changes
@@ -44,6 +49,7 @@
 - [ ] Audit records
 
 ## Step 6 — Projects
+
 - [ ] Create project from parcel
 - [ ] Project workspace
 - [ ] Project members
@@ -52,12 +58,14 @@
 - [ ] Project documents
 
 ## Step 7 — Feasibility
+
 - [ ] Scenario form
 - [ ] Calculations
 - [ ] Scenario persistence
 - [ ] Comparison view
 
 ## Step 8 — Admin
+
 - [ ] User management
 - [ ] Parcel management
 - [ ] Verification management
@@ -65,6 +73,7 @@
 - [ ] Project overview
 
 ## Step 9 — Quality
+
 - [ ] Unit tests for calculations and permission rules
 - [ ] Integration tests for persistence and authorization boundaries
 - [ ] End-to-end test of main journey
@@ -75,4 +84,5 @@
 - [ ] Security review
 
 ## Definition of done
+
 The complete prototype journey works against the real database and storage, with no fake success states or disconnected mock interactions.

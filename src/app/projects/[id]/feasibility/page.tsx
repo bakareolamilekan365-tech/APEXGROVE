@@ -1,1 +1,7 @@
-export default function ProjectFeasibilityPage() { return <main><h1>Feasibility</h1></main>; }
+export default function ProjectFeasibilityPage() {
+  return (
+    <main>
+      <h1>Feasibility</h1>
+    </main>
+  );
+}

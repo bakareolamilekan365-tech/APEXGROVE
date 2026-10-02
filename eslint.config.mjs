@@ -2,9 +2,15 @@ import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
 
 export default [
-	{
-		ignores: [".next/**", "node_modules/**", "playwright-report/**", "test-results/**"]
-	},
-	eslint.configs.recommended,
-	...tseslint.configs.recommended
+  {
+    ignores: [
+      ".next/**",
+      "next-env.d.ts",
+      "node_modules/**",
+      "playwright-report/**",
+      "test-results/**",
+    ],
+  },
+  eslint.configs.recommended,
+  ...tseslint.configs.recommended,
 ];

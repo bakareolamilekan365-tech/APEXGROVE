@@ -1,1 +1,3 @@
-export function createSupabaseClient() { throw new Error("Supabase client is not configured yet."); }
+export function createSupabaseClient() {
+  throw new Error("Supabase client is not configured yet.");
+}
