@@ -35,6 +35,8 @@ describe("auth foundation migration contract", () => {
   it("hardens role assignment against admin escalation", () => {
     const sql = migration("014_auth_hardening.sql");
     expect(sql).toContain("public.prevent_profile_role_escalation");
-    expect(sql).toContain("Only an existing administrator can assign the admin role");
+    expect(sql).toContain(
+      "Only an existing administrator can assign the admin role",
+    );
   });
 });
