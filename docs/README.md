@@ -33,6 +33,7 @@ All synthetic records must be clearly labelled **DEMO DATA / NOT OFFICIAL**.
 13. `12-IMPLEMENTATION-CHECKLIST.md`
 14. `13-DEMO-DATA-GUIDE.md`
 15. `14-BUILD-AGENT-INSTRUCTIONS.md`
+16. `15-REQUIREMENTS-AND-TEST-STRATEGY.md`
 
 ## Important
 These documents intentionally separate the huge long-term APEXGROVE vision from the smaller prototype implementation.

@@ -7,6 +7,8 @@
 - [ ] Create GitHub repository
 - [ ] Create `.env.example`
 - [ ] Configure Supabase
+- [ ] Add requirement IDs and acceptance signals
+- [ ] Configure unit, integration, and E2E test commands
 
 ## Step 2 — Database
 - [ ] Create migrations
@@ -63,7 +65,9 @@
 
 ## Step 9 — Quality
 - [ ] Unit tests for calculations and permission rules
+- [ ] Integration tests for persistence and authorization boundaries
 - [ ] End-to-end test of main journey
+- [ ] Run tests in order: unit, integration, E2E, then journey gate
 - [ ] Loading/error/empty states
 - [ ] Responsive testing
 - [ ] Accessibility pass

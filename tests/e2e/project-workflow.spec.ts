@@ -1,3 +1,5 @@
 import { test } from "@playwright/test";
 
-test.describe("project workflow", () => {});
+test("project workflow is reserved", async () => {
+	test.skip(true, "Implement after project workspace persistence is connected.");
+});
