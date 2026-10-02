@@ -78,6 +78,10 @@ Before implementing a module, define:
 
 Do not add Stripe, Google Maps, Auth0, Cloudinary, OpenAI, paid GIS datasets, or a separate file-upload vendor for the prototype foundation. Supabase covers the initial database, authentication, and private document storage; MapLibre keeps the map rendering layer open.
 
+### Payment decision
+
+Payments are out of scope for the prototype. No payment provider account is required until APEXGROVE has a defined paid transaction, subscription, professional fee, or marketplace workflow. Keep a future `PaymentProvider` adapter in the architecture, but do not add payment credentials or checkout UI now.
+
 ## Development Extensions
 
 These improve the workflow and do not require external service accounts:
