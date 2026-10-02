@@ -1,6 +1,7 @@
 # APEXGROVE — Initial Implementation Checklist
 
 ## Step 1 — Bootstrap
+- [ ] Approve requirements, user flows, wireframes, and design tokens
 - [ ] Create Next.js TypeScript application
 - [ ] Configure linting/formatting
 - [ ] Initialize git

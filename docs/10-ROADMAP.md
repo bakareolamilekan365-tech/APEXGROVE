@@ -2,6 +2,7 @@
 
 ## Phase 0 — Foundation
 - Repository setup
+- Requirements, UX flows, wireframes, and design tokens
 - Environment variables
 - Supabase project
 - Database migrations
