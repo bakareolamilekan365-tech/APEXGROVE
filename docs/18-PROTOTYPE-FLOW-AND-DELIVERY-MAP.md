@@ -57,6 +57,21 @@ flowchart LR
     Storage --> RLS
 ```
 
+## Responsibility map
+
+| Journey stage | Boundary that matters |
+| --- | --- |
+| Login/onboarding | Supabase Auth establishes identity and session; profile/role data is not a complete permission grant. |
+| Discover land | Server/API validation, ownership/scope checks and bounded pagination; GIS is visual/platform data unless authority is explicit. |
+| View parcel/details | PostGIS/GeoJSON query plus source, jurisdiction, data-as-of and DEMO/NOT OFFICIAL labels. |
+| Verification | Structured type/status/evidence/reviewer/source; authority hierarchy remains visible and auditable. |
+| Documents | Private storage, metadata/version checks and authorization before preview/download; no guessable public URL. |
+| Project/professionals | Organization/project membership and project role checks; professional discipline is not a permission. |
+| Feasibility | Deterministic inputs/rules/outputs, reproducible scenarios and clear estimate/uncertainty labels. |
+| Admin/review | Separated responsibilities, least privilege, scope and audit logging for sensitive actions. |
+
+Every vertical slice must pass through the relevant server/business, database/RLS, storage and test boundaries. A screen alone is not a completed feature.
+
 ## Delivery Phases
 
 ### Phase 0 - Design lock
@@ -103,6 +118,8 @@ flowchart LR
 
 **Exit gate:** `npm test`, typecheck, lint, build, and the complete Playwright journey pass without fake success states.
 
+Payments, subscriptions and entitlement checks are not part of the current prototype. Do not add checkout, payment credentials or financial state to this journey.
+
 ## Execution Rule
 
 Work in vertical slices. For each phase:
@@ -115,3 +132,7 @@ Work in vertical slices. For each phase:
 6. Run the phase exit gate before starting the next phase.
 
 Do not build disconnected screens ahead of the data boundary they depend on.
+
+## Future extension points
+
+The completed prototype leaves explicit, non-implemented extension points for planning, approvals, construction, property management, finance/payments, AI-assisted analysis, mobile GPS/photo/document capture with future offline synchronization, and urban intelligence. These extensions must reuse the backend authorization, provenance, audit and provider-adapter boundaries rather than bypassing them.
