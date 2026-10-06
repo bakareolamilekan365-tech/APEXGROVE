@@ -6,6 +6,19 @@ Design decisions should be settled before feature implementation. This plan defi
 
 Free tiers are suitable for development and demonstration when quotas, attribution, privacy, and rate limits are respected. The application must keep providers behind adapters so changing a provider does not require rewriting domain logic.
 
+## Integration inventory
+
+### Current / near-term
+
+- **GitHub** — source control, reviews and CI.
+- **Supabase** — PostgreSQL/PostGIS, Auth, RLS and private Storage.
+- **Map stack** — MapLibre and a replaceable tile/data provider when map implementation needs it.
+- **Vercel** — future preview/deployment target when the local journey is ready.
+- **Email provider** — later; begin with Supabase Auth email for development.
+- **Monitoring/observability** — later, after privacy/consent and event boundaries are defined.
+
+The prototype does not require every future API domain, external authority feed or paid provider.
+
 ## Design Gate Before Implementation
 
 ### 1. Product and requirements baseline
@@ -81,6 +94,34 @@ Do not add Stripe, Google Maps, Auth0, Cloudinary, OpenAI, paid GIS datasets, or
 ### Payment decision
 
 Payments are out of scope for the prototype. No payment provider account is required until APEXGROVE has a defined paid transaction, subscription, professional fee, or marketplace workflow. Keep a future `PaymentProvider` adapter in the architecture, but do not add payment credentials or checkout UI now.
+
+When payments eventually arrive, preserve this boundary:
+
+```text
+user → APEXGROVE server → payment provider → verified webhook
+→ subscription state → entitlement
+```
+
+The future commercial domain should include provider abstraction, verified webhook signatures, idempotency, transaction/invoice/payment-event records, refunds, disputes and fraud controls. Never store raw card data. Role, subscription and entitlement remain separate.
+
+## Future adapter inventory
+
+Keep these behind interfaces/adapters and out of core domain models:
+
+- payment providers
+- verification providers
+- government/authority data
+- GIS/tile/data providers
+- AI providers
+- notification/email providers
+- professional registry sources
+- external market and cost data
+
+Provider outages, timeouts, retry/backoff rules and source/provenance metadata must remain visible at the boundary. Long-running provider work should use future background jobs rather than blocking ordinary request paths.
+
+## Privacy, transfers and operations
+
+Before adding third-party processors, review data minimization, access control, retention/deletion, international transfers, consent and applicable Nigerian privacy/regulatory obligations. Add monitoring and alerting without putting sensitive document contents or secrets into logs. This plan is architectural guidance, not legal advice.
 
 ## Development Extensions
 
