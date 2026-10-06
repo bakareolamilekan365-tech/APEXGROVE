@@ -33,6 +33,8 @@ Use this as an engineering gate, not a list of screens. Every item should be mar
 ## RLS and security
 
 - [ ] RLS policies cover each protected table and are tested for allow/deny cases.
+- [ ] The RLS guardrail check fails when an application-owned public table is introduced without RLS; system-managed Supabase schemas are intentionally excluded.
+- [ ] New protected tables include explicit grants, per-operation policies and database allow/deny tests in the same change.
 - [ ] BOLA/IDOR, privilege escalation and alternate endpoint/download paths are blocked.
 - [ ] Service-role credentials remain server-only; secrets are absent from source control.
 - [ ] Sensitive mutations, verification decisions, document access and admin actions are auditable.
@@ -86,6 +88,17 @@ Use this as an engineering gate, not a list of screens. Every item should be mar
 - [ ] Backups/recovery, credential rotation and incident-response ownership are planned before production use.
 - [ ] Accessibility, responsive behavior, loading/empty/error states and synthetic-data labels are reviewed.
 - [ ] Typecheck, lint, build and relevant tests pass in CI.
+
+## Foundation gate evidence
+
+Track these items from implementation evidence, not documentation alone:
+
+- **Password recovery/email confirmation:** recovery request, PKCE callback, safe internal redirect and authenticated password update.
+- **Profile onboarding/dashboard:** full name, phone, location and bio persist for the authenticated user; dashboard copy reflects the selected platform role without implying future modules exist.
+- **Organization security:** creator spoofing, self-verification, admin escalation, owner transfer/removal and last-owner loss are denied by database policy/trigger behavior.
+- **Private storage:** the foundation `documents` bucket is private and object paths are scoped to `documents/<user-id>/...`.
+- **Synthetic fixtures:** demo users/organizations are reproducible, synthetic and labelled `DEMO DATA / NOT OFFICIAL`.
+- **Requirement-specific tests:** behavior, persistence, denial paths and recovery states are covered; smoke/source-text checks do not substitute for them.
 
 ## Definition of done
 

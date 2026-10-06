@@ -227,3 +227,29 @@ After the outstanding foundation gates are satisfied, implementation should proc
 ### Audit boundary for this update
 
 This addendum records the documentation milestone and the next implementation direction. It does not replace the 2026-10-02 baseline, change application behavior or authorize future features to be represented as implemented. The audit should receive another dated update after the Land + GIS milestone and before the next major phase.
+
+## Audit Update — 2026-10-06 Foundation Hardening Checkpoint
+
+**Update type:** Implementation checkpoint on `fix/foundation-security-and-quality-gates`.
+**Historical boundary:** The 2026-10-02 audit and the earlier 2026-10-06 documentation checkpoint above remain unchanged.
+
+### Evidence completed on this branch
+
+- Password recovery now has a generic request state, Supabase PKCE callback exchange, safe internal redirects and an authenticated update-password page.
+- Registration confirmation now targets the existing callback route; profile onboarding persists full name, phone, location and bio; the dashboard uses persisted platform role data and labels future modules as planned.
+- Migration `015_foundation_security_hardening.sql` adds constrained organization creation, security-field immutability, membership/owner invariants, trigger audit records, account-type escalation protection and a private user-scoped `documents` bucket with storage policies.
+- Reusable server authorization helpers and a fail-closed production middleware configuration path are present.
+- Synthetic fixture seeding is reproducible and uses `.invalid` demo identities; no real credentials or sensitive documents are included.
+- CI now uses `npm ci`, runs lint/typecheck/unit/integration/build and runs a permanent application-table RLS/private-storage guardrail check.
+- Local evidence on this branch: lint, typecheck, unit tests, integration tests (configured external Supabase security suite skipped without test credentials), guardrail check and production build pass.
+
+### Foundation gates still requiring deployment or environment evidence
+
+- Apply migration 015 to the hosted project through the normal reviewed migration workflow and run the real Supabase database/RLS test suite with isolated test credentials.
+- Confirm the configured Supabase Auth Site URL/redirect allowlist includes the callback and recovery paths, then manually verify confirmation and recovery emails end to end.
+- Run the integration security suite against a disposable/isolated database to verify allow/deny behavior for profiles, organizations, memberships and private storage.
+- Review Supabase security advisors after migration deployment; existing system-managed `spatial_ref_sys` and PostGIS advisories remain intentionally outside the application-table RLS guardrail and should be handled as a separate database-posture decision.
+
+### Known risks and boundaries
+
+This checkpoint does not claim production readiness, legal compliance, official land status, or completion of Land/GIS, Projects, Professionals, Feasibility, Payments or AI. The existing dependency advisory state remains a separate tested upgrade decision; no framework major upgrade was included. A feature is not foundation-complete until deployment evidence, authorization behavior, persistence, tests and failure handling are verified together.

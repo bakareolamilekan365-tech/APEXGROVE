@@ -53,6 +53,10 @@ Test the same decisions at the server and database boundaries:
 - document privacy and alternate download paths
 - audit records for sensitive mutations, reviews and access
 
+Foundation authorization tests must exercise both ALLOW and DENY behavior for profiles, organizations, organization membership, audit logs and private storage. Include account-type admin escalation, creator/verification spoofing, owner/admin boundaries, last-owner protection, cross-organization manipulation, wrong-user document access and anonymous access. A test that only searches migration text is not a database security test.
+
+The repository also maintains a permanent RLS guardrail: application-owned tables in the exposed public schema must have an RLS enablement statement, while Supabase-managed system schemas are explicitly excluded. New protected tables are expected to ship with grants, per-operation policies and database tests in the same change.
+
 ### 3. E2E tests: separately tested user flows
 
 Location: `tests/e2e/`
@@ -64,6 +68,8 @@ E2E cases should include permission-denied, not-found, loading, empty, timeout/f
 ### 3a. Domain and abuse regression cases
 
 Cover verification status transitions, provenance preservation, invalid/oversized/malicious uploads, forged or conflicting evidence, duplicate/retried operations, idempotency where applicable, rate-limit behavior, provider failure and timeout handling, and malicious/untrusted AI or document input. Feasibility tests must prove deterministic calculations and scenario reproducibility.
+
+Authentication recovery tests should cover the generic forgot-password response, safe callback redirects, expired/invalid links and authenticated password updates. Onboarding tests should cover profile persistence beyond role selection and role-aware dashboard authorization. Storage tests must prove private-by-default access and deny path/filename substitution.
 
 ### 4. Journey integration gate
 

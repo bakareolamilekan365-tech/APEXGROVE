@@ -35,6 +35,22 @@ Build the APEXGROVE prototype defined by the project markdown files in this dire
 
 Generated code must not silently expand scope. If generated output introduces a new domain, provider, dependency, migration or user-facing capability, stop and document the assumption or obtain explicit direction before including it.
 
+## Permanent foundation security gate
+
+Before adding or changing a protected feature, the agent must verify:
+
+- **Database:** RLS is enabled, explicit grants and per-operation policies exist, ownership/membership checks are present, and allow/deny database tests cover the boundary. Never add a permissive policy as a shortcut; scope security-definer functions narrowly.
+- **API:** authentication, server-side authorization, object-level authorization, validation, safe errors, rate limiting where needed, and idempotency for repeatable operations are addressed.
+- **Storage:** sensitive storage is private by default, retrieval is authorized, uploads are validated, access is auditable, and public/guessable URLs are not used for private documents.
+- **Trust:** provenance, authority level, verification state, reviewer, source/date/jurisdiction and uncertainty are preserved. A selected account type is never proof of professional, land, official or legal status.
+- **Administration:** least privilege, responsibility/scope separation, approval boundaries and audit records are preserved; do not create an unrestricted God Admin.
+- **AI:** uploaded data and prompts are untrusted, prompt injection is treated as a security concern, facts are not invented, uncertainty is shown, and consequential output remains advisory pending human/professional review.
+- **Payments:** future only in the prototype; use a provider adapter, verified webhook, idempotency, fraud controls and no raw card storage if introduced later.
+- **Resilience:** use timeouts, bounded retries/backoff and explicit failure states; move long-running work to background processing and never blindly retry financial operations.
+- **Mobile:** future clients use the same backend authorization and business rules, with offline sync/conflict handling designed explicitly.
+
+The release definition remains: feature behavior, authorization, persistence, meaningful tests, understood failures and preserved security boundaries must all be present. A visible UI or route is not completion evidence.
+
 ## Working style
 After each milestone:
 - run type checks

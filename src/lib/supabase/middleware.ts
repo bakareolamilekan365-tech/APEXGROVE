@@ -6,6 +6,9 @@ export async function updateSupabaseSession(request: NextRequest) {
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
   if (!url || !key) {
+    if (process.env.NODE_ENV === "production") {
+      throw new Error("Supabase authentication is not configured; refusing to serve an unprotected production request.");
+    }
     return NextResponse.next({ request });
   }
 

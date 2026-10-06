@@ -39,4 +39,14 @@ describe("auth foundation migration contract", () => {
       "Only an existing administrator can assign the admin role",
     );
   });
+
+  it("locks down foundation organization and storage boundaries", () => {
+    const sql = migration("015_foundation_security_hardening.sql");
+    expect(sql).toContain("created_by = (select auth.uid())");
+    expect(sql).toContain("verification_status = 'unverified'");
+    expect(sql).toContain("prevent_organization_last_owner_removal");
+    expect(sql).toContain("values ('documents', 'documents', false)");
+    expect(sql).toContain("Users can read their private documents");
+    expect(sql).toContain("organization_actor_role");
+  });
 });

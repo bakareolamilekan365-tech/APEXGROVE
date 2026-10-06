@@ -60,6 +60,9 @@ export default function LoginPage() {
       <p>
         <a href="/register">Create an account</a>
       </p>
+      <p>
+        <a href="/forgot-password">Forgot your password?</a>
+      </p>
     </main>
   );
 }
