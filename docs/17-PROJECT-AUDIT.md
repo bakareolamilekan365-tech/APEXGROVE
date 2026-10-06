@@ -156,3 +156,74 @@ Until the unchecked items are complete, feature work should remain limited to fo
 ## Audit Boundary
 
 This is an internal engineering progress record, not a security certification, legal review, data-provenance certification, or production-readiness approval. It should be updated after each foundation milestone and before each major implementation phase.
+
+## Audit Update — 2026-10-06
+
+**Update type:** Documentation architecture consolidation checkpoint
+**Baseline preserved:** The 2026-10-02 audit above remains unchanged and historical.
+
+### Executive summary
+
+Since the baseline audit, the V2 documentation architecture has been consolidated and merged into `main` through three documentation-only pull requests:
+
+- PR #2 — foundation context, PRD, system architecture and database schema
+- PR #3 — authentication/security and document trust model
+- PR #4 — remaining API, UI/UX, GIS, feasibility, roadmap, repository, checklist, demo-data, build-agent, testing, integration and delivery documents
+
+These changes clarify the intended architecture without claiming that future capabilities are implemented. No application code, Supabase migrations, dependencies, package configuration or tests were changed by those documentation passes.
+
+### Architectural decisions now recorded
+
+- The current application remains a modular monolith; future service extraction is conditional on scale and ownership.
+- Identity, platform role, professional discipline, organization membership, project role, permission, subscription and entitlement remain separate.
+- Administrative responsibility is least-privilege and separable; there is no intended unrestricted “God Admin”.
+- Authorization requires ownership, organization/project membership, permissions, scope, server-side checks and RLS.
+- Verification is structured and authority-aware; APEXGROVE internal review is not government or statutory certification.
+- Provenance is required for important land, GIS, document and verification information.
+- GIS geometry is not automatically a legally authoritative cadastral boundary.
+- Sensitive documents follow private storage, controlled access, metadata, versioning, review, audit and retention/deletion principles.
+- External services belong behind replaceable provider adapters; long-running work has a future background-processing extension point.
+- AI is advisory and untrusted-input-aware, not an official, legal or professional authority.
+- Payments/subscriptions remain outside prototype scope and must be a separate future commercial domain.
+- Mobile/offline field workflows, privacy/regulatory work and operational resilience remain future architecture or follow-up work.
+
+### Current implementation status after documentation consolidation
+
+The implementation status remains materially the same as the baseline audit because this consolidation changed documentation only:
+
+| Area | Current status | Update |
+| --- | --- | --- |
+| Product/architecture documentation | **Implemented as documentation** | V2 boundaries and current-vs-future language are now aligned across the foundation and remaining specifications. |
+| Repository and Supabase foundation | **Foundation complete/partial** | Existing Auth, profile, organization, audit and RLS foundation remains the implementation source of truth. |
+| Authentication | **Foundation verified / follow-up pending** | Registration, login, role selection and protected dashboard remain the verified slice; recovery/MFA/session administration still require completion or explicit verification. |
+| Authorization/RLS | **Foundation partial** | Architecture is documented; comprehensive object-level, membership, admin-scope and RLS tests remain required. |
+| Land/GIS | **Not started or scaffolded** | The next implementation slice remains Land Discovery + GIS; visual, survey, cadastral and official boundaries must stay distinct. |
+| Verification/documents | **Planned/partial** | Structured trust and private-document requirements are documented; complete storage policies, access checks, version lineage and review workflows require implementation evidence. |
+| Projects/professionals | **Not started or scaffolded** | Project membership, professional participation and controlled workspace flows remain future implementation work. |
+| Feasibility | **Not started or scaffolded** | Deterministic, transparent calculations and persistence remain future implementation work. |
+| Payments/subscriptions | **Out of scope** | No checkout, payment provider or entitlement implementation is part of the prototype. |
+| Production readiness/compliance | **Not complete** | Privacy, retention, monitoring, recovery, threat controls and professional/legal review remain follow-up work. |
+
+### Next implementation phase
+
+After the outstanding foundation gates are satisfied, implementation should proceed with the vertical Land Discovery + GIS slice:
+
+1. Confirm parcel data, ownership and RLS contracts.
+2. Add reproducible synthetic Abuja/demo fixtures labelled `DEMO DATA / NOT OFFICIAL`.
+3. Implement bounded search/filter, list/map views, parcel detail and viewport-aware spatial queries.
+4. Preserve source, jurisdiction, update date and authority/provenance labels.
+5. Add unit, integration, RLS/authorization and E2E coverage before expanding into verification/documents.
+
+### Outstanding gates and risks
+
+- Password-reset and account-recovery behavior still requires completion or verification.
+- Profile onboarding details and role-aware dashboard modules remain incomplete.
+- Real database tests for RLS, profile provisioning and organization/project membership are required.
+- Private document buckets, access policies, version/audit behavior and retention rules require implementation evidence.
+- Synthetic seed fixtures and failure/rejection edge cases are still needed.
+- Dependency advisories and any framework upgrade must be handled as a separate tested change.
+- This update does not certify legal compliance, official land status, security readiness or production readiness.
+
+### Audit boundary for this update
+
+This addendum records the documentation milestone and the next implementation direction. It does not replace the 2026-10-02 baseline, change application behavior or authorize future features to be represented as implemented. The audit should receive another dated update after the Land + GIS milestone and before the next major phase.
