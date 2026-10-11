@@ -1,6 +1,6 @@
-# APEXGROVE
+# Atexgrove
 
-APEXGROVE is a Next.js prototype for a trusted digital ecosystem for land development in Africa.
+Atexgrove is a Next.js prototype for a trusted digital ecosystem for land development in Africa.
 
 ## Project layout
 

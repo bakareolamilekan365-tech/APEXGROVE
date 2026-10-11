@@ -1,4 +1,4 @@
-# APEXGROVE — System Architecture
+# Atexgrove — System Architecture
 
 ## Architecture style
 Use a modular monolith for the prototype. Keep domain boundaries clean so modules can later become independently deployable services if scale requires it.
@@ -72,7 +72,7 @@ The platform must not depend on one unrestricted “God Admin”. The future adm
 
 Verification is its own trust subsystem rather than a single badge. It should support distinct verification subjects and types, including identity, organization, professional, land/document, survey-related, title/ownership and planning-related checks. Records should be able to reference status, evidence, reviewer, source, dates, expiry and confidence.
 
-The subsystem must preserve an authority hierarchy: user-submitted information → automated checks → APEXGROVE internal review → professional review → authoritative third-party confirmation → official/statutory confirmation. Internal review must not be represented as government certification. GIS geometry should distinguish visual/spatial representation from survey information, authoritative cadastral information and official/legal records.
+The subsystem must preserve an authority hierarchy: user-submitted information → automated checks → Atexgrove internal review → professional review → authoritative third-party confirmation → official/statutory confirmation. Internal review must not be represented as government certification. GIS geometry should distinguish visual/spatial representation from survey information, authoritative cadastral information and official/legal records.
 
 ## Provenance and data trust
 

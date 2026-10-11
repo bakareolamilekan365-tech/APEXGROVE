@@ -1,4 +1,4 @@
-# APEXGROVE — Implementation Checklist
+# Atexgrove — Implementation Checklist
 
 Use this as an engineering gate, not a list of screens. Every item should be marked **NOT STARTED**, **IN PROGRESS**, **IMPLEMENTED** or **VERIFIED** based on repository evidence. Documentation alone never earns IMPLEMENTED or VERIFIED.
 

@@ -1,7 +1,7 @@
-# APEXGROVE — Build Agent Instructions
+# Atexgrove — Build Agent Instructions
 
 ## Mission
-Build the APEXGROVE prototype defined by the project markdown files in this directory.
+Build the Atexgrove prototype defined by the project markdown files in this directory.
 
 ## Priority order
 1. Read the relevant markdown specifications before coding, including `00-03` and `07-08` as the current architecture authority.
@@ -14,7 +14,7 @@ Build the APEXGROVE prototype defined by the project markdown files in this dire
 8. Test the journey and its failure/security paths.
 
 ## Non-negotiable rules
-- Do not turn APEXGROVE into a generic real-estate listing site.
+- Do not turn Atexgrove into a generic real-estate listing site.
 - Do not implement the long-term roadmap as fake UI.
 - Do not create fake verification.
 - Do not expose private documents publicly.

@@ -1,4 +1,4 @@
-# APEXGROVE — Repository Structure
+# Atexgrove — Repository Structure
 
 This map reflects the current repository. Empty `.gitkeep` directories are extension points, not implemented modules.
 

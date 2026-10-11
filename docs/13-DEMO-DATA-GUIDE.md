@@ -1,4 +1,4 @@
-# APEXGROVE — Demo Data Guide
+# Atexgrove — Demo Data Guide
 
 ## Purpose
 Provide enough realistic-looking but explicitly synthetic data for demonstrations without implying legal or governmental authenticity.
@@ -47,7 +47,7 @@ Include examples at more than one trust level without collapsing them into one b
 
 - user-submitted evidence awaiting review
 - automated check with a clear method/result
-- APEXGROVE internal review
+- Atexgrove internal review
 - professional review example
 - authoritative/official status only when a real permitted fixture explicitly represents that authority
 

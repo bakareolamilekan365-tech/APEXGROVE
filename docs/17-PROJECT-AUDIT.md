@@ -227,3 +227,7 @@ After the outstanding foundation gates are satisfied, implementation should proc
 ### Audit boundary for this update
 
 This addendum records the documentation milestone and the next implementation direction. It does not replace the 2026-10-02 baseline, change application behavior or authorize future features to be represented as implemented. The audit should receive another dated update after the Land + GIS milestone and before the next major phase.
+
+## Rename note — 2026-10-11
+
+The product display name changed from APEXGROVE to Atexgrove (code identifier `atexgrove`). Existing lines above were left unchanged as a historical record. The GitHub repository name and the hosted Supabase project's dashboard name and the local `supabase/config.toml` `project_id` have not yet been renamed. Logo files under `public/logo/apexgrove-*.svg`, `LICENSE`, applied Supabase migrations, seed, functions, environment variables, cookie/storage keys and repository URLs were intentionally left unchanged.

@@ -1,4 +1,4 @@
-# APEXGROVE - Requirements and Test Strategy
+# Atexgrove - Requirements and Test Strategy
 
 ## Purpose
 

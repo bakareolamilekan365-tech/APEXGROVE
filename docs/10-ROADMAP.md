@@ -1,4 +1,4 @@
-# APEXGROVE — Roadmap
+# Atexgrove — Roadmap
 
 The roadmap separates the working prototype from future architecture. A phase is not complete because a screen exists: the relevant persistence, authorization, failure handling, tests and trust boundaries must work together.
 

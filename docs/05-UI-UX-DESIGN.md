@@ -1,4 +1,4 @@
-# APEXGROVE — UI/UX Specification
+# Atexgrove — UI/UX Specification
 
 ## Design character
 Corporate, architectural, technical, trustworthy and modern.
@@ -57,12 +57,12 @@ Never leave the user with a dead screen after an action.
 The interface must make the authority of information visible. For land, GIS, documents and verification records, show where relevant:
 
 - verification type and status, rather than one generic “Verified” badge
-- verification level/authority: user-submitted, automated, APEXGROVE review, professional review, authoritative third party or official/statutory confirmation
+- verification level/authority: user-submitted, automated, Atexgrove review, professional review, authoritative third party or official/statutory confirmation
 - source, jurisdiction, collection/update date and provenance
 - confidence, uncertainty, limitations and reviewer/date where available
 - whether a capability is **Current Prototype**, **Planned** or **Future**
 
-APEXGROVE review must not look like government certification. A map polygon must not be labelled as a legal cadastral boundary without authoritative supporting records. Professional responsibility and APEXGROVE platform responsibility should be distinct in copy, labels and assignment states.
+Atexgrove review must not look like government certification. A map polygon must not be labelled as a legal cadastral boundary without authoritative supporting records. Professional responsibility and Atexgrove platform responsibility should be distinct in copy, labels and assignment states.
 
 ## Authorization-aware UX
 

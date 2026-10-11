@@ -1,4 +1,4 @@
-# APEXGROVE — Authentication, Authorization & Security
+# Atexgrove — Authentication, Authorization & Security
 
 ## Security boundary and status
 
@@ -37,7 +37,7 @@ Authorization is a contextual decision, not one global role check. The following
 | Concept | Meaning | Security consequence |
 | --- | --- | --- |
 | Identity | The authenticated Supabase user | Establishes who is making a request; it does not grant access to every record. |
-| Platform/user role | Broad relationship to APEXGROVE, such as buyer, landowner, developer, professional or admin | A useful product classification, not a complete permission policy. |
+| Platform/user role | Broad relationship to Atexgrove, such as buyer, landowner, developer, professional or admin | A useful product classification, not a complete permission policy. |
 | Professional discipline | Surveying, architecture, planning, construction, or another field | Describes expertise; it is not an administrative permission. |
 | Organization membership/type | A user’s relationship to an organization and the kind of organization | Scopes organization resources and responsibilities. |
 | Project membership/role | A person’s responsibility on a particular project | Scopes project resources and actions. |
@@ -63,7 +63,7 @@ The long-term decision should consider ownership, organization membership, proje
 
 ## Administrative security
 
-APEXGROVE must support separated administrative responsibilities with least privilege. Conceptual examples include:
+Atexgrove must support separated administrative responsibilities with least privilege. Conceptual examples include:
 
 | Administrative responsibility | Example scope |
 | --- | --- |
@@ -110,13 +110,13 @@ Each record should be able to identify its status, evidence, reviewer, source, s
 ```text
 user-submitted information
 → automated checks
-→ APEXGROVE internal review
+→ Atexgrove internal review
 → professional review
 → authoritative third-party confirmation
 → official/statutory confirmation
 ```
 
-APEXGROVE is a coordination and trust layer, not a government registry or statutory authority. Internal review must never be presented as government certification. A GIS polygon is a visual/spatial representation unless supported by survey, authoritative cadastral or official/legal records.
+Atexgrove is a coordination and trust layer, not a government registry or statutory authority. Internal review must never be presented as government certification. A GIS polygon is a visual/spatial representation unless supported by survey, authoritative cadastral or official/legal records.
 
 ## Threat model
 

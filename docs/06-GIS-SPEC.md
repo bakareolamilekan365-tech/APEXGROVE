@@ -1,9 +1,9 @@
-# APEXGROVE — GIS Specification
+# Atexgrove — GIS Specification
 
 ## Purpose
-GIS is a core capability of APEXGROVE. The prototype should prove that parcels and development information are spatially connected.
+GIS is a core capability of Atexgrove. The prototype should prove that parcels and development information are spatially connected.
 
-GIS is a representation and analysis capability, not a promise that APEXGROVE is a cadastral registry. Every geometry must preserve its source, update date, jurisdiction and verification/authority state.
+GIS is a representation and analysis capability, not a promise that Atexgrove is a cadastral registry. Every geometry must preserve its source, update date, jurisdiction and verification/authority state.
 
 ## Stack
 - PostGIS for spatial persistence and querying
@@ -25,7 +25,7 @@ A user can:
 - Open parcel detail
 - Highlight the selected geometry
 
-The map must label the confidence and authority of the displayed geometry. A polygon inside APEXGROVE is not automatically a legal land boundary.
+The map must label the confidence and authority of the displayed geometry. A polygon inside Atexgrove is not automatically a legal land boundary.
 
 ## Boundary and authority distinction
 
@@ -36,7 +36,7 @@ Keep these layers separate in data, copy and UI:
 3. **Cadastral information** — authoritative parcel/boundary data where a recognized source provides it.
 4. **Official/statutory boundaries** — records confirmed by the relevant authority or legal system.
 
-APEXGROVE internal review or a third-party dataset must not be presented as official/statutory confirmation. Conflicting sources should remain visible with source, dates, jurisdiction, reviewer and uncertainty; do not silently choose a legally consequential answer.
+Atexgrove internal review or a third-party dataset must not be presented as official/statutory confirmation. Conflicting sources should remain visible with source, dates, jurisdiction, reviewer and uncertainty; do not silently choose a legally consequential answer.
 
 ## Data model
 `land_parcels.geometry` is the source of truth for parcel spatial representation.

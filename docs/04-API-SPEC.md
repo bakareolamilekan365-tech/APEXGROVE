@@ -1,4 +1,4 @@
-# APEXGROVE — API Architecture
+# Atexgrove — API Architecture
 
 ## Principles
 - Consistent JSON response shapes

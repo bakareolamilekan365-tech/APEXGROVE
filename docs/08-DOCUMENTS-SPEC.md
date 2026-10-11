@@ -1,4 +1,4 @@
-# APEXGROVE — Document Management Specification
+# Atexgrove — Document Management Specification
 
 ## Scope and implementation boundary
 
@@ -81,11 +81,11 @@ Metadata should not contain unnecessary copies of sensitive document content. Ac
 - **Draft** — uploaded or being prepared; not submitted for a decision.
 - **Submitted** — explicitly submitted for review.
 - **Under Review** — assigned review is in progress.
-- **Approved** — approved within the stated APEXGROVE workflow and scope.
+- **Approved** — approved within the stated Atexgrove workflow and scope.
 - **Rejected** — review found a problem or insufficient evidence; reason should be recorded where appropriate.
 - **Archived** — retained for history but not active in the current workflow.
 
-Document status is not the same as legal validity, statutory registration, ownership, professional certification or government approval. APEXGROVE internal approval must not be represented as official confirmation.
+Document status is not the same as legal validity, statutory registration, ownership, professional certification or government approval. Atexgrove internal approval must not be represented as official confirmation.
 
 ## Provenance and authority
 
@@ -105,7 +105,7 @@ The authority hierarchy is:
 ```text
 user-submitted information
 → automated checks
-→ APEXGROVE internal review
+→ Atexgrove internal review
 → professional review
 → authoritative third-party confirmation
 → official/statutory confirmation

@@ -1,4 +1,4 @@
-# APEXGROVE — Prototype PRD
+# Atexgrove — Prototype PRD
 
 ## 1. Objective
 Build a credible, usable first version that demonstrates how land discovery can flow into verification and then into a structured development project.
@@ -16,7 +16,7 @@ Other future roles may exist in the schema but do not need full workflows yet.
 
 The PRD keeps these concepts separate:
 
-- platform/user role: a broad relationship to APEXGROVE
+- platform/user role: a broad relationship to Atexgrove
 - professional discipline: for example surveying, architecture, planning or construction
 - organization type: the kind of company, institution or practice
 - project role: a person’s responsibility on one project
@@ -27,7 +27,7 @@ The prototype can expose a small role-aware experience, but it must not create o
 
 ## Administrative responsibilities
 
-APEXGROVE must not depend on one unrestricted “God Admin”. The future administration model should support separated responsibilities and scopes, such as Super Admin, Operations Admin, Verification Admin, Compliance Admin, Finance/Billing Admin and Support Admin. These are conceptual examples rather than a final role catalogue. Administrative actions require auditable actor, action, target, scope and time information.
+Atexgrove must not depend on one unrestricted “God Admin”. The future administration model should support separated responsibilities and scopes, such as Super Admin, Operations Admin, Verification Admin, Compliance Admin, Finance/Billing Admin and Support Admin. These are conceptual examples rather than a final role catalogue. Administrative actions require auditable actor, action, target, scope and time information.
 
 ## 3. Core modules
 ### Authentication
@@ -69,7 +69,7 @@ Show role-specific summary cards, recent activity, active projects and useful ac
 
 Verification is a structured trust system, not one generic badge. Future verification types may include identity, organization, professional, land/document, survey-related, title/ownership and planning-related verification. A verification record should be able to capture status, evidence, reviewer, source, date, expiry and confidence.
 
-The product must distinguish the authority of information: user-submitted information, automated checks, APEXGROVE internal review, professional review, authoritative third-party confirmation and official/statutory confirmation. APEXGROVE’s internal review must never be presented as equivalent to government certification.
+The product must distinguish the authority of information: user-submitted information, automated checks, Atexgrove internal review, professional review, authoritative third-party confirmation and official/statutory confirmation. Atexgrove’s internal review must never be presented as equivalent to government certification.
 
 Statuses:
 - Unverified
