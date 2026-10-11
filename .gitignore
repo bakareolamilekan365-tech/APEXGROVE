@@ -44,3 +44,6 @@ test-results/
 coverage/
 *.tsbuildinfo
 *.log
+
+# Local review packs (reference material, not part of the app)
+_zip-review/

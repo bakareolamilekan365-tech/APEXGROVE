@@ -231,3 +231,62 @@ This addendum records the documentation milestone and the next implementation di
 ## Rename note — 2026-10-11
 
 The product display name changed from APEXGROVE to Atexgrove (code identifier `atexgrove`). Existing lines above were left unchanged as a historical record. The GitHub repository name and the hosted Supabase project's dashboard name and the local `supabase/config.toml` `project_id` have not yet been renamed. Logo files under `public/logo/apexgrove-*.svg`, `LICENSE`, applied Supabase migrations, seed, functions, environment variables, cookie/storage keys and repository URLs were intentionally left unchanged.
+
+## Audit Update — 2026-10-11
+
+### Executive summary
+
+This update records a read-only check of the hosted Supabase project, a review of the unmerged `fix/foundation-security-and-quality-gates` branch, a correction to the baseline audit, and a proposed change to the next implementation phase following the founder's Master Product Blueprint v1.0. It does not change application behavior. Nothing in this update has been executed against the database beyond read-only queries.
+
+### Correction to the baseline audit
+
+The baseline states that Tailwind was configured. On `main` as reviewed on 2026-10-08, `package.json` has no Tailwind dependency, `postcss.config.mjs` has no plugins, `tailwind.config.ts` is a stub, and `src/app/globals.css` is plain CSS. **Corrected status: Tailwind is documented as the intended styling direction but is not installed.** Installing it is a tracked change that requires lint, typecheck, test, build and visual verification.
+
+### Live Supabase verification (read-only)
+
+| Check | Result |
+| --- | --- |
+| Project | `apexgrove`, eu-north-1, Postgres 17. It had been paused and was restored for this check. |
+| Applied migrations | **001 to 014 applied.** Migrations 015 and above are not applied. |
+| Application tables with RLS enabled | `profiles`, `organizations`, `organization_members`, `audit_logs`. All showed 0 rows. |
+| Placeholder migrations | 004 to 011 created no tables; land, verification, properties, projects, professionals, documents, feasibility and notifications do not exist yet. |
+
+### Security advisor findings (live project)
+
+| Finding | Level | Planned fix | Status |
+| --- | --- | --- | --- |
+| `public.spatial_ref_sys` has RLS disabled | ERROR | Migration 017: enable RLS and add a read-only policy | **Not applied** |
+| Six SECURITY DEFINER functions executable through the API by `anon` and `authenticated` | WARN | Migration 017: revoke execute | **Not applied** |
+| `set_updated_at` has a mutable `search_path` | WARN | Migration 017 | **Not applied** |
+| PostGIS extension installed in `public` | WARN | Accepted for now; revisit when map features are built | **Accepted** |
+| PostGIS `st_estimatedextent` functions executable by `anon` and `authenticated` | WARN | Accepted for now; extension-owned | **Accepted** |
+| Leaked-password protection disabled | WARN | Dashboard setting; may require a paid plan | **Open** |
+
+### Known issues in the fix branch (not merged)
+
+- An organization admin could demote an owner, because the membership UPDATE policy checks the new row but not the old row. Planned fix: migration 016.
+- `safeInternalPath` could be bypassed with `/\host` and control characters. Planned fix: corrected helper with tests.
+- The Supabase allow/deny integration tests are skipped in CI without credentials, and the pgTAP file checks that policies exist rather than how they behave. Planned fix: a database-tests CI job running `supabase test db`, and behavioral membership tests.
+- Migration 015 has not been proven to apply cleanly, especially the `storage.objects` triggers and policies.
+- `account_type` is self-selected; a separate verification state is required before any trust-sensitive feature relies on it.
+- `requireOwnedRow` accepts a table name and should be limited to an allow-list in trusted server code.
+- Middleware treats `/api/` as public, so each API route must perform its own authentication and authorization.
+
+### Proposed revision to the next implementation phase
+
+The 2026-10-06 update names Land Discovery + GIS as the next slice. The founder's Master Product Blueprint v1.0 (shared 2026-10-11) makes **Land Verification and Development Feasibility in Abuja** the first commercial product, delivered as a Land & Development Report. **Proposed, pending founder confirmation:** after the outstanding foundation gates, build the verification case workflow first (request, document submission, internal work queue, assignment and handover, evidence recording, report review, audit trail), and treat the map as a way to locate a site within a case. Land Discovery follows.
+
+This also requires decisions before implementation: the role and department model, a single set of trust labels based on the blueprint's information-source types, and the case and evidence data model. Planning standards must not be hard-coded until the Development Control and FHA manuals have been reviewed.
+
+### Outstanding gates
+
+- Apply and verify migrations 015, 016 and 017 locally, then re-run the security advisors.
+- Run the behavioral RLS tests and keep them in CI.
+- Set Supabase Auth password length, email confirmation and leaked-password protection, and verify.
+- Install Tailwind as a separate tested change.
+- Obtain the founder's answers to the open scope, naming, palette, legal and data-source questions.
+- Record decisions in `docs/DECISIONS.md` and the development process in `docs/SDLC.md`.
+
+### Audit boundary for this update
+
+This update does not certify legal compliance, official land status, security readiness or production readiness. It does not replace the 2026-10-02 baseline or the 2026-10-06 update, except for the Tailwind correction above, and it does not authorize any planned feature to be represented as implemented. The audit should receive another dated update after the foundation gates are closed.
