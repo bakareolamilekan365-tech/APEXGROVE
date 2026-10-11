@@ -5,8 +5,8 @@ Status values: Accepted / Proposed (needs founder confirmation) / Deferred / Rej
 
 | # | Decision | Status | Date | Reason (edit me) |
 |---|----------|--------|------|------------------|
-| 1 | Styling with Tailwind CSS | Accepted (not yet installed in code) | 2026-10-11 | Documented stack; [FILL IN] |
-| 2 | 2D maps with MapLibre GL JS on PostGIS data | Accepted (later phase) | 2026-10-11 | Mapping foundation; [FILL IN] |
+| 1 | Styling with Tailwind CSS | Accepted (not yet installed in code) | 2026-10-11 | Documented stack; it is optimal |
+| 2 | 2D maps with MapLibre GL JS on PostGIS data | Accepted (later phase) | 2026-10-11 | Mapping foundation; it is optimal |
 | 3 | Three.js / React Three Fiber for 3D | Deferred | 2026-10-11 | Needs terrain/building data and a working 2D GIS first |
 | 4 | Blender | Not required now | 2026-10-11 | Three.js can build scenes directly; GLB/glTF can be loaded later |
 | 5 | EasyUI (easyui.site, React/Tailwind) | Not adopted | 2026-10-11 | Evaluate individual components only; not the older jQuery EasyUI |

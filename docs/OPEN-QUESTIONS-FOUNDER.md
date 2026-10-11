@@ -9,7 +9,7 @@ Record answers here with the date. Do not build on an assumption while a questio
 4. Which staff roles and departments exist at launch, and which can be combined? Answer: [FILL IN]
 
 ## Brand and naming
-5. Product name: ATEX GROVE, Atexgrove, or APEXGROVE? Rename the repo? Answer: [FILL IN]
+5. Product name: ATEX GROVE, Atexgrove, or APEXGROVE? Rename the repo? Answer (2026-10-11): Decided — display name Atexgrove, code identifier atexgrove. Repository rename pending.
 6. Final palette: logo navy/blue, or blueprint forest green/gold/ivory/charcoal? Final logo file and font? Answer: [FILL IN]
 
 ## Trust and legal
