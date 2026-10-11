@@ -1,1 +1,1 @@
-export const APP_NAME = "APEXGROVE";
+export const APP_NAME = "Atexgrove";

@@ -1,4 +1,4 @@
-# APEXGROVE - Prototype Flow and Delivery Map
+# Atexgrove - Prototype Flow and Delivery Map
 
 ## Payment Decision
 
@@ -12,7 +12,7 @@ Do not add Stripe, Paystack, Flutterwave, or another payment provider yet. Reser
 
 ```mermaid
 flowchart TD
-    A[Visitor opens APEXGROVE] --> B{Has account?}
+    A[Visitor opens Atexgrove] --> B{Has account?}
     B -->|No| C[Register with email and password]
     B -->|Yes| D[Sign in]
     C --> E[Confirm email if required]

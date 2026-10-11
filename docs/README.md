@@ -1,6 +1,6 @@
-# APEXGROVE
+# Atexgrove
 
-APEXGROVE is a prototype specification for a trusted digital ecosystem for land development in Africa. The initial demonstration geography is Abuja, Nigeria.
+Atexgrove is a prototype specification for a trusted digital ecosystem for land development in Africa. The initial demonstration geography is Abuja, Nigeria.
 
 This folder contains the focused markdown specifications required to build the first end-to-end prototype.
 
@@ -41,7 +41,7 @@ All synthetic records must be clearly labelled **DEMO DATA / NOT OFFICIAL**.
 
 ## Important
 
-These documents intentionally separate the huge long-term APEXGROVE vision from the smaller prototype implementation.
+These documents intentionally separate the huge long-term Atexgrove vision from the smaller prototype implementation.
 
 The original master prompt can remain as a product-vision document. These files are the operational build specification.
 

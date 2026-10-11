@@ -1,4 +1,4 @@
-# APEXGROVE — Database Schema
+# Atexgrove — Database Schema
 
 ## Database
 
@@ -132,7 +132,7 @@ The future document model must also account for validation/security-check result
 - reviewed_at nullable
 - expires_at nullable
 
-Verification is a structured trust record. Future representations should distinguish verification type (identity, organization, professional, land/document, survey-related, title/ownership or planning-related), status, evidence, reviewer, source, submitted/reviewed dates, expiry and confidence. The authority of a record must be explicit: user-submitted, automated, APEXGROVE internal, professional, authoritative third-party or official/statutory.
+Verification is a structured trust record. Future representations should distinguish verification type (identity, organization, professional, land/document, survey-related, title/ownership or planning-related), status, evidence, reviewer, source, submitted/reviewed dates, expiry and confidence. The authority of a record must be explicit: user-submitted, automated, Atexgrove internal, professional, authoritative third-party or official/statutory.
 
 ### land_verification_items
 
@@ -287,7 +287,7 @@ These concepts must remain distinct. A professional discipline must not become a
 
 ## Provenance and source authority (reserved)
 
-Important land, GIS, document and verification records should eventually be able to retain source, source type, supplied by, collection/import date, verification date, reviewer, last updated time, jurisdiction, confidence and verification state. Source/authority records should preserve the distinction between user-submitted data, automated checks, internal review, professional review, authoritative third-party confirmation and official/statutory confirmation. APEXGROVE internal review must never be stored or presented as government certification.
+Important land, GIS, document and verification records should eventually be able to retain source, source type, supplied by, collection/import date, verification date, reviewer, last updated time, jurisdiction, confidence and verification state. Source/authority records should preserve the distinction between user-submitted data, automated checks, internal review, professional review, authoritative third-party confirmation and official/statutory confirmation. Atexgrove internal review must never be stored or presented as government certification.
 
 ## Future document controls (reserved)
 

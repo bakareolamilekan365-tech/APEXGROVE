@@ -1,4 +1,4 @@
-# APEXGROVE - Design and Integration Plan
+# Atexgrove - Design and Integration Plan
 
 ## Purpose
 
@@ -93,12 +93,12 @@ Do not add Stripe, Google Maps, Auth0, Cloudinary, OpenAI, paid GIS datasets, or
 
 ### Payment decision
 
-Payments are out of scope for the prototype. No payment provider account is required until APEXGROVE has a defined paid transaction, subscription, professional fee, or marketplace workflow. Keep a future `PaymentProvider` adapter in the architecture, but do not add payment credentials or checkout UI now.
+Payments are out of scope for the prototype. No payment provider account is required until Atexgrove has a defined paid transaction, subscription, professional fee, or marketplace workflow. Keep a future `PaymentProvider` adapter in the architecture, but do not add payment credentials or checkout UI now.
 
 When payments eventually arrive, preserve this boundary:
 
 ```text
-user → APEXGROVE server → payment provider → verified webhook
+user → Atexgrove server → payment provider → verified webhook
 → subscription state → entitlement
 ```
 

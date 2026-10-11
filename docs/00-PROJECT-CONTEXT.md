@@ -1,15 +1,15 @@
-# APEXGROVE — Project Context
+# Atexgrove — Project Context
 
 ## Product
-APEXGROVE
+Atexgrove
 
 ## Positioning
 > The trusted digital ecosystem for land development in Africa.
 
 ## Prototype purpose
-This repository is the first serious working prototype of APEXGROVE. It must demonstrate a coherent end-to-end land-development workflow rather than a collection of disconnected mock screens.
+This repository is the first serious working prototype of Atexgrove. It must demonstrate a coherent end-to-end land-development workflow rather than a collection of disconnected mock screens.
 
-APEXGROVE is not simply a real-estate listing platform. Its long-term purpose is to help people and organizations move through a trustworthy land-development ecosystem:
+Atexgrove is not simply a real-estate listing platform. Its long-term purpose is to help people and organizations move through a trustworthy land-development ecosystem:
 
 ```text
 LAND → VERIFICATION → PLANNING → DESIGN → APPROVAL → CONSTRUCTION → PROPERTY → URBAN INTELLIGENCE
@@ -66,13 +66,13 @@ If a feature is not implemented, label it as planned/pending. Never create contr
 ## Product principles
 
 ### Trust and provenance
-Important land, GIS, document, professional and verification information should eventually retain where it came from, who supplied it, when it was collected or last updated, who reviewed it, the relevant jurisdiction, confidence, and verification state. A record presented by APEXGROVE must not silently appear more authoritative than its source.
+Important land, GIS, document, professional and verification information should eventually retain where it came from, who supplied it, when it was collected or last updated, who reviewed it, the relevant jurisdiction, confidence, and verification state. A record presented by Atexgrove must not silently appear more authoritative than its source.
 
 ### Distinct concepts
 Platform/user role, professional discipline, organization type, project role, permissions, and subscription/entitlement are separate concepts. A profession is not a permission, an organization membership is not a platform administrator role, and a subscription is not an authorization grant. The prototype may use simpler fields, but the long-term model must not collapse these concepts into one technical role per profession.
 
 ### Authority boundaries
-APEXGROVE must distinguish user-submitted information, automated checks, internal review, professional review, authoritative third-party confirmation and official/statutory confirmation. Internal review is not government certification. A GIS polygon is a visual/spatial representation unless backed by survey or authoritative cadastral records.
+Atexgrove must distinguish user-submitted information, automated checks, internal review, professional review, authoritative third-party confirmation and official/statutory confirmation. Internal review is not government certification. A GIS polygon is a visual/spatial representation unless backed by survey or authoritative cadastral records.
 
 ### Professional involvement and jurisdiction
 Land development involves qualified professionals and jurisdiction-specific rules. The product should make professional review and jurisdiction visible where relevant, while avoiding legal, planning, surveying, investment or regulatory claims that the product cannot substantiate.

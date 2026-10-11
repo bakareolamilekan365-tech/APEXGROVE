@@ -1,4 +1,4 @@
-# APEXGROVE — Feasibility Engine
+# Atexgrove — Feasibility Engine
 
 ## Purpose
 Provide transparent, basic scenario calculations for development planning. This is a planning aid and not professional financial advice.
