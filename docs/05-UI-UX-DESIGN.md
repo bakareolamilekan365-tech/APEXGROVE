@@ -4,6 +4,9 @@
 Corporate, architectural, technical, trustworthy and modern.
 
 ## Palette direction
+
+Status: tentative until the founder resolves the palette/logo question in `OPEN-QUESTIONS-FOUNDER.md`.
+
 - Deep navy
 - Near-black
 - White
@@ -22,14 +25,16 @@ Avoid excessive gradients, gaming aesthetics, oversized illustrations, childish 
 - Maps used where spatial context matters
 
 ## Primary navigation
+
+For the proposed verification-first release:
+
 - Overview
-- Land
-- Map
-- Projects
-- Professionals
-- Properties
+- Verification cases
+- Reports
 - Documents
-- AI (planned/future state unless implemented)
+- Profile/settings
+
+Staff with permission may additionally see a work queue, assignments, reviews and audit history. Land discovery, a standalone map, projects, professionals, properties and AI remain planned navigation until their connected data and authorization boundaries are implemented. A site-location map may appear inside a verification case without becoming a public marketplace.
 
 Admin navigation appears only for authorized users and should expose only the responsibilities and scope granted to that administrator. Do not build one unrestricted admin interface.
 

@@ -4,16 +4,18 @@ Atexgrove is a prototype specification for a trusted digital ecosystem for land 
 
 This folder contains the focused markdown specifications required to build the first end-to-end prototype.
 
-## Prototype Journey
+For founder, partner, and non-engineering explanations, start with [`non-technical/README.md`](non-technical/README.md). The plain-language library summarizes the project story, product, security approach, roadmap, current progress, decisions, and working method without replacing these detailed specifications.
 
-The prototype should support this connected workflow:
+## Current delivery journey
+
+The current proposed delivery order puts the verification service before a land-discovery marketplace. It remains subject to the founder decisions recorded in `OPEN-QUESTIONS-FOUNDER.md` and `DECISIONS.md`.
 
 1. Register, choose a role, and sign in.
-2. Discover demo land parcels through list and map views.
-3. Review a parcel and begin a land-verification workflow.
-4. Upload and version supporting documents.
-5. Create a development project from a parcel.
-6. Add professionals and compare basic feasibility scenarios.
+2. Start a land-verification and development-feasibility case.
+3. Identify the Abuja site and submit private supporting documents.
+4. Route the case through assignment, evidence review, notes, status changes, and audit events.
+5. Produce a reviewed Land & Development Report with explicit source and authority labels.
+6. Add land discovery, mapping, projects, professionals, and wider development workflows only after the case workflow is proven.
 
 All synthetic records must be clearly labelled **DEMO DATA / NOT OFFICIAL**.
 
@@ -47,4 +49,6 @@ The original master prompt can remain as a product-vision document. These files 
 
 ## Status
 
-This repository currently contains the product, architecture, data, API, UX, GIS, security, roadmap, and implementation specifications. The working application is to be built according to the scope and priorities described in these documents.
+As of 2026-10-12, the repository contains a partial working foundation: registration, login, role selection, session-protected dashboard behavior, password recovery/callback code, profile onboarding, and migrations through `017` on `fix/security-pass-2`. The application checks pass locally, but migrations `015`–`017` and the pgTAP suites have not been executed because a Docker-capable database environment is not currently available. Land verification, reports, GIS, projects, professionals, and feasibility remain planned rather than implemented.
+
+Historical sections in `17-PROJECT-AUDIT.md` retain the status that was true on their stated dates. Use the latest dated audit addendum and the implementation itself for current status.

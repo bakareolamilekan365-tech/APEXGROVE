@@ -10,7 +10,9 @@
     "test": "npm run test:unit && npm run test:integration && npm run test:e2e",
     "test:unit": "vitest run tests/unit",
     "test:integration": "vitest run tests/integration",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "security:guardrails": "node scripts/check-security-guardrails.mjs",
+    "seed:fixtures": "node scripts/seed-fixtures.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",

@@ -18,27 +18,27 @@ flowchart TD
     C --> E[Confirm email if required]
     E --> D
     D --> F[Load role-aware dashboard]
-    F --> G[Discover demo land]
-    G --> H[Search, filter, or open map]
-    H --> I[Open parcel detail]
-    I --> J{Start verification?}
-    J -->|No| G
-    J -->|Yes| K[Create verification record]
-    K --> L[Upload private supporting document]
-    L --> M[Review checklist and status]
-    M --> N{Create project?}
-    N -->|No| F
-    N -->|Yes| O[Create development project]
-    O --> P[Open project workspace]
-    P --> Q[Add professionals]
-    P --> R[Upload and version project documents]
-    P --> S[Enter feasibility assumptions]
-    S --> T[Compare scenarios]
-    Q --> U[Review project activity]
-    R --> U
-    T --> U
-    U --> V[Continue project workflow without dead ends]
+    F --> G[Start verification and feasibility case]
+    G --> H[Record Abuja site and request details]
+    H --> I[Upload private supporting documents]
+    I --> J[Submit case]
+    J --> K[Authorized staff work queue]
+    K --> L[Assign or hand over case]
+    L --> M[Review evidence and record source labels]
+    M --> N{More evidence required?}
+    N -->|Yes| O[Request clarification or documents]
+    O --> I
+    N -->|No| P[Enter feasibility assumptions]
+    P --> Q[Generate draft Land and Development Report]
+    Q --> R[Qualified review and approval]
+    R --> S[Deliver report with findings and limitations]
+    S --> T{Continue into later product flows?}
+    T -->|Land discovery| U[Open clearly labelled demo list or map]
+    T -->|Project| V[Create controlled project workspace]
+    T -->|No| F
 ```
+
+This is the proposed verification-first delivery flow as of 2026-10-12. It is not a claim that the case or report workflow is already implemented.
 
 ## System Boundary Flow
 
@@ -51,7 +51,8 @@ flowchart LR
     Session --> Auth
     Server --> Database[(PostgreSQL + PostGIS)]
     Server --> Storage[(Private Supabase Storage)]
-    Map[MapLibre UI] --> Tiles[Map tile adapter]
+    Case[Verification case and report UI] --> Server
+    Map[Later MapLibre UI] --> Tiles[Map tile adapter]
     Map --> GeoJSON[Demo GeoJSON]
     Database --> RLS[Row-level security]
     Storage --> RLS
@@ -86,35 +87,37 @@ Every vertical slice must pass through the relevant server/business, database/RL
 
 **Status:** foundation migrations and the first auth flow are working and manually verified.
 
-**Remaining:** password reset, profile onboarding details, real RLS tests, storage bucket policy, and seed fixtures.
+**Implemented on `fix/security-pass-2`:** password recovery/callback code, profile onboarding details, private-storage migration, security guardrails, synthetic fixture tooling, migrations `015`–`017`, pgTAP files, and a database-test GitHub Actions workflow.
 
-### Phase 2 - Land discovery
+**Still unverified:** migrations `015`–`017` applying cleanly, pgTAP behavior, hosted Auth redirect/settings, hosted security advisors, and end-to-end email recovery. Local Docker/database execution is pending; GitHub Actions is the intended database-test runner once the branch is pushed.
 
-**Output:** land parcel schema, synthetic Abuja data, GeoJSON import, search/filter, list/map toggle, map selection, and parcel detail.
+### Phase 2 - Verification case and private evidence
 
-**Exit gate:** a signed-in user can discover and open a clearly labelled demo parcel.
+**Output:** customer request, internal work queue, assignment/handover, status history, reviewer notes, private evidence, and audit events.
 
-### Phase 3 - Verification and documents
+**Exit gate:** a customer can submit a case and authorized staff can process it without public documents, cross-case access, silent reassignment, or fake verification claims.
 
-**Output:** verification lifecycle, checklist, private storage, document metadata, versioning, reviewer notes, and audit events.
+### Phase 3 - Feasibility and Land & Development Report
 
-**Exit gate:** a user can submit evidence without any public document URL or fake verification badge.
+**Output:** deterministic assumptions/calculations, source and authority labels, reviewed report generation, delivery, and explicit limitations.
 
-### Phase 4 - Projects and professionals
+**Exit gate:** the report is reproducible, reviewable, access-controlled, and honest about estimates, sources, authority, and unresolved matters.
 
-**Output:** create a project from a parcel, project workspace, membership rules, professional directory, and project documents.
+### Phase 4 - Controlled land discovery and GIS
 
-**Exit gate:** a parcel can move into a persisted project workspace with controlled access.
+**Output:** synthetic Abuja parcel data, search/filter, list/map toggle, site/parcel detail, PostGIS/GeoJSON integration, and provenance labels.
 
-### Phase 5 - Feasibility and admin
+**Exit gate:** a signed-in user can discover clearly labelled demo parcels without the map implying cadastral or legal authority.
 
-**Output:** deterministic feasibility calculations, scenario comparison, demo-data admin tools, and audit review.
+### Phase 5 - Projects, professionals, and scoped admin
 
-**Exit gate:** the core prototype journey works against persisted data from registration through feasibility.
+**Output:** project workspace, membership rules, professional directory/involvement, project documents, scoped administration, and audit review.
+
+**Exit gate:** a completed case or parcel can move into a permission-checked project workspace, and each administrator can perform only their granted scope.
 
 ### Phase 6 - Integration and release confidence
 
-**Output:** replace reserved tests with real unit/integration/E2E coverage, responsive/accessibility review, error-state review, and a deployable preview.
+**Output:** replace reserved tests with real unit/integration/E2E coverage, execute migrations and pgTAP in Docker-capable CI, complete responsive/accessibility and error-state review, and produce a deployable preview.
 
 **Exit gate:** `npm test`, typecheck, lint, build, and the complete Playwright journey pass without fake success states.
 

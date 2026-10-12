@@ -2,6 +2,8 @@
 
 The roadmap separates the working prototype from future architecture. A phase is not complete because a screen exists: the relevant persistence, authorization, failure handling, tests and trust boundaries must work together.
 
+**Planning status (2026-10-12):** phases 2 onward reflect the proposed verification-first Abuja delivery order recorded in `DECISIONS.md`. Founder answers may refine scope, but new implementation should not revert to a marketplace-first sequence without recording a replacement decision.
+
 ## Phase 0 — Architecture / Design Lock
 
 - Confirm the prototype journey, domain boundaries and role/discipline/organization/project-role separation.
@@ -19,42 +21,45 @@ The roadmap separates the working prototype from future architecture. A phase is
 
 **Gate:** a signed-in user can complete the foundation flow against real persistence; secrets remain outside source control.
 
-## Phase 2 — Land + GIS
+## Phase 2 — Verification Case + Private Evidence
+
+- Customer request, internal work queue, assignment, handover, status transitions and reviewer notes.
+- Private document submission, controlled retrieval, metadata/version lineage and audit events.
+- Evidence source, authority, jurisdiction, reviewer, date and unresolved-state labels.
+
+**Gate:** a customer can submit a case and evidence; authorized staff can process it without public document URLs, cross-case access, silent reassignment or fake verification claims.
+
+## Phase 3 — Development Feasibility + Report
+
+- Deterministic feasibility inputs, assumptions, calculations and limitations.
+- Reviewed Land & Development Report generation and delivery.
+- Explicit separation of supplied information, professional checks, authoritative confirmation, estimates and unresolved matters.
+- Site location inside the case; mapping is contextual and does not imply cadastral or legal authority.
+
+**Gate:** the report is reproducible, reviewable, access-controlled and honest about every source, estimate, limitation and authority boundary.
+
+## Phase 4 — Controlled Land Discovery + GIS
 
 - Synthetic land discovery, filters, list/map views, parcel detail and PostGIS/GeoJSON integration.
 - Source, jurisdiction, data-as-of and visual-versus-authoritative GIS labels.
 - Spatial indexes and viewport loading where needed for real data volume.
 
-**Gate:** users can discover and open clearly labelled DEMO / NOT OFFICIAL parcels without implying cadastral authority.
+**Gate:** users can discover and open clearly labelled DEMO DATA / NOT OFFICIAL parcels without implying cadastral authority or bypassing the verification service.
 
-## Phase 3 — Verification + Documents
+## Phase 5 — Projects + Professionals
 
-- Verification records, checklist/status workflow, reviewer notes and structured evidence.
-- Private document storage, metadata, versioning, controlled access and audit events.
-- Distinct identity, organization, professional, land/document, title, survey and planning verification concepts as the architecture evolves.
+- Create projects from parcels or completed cases, with project membership/roles and project documents.
+- Add a professional directory and controlled professional involvement.
+- Preserve organization/project scope, professional responsibility boundaries, scoped administration and audit review.
 
-**Gate:** evidence access is authorized and traceable; internal review is never represented as government certification.
-
-## Phase 4 — Projects + Professionals
-
-- Create projects from parcels, project membership/roles, professional directory and project documents.
-- Preserve organization/project scope and professional responsibility boundaries.
-
-**Gate:** a parcel becomes a persisted, permission-checked project workspace with no disconnected UI states.
-
-## Phase 5 — Feasibility + Admin
-
-- Deterministic feasibility inputs, calculations and scenario comparison.
-- Scoped administration, separated responsibilities and audit review.
-- Explicit failure/uncertainty handling for assumptions and demo data.
-
-**Gate:** results are reproducible and labelled as planning estimates; administrators can perform only their granted scope.
+**Gate:** a case or parcel becomes a persisted, permission-checked project workspace; professionals and administrators can perform only their granted scope.
 
 ## Phase 6 — Integration + Release Confidence
 
 - Replace placeholder tests with meaningful unit, integration, RLS/authorization and E2E coverage.
 - Responsive/accessibility review, error/empty/loading states, observability and deployment preview.
 - Verify backup/recovery, rate limits, private storage controls and release documentation as operational work matures.
+- Run migrations and pgTAP tests in a Docker-capable CI environment when local hardware is constrained; Kubernetes is not required.
 
 **Gate:** feature behavior, persistence, authorization, tests, failure behavior and security boundaries all pass review.
 

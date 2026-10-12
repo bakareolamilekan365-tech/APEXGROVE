@@ -10,17 +10,20 @@ This document translates the prototype requirements into testable slices. Work s
 | ------ | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
 | REQ-01 | Authentication and onboarding | A user can register, select a role, sign in, persist a session, and recover a password through the planned flow.             | Unit, integration, e2e   |
 | REQ-02 | Authorization                 | Server-side permission checks prevent users from reading or mutating data outside their role and organization.               | Unit, integration        |
-| REQ-03 | Land discovery and GIS        | A user can search demo parcels, filter results, switch list/map views, select a parcel, and view its detail.                 | Unit, integration, e2e   |
-| REQ-04 | Verification                  | A parcel has a verification lifecycle, checklist, reviewer notes, documents, and audit history without fake official status. | Unit, integration, e2e   |
-| REQ-05 | Documents                     | Private documents support metadata, controlled access, upload, and versioning.                                               | Unit, integration, e2e   |
-| REQ-06 | Projects and professionals    | A parcel can become a project and professionals can be added to its workspace.                                               | Unit, integration, e2e   |
-| REQ-07 | Feasibility                   | Inputs produce deterministic cost, revenue, margin, and break-even outputs, with scenario comparison.                        | Unit, integration        |
-| REQ-08 | Administration                | Authorized administrators can manage core demo records and review audit events.                                              | Integration, e2e         |
-| REQ-09 | Quality and safety            | The application handles loading, error, empty, responsive, accessible, and secret-management cases.                          | Integration, e2e, manual |
+| REQ-03 | Verification case workflow    | A customer can create and submit a case; authorized staff can queue, assign, hand over, review and change status with audit history. | Unit, integration, e2e   |
+| REQ-04 | Evidence and trust             | Every important finding retains evidence, source/authority label, reviewer, date, limitations and unresolved state without fake official status. | Unit, integration, e2e   |
+| REQ-05 | Documents                      | Private documents support metadata, controlled access, upload, retrieval and version lineage without public URLs.            | Unit, integration, e2e   |
+| REQ-06 | Feasibility and report         | Validated inputs produce deterministic calculations and a reviewed Land & Development Report with explicit assumptions and limitations. | Unit, integration, e2e   |
+| REQ-07 | Land discovery and GIS         | After the case workflow is proven, a user can search clearly labelled demo parcels and use maps without implying cadastral authority. | Unit, integration, e2e   |
+| REQ-08 | Projects and professionals     | Follow-on project/professional collaboration preserves organization, project-role and professional-responsibility boundaries. | Unit, integration, e2e   |
+| REQ-09 | Administration                 | Authorized staff and administrators can perform only their assigned case/review/operations scope and inspect audit events.    | Integration, e2e         |
+| REQ-10 | Quality and safety             | The application handles loading, error, empty, responsive, accessible, secret-management and provider-failure cases.          | Integration, e2e, manual |
 
 All demo records must display **DEMO DATA / NOT OFFICIAL**. Planned features must not expose controls that imply they are implemented.
 
 Requirements must also preserve the V2 boundaries: platform role, professional discipline, organization/project role, permission, subscription and entitlement are distinct; verification authority and provenance are explicit; GIS geometry is not automatically legal; private documents are protected; AI is advisory; and payments remain out of prototype scope.
+
+The requirement order above is the proposed 2026-10-12 delivery priority, not an implementation claim. Current branch evidence and remaining verification gaps are recorded in `12-IMPLEMENTATION-CHECKLIST.md` and the latest section of `17-PROJECT-AUDIT.md`.
 
 ## Test Layers
 
@@ -53,17 +56,23 @@ Test the same decisions at the server and database boundaries:
 - document privacy and alternate download paths
 - audit records for sensitive mutations, reviews and access
 
+Foundation authorization tests must exercise both ALLOW and DENY behavior for profiles, organizations, organization membership, audit logs and private storage. Include account-type admin escalation, creator/verification spoofing, owner/admin boundaries, last-owner protection, cross-organization manipulation, wrong-user document access and anonymous access. A test that only searches migration text is not a database security test.
+
+The repository also maintains a permanent RLS guardrail: application-owned tables in the exposed public schema must have an RLS enablement statement, while Supabase-managed system schemas are explicitly excluded. New protected tables are expected to ship with grants, per-operation policies and database tests in the same change.
+
 ### 3. E2E tests: separately tested user flows
 
 Location: `tests/e2e/`
 
-Use Playwright for critical browser flows: registration/onboarding, land discovery, verification/document upload, and project creation/workspace navigation. Keep this layer focused rather than duplicating every unit case.
+Use Playwright first for registration/onboarding, verification-case submission, private document handling, staff assignment/review, report delivery, permission-denied states and recovery from invalid/expired Auth links. Add land discovery, map, and project-workspace journeys when those follow-on slices are implemented. Keep this layer focused rather than duplicating every unit case.
 
 E2E cases should include permission-denied, not-found, loading, empty, timeout/failure and recovery states. Do not treat a visible button or route as evidence of a working feature.
 
 ### 3a. Domain and abuse regression cases
 
 Cover verification status transitions, provenance preservation, invalid/oversized/malicious uploads, forged or conflicting evidence, duplicate/retried operations, idempotency where applicable, rate-limit behavior, provider failure and timeout handling, and malicious/untrusted AI or document input. Feasibility tests must prove deterministic calculations and scenario reproducibility.
+
+Authentication recovery tests should cover the generic forgot-password response, safe callback redirects, expired/invalid links and authenticated password updates. Onboarding tests should cover profile persistence beyond role selection and role-aware dashboard authorization. Storage tests must prove private-by-default access and deny path/filename substitution.
 
 ### 4. Journey integration gate
 

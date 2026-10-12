@@ -1,0 +1,17 @@
+name: Database security tests
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  db-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      # Starts a local Supabase stack and applies every migration in supabase/migrations.
+      - run: supabase start
+      # Runs the pgTAP files in supabase/tests against that database.
+      - run: supabase test db

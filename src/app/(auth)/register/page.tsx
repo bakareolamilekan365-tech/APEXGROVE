@@ -21,7 +21,10 @@ export default function RegisterPage() {
       await createSupabaseClient().auth.signUp({
         email,
         password,
-        options: { data: { full_name: fullName } },
+        options: {
+          data: { full_name: fullName },
+          emailRedirectTo: `${window.location.origin}/auth/callback?next=/onboarding/role`,
+        },
       });
 
     if (signUpError) {

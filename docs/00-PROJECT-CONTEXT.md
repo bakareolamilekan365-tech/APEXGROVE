@@ -17,34 +17,33 @@ LAND → VERIFICATION → PLANNING → DESIGN → APPROVAL → CONSTRUCTION → 
 
 The current prototype proves only the beginning of this journey. The later stages are architectural direction, not claims about functionality already implemented in this repository.
 
-## Prototype journey
+## Current proposed prototype journey
+
+The first commercial slice is a controlled land-verification and development-feasibility service for Abuja. This ordering is proposed pending the founder answers in `OPEN-QUESTIONS-FOUNDER.md`; it deliberately places the case workflow before a public land-discovery experience.
+
 1. User registers and selects a role.
 2. User signs in and sees a role-aware dashboard.
-3. User discovers demo land parcels through list and map views.
-4. User opens a parcel and reviews its available information.
-5. User starts a land-verification workflow and uploads supporting documents.
-6. User creates a development project from a parcel.
-7. User adds professionals to the project.
-8. User uploads and versions project documents.
-9. User enters basic development assumptions and compares feasibility scenarios.
-10. User can move through the project workspace without dead ends.
+3. User opens a land-verification and development-feasibility case.
+4. User records the Abuja site and submits private supporting documents.
+5. Authorized staff assign, review, and hand over the case while preserving evidence sources, notes, status history, and audit events.
+6. Qualified review produces a Land & Development Report that clearly separates supplied information, professional checks, authoritative confirmation, and unresolved matters.
+7. A map may locate the site within the case, but it must not imply cadastral or legal authority.
+8. Land discovery, project workspaces, professionals, and broader development features follow after this controlled service is proven.
 
 ## Prototype scope
 ### Must work
 - Authentication
 - Role-aware onboarding
 - Role-aware dashboard
-- Land discovery
-- Interactive map
-- Land parcel detail
-- Basic verification workflow
-- Document upload/versioning
-- Project creation and workspace
-- Professional profiles
-- Adding professionals to projects
-- Basic feasibility calculations
-- Admin management of core demo data
+- Verification case request, assignment, handover and status workflow
+- Private document submission, controlled retrieval and evidence lineage
+- Reviewer notes, source/authority labels and audit trail
+- Deterministic development-feasibility inputs and report output
+- Site location within a case, with honest GIS authority labels
+- Admin/reviewer management limited to granted scope
 - Database/API integration
+
+The list above describes the target first commercial slice, not the current implementation. As of 2026-10-12, the repository has the authentication/foundation work and security migrations on a branch; the case, report, GIS, and feasibility behavior is not yet implemented.
 
 ### Architect but do not fake
 - Planning intelligence
@@ -60,6 +59,8 @@ The current prototype proves only the beginning of this journey. The later stage
 - Urban intelligence
 - Multi-country expansion
 - Offline construction workflows
+- Public land discovery/marketplace behavior until the controlled case workflow is proven
+- Full project/professional collaboration beyond what the first report service requires
 
 If a feature is not implemented, label it as planned/pending. Never create controls that imply functionality that does not exist.
 

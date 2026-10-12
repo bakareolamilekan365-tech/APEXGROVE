@@ -9,12 +9,13 @@ APEXGROVE/
 │   ├── components/          # Reusable UI components grouped by current domain
 │   ├── features/            # Domain/service extension points; many are placeholders today
 │   ├── config/              # Roles, permissions, navigation and environment configuration
-│   ├── lib/                 # Shared infrastructure, including Supabase clients/middleware
+│   ├── lib/                 # Shared auth/authorization helpers and Supabase infrastructure
 │   ├── types/               # Domain and database TypeScript types
 │   ├── middleware.ts        # Request/session middleware boundary
 │   └── app/globals.css      # Global styling
 ├── supabase/
 │   ├── migrations/          # Database migrations and RLS/storage contracts
+│   ├── tests/               # pgTAP database structure and behavioral allow/deny tests
 │   ├── functions/           # Supabase Edge Functions
 │   ├── seed.sql
 │   └── config.toml
@@ -28,7 +29,7 @@ APEXGROVE/
 ├── public/                  # Public, non-sensitive assets only
 ├── scripts/                 # Type generation, imports, validation and seed helpers
 ├── docs/                    # Product, architecture, security and delivery documents
-├── .github/                 # Repository automation/workflows
+├── .github/                 # App CI and Docker-capable Supabase database-test workflows
 ├── package.json
 ├── package-lock.json
 ├── next.config.ts

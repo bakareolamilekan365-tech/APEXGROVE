@@ -30,7 +30,7 @@ export default function RolePage() {
       return;
     }
 
-    router.push("/dashboard");
+    router.push("/onboarding/profile");
     router.refresh();
   }
 
