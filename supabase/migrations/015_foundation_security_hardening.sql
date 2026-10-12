@@ -248,19 +248,9 @@ create trigger organization_members_audit_security_changes
   after insert or update or delete on public.organization_members
   for each row execute procedure public.audit_foundation_security_change();
 
-drop trigger if exists storage_objects_audit_document_changes on storage.objects;
-create trigger storage_objects_audit_document_changes
-  after insert or update on storage.objects
-  for each row
-  when (new.bucket_id = 'documents')
-  execute procedure public.audit_foundation_security_change();
-
-drop trigger if exists storage_objects_audit_document_deletes on storage.objects;
-create trigger storage_objects_audit_document_deletes
-  after delete on storage.objects
-  for each row
-  when (old.bucket_id = 'documents')
-  execute procedure public.audit_foundation_security_change();
+-- Audit triggers on storage.objects are deliberately not created here: Supabase owns the
+-- storage schema and recommends treating it as managed. Document access auditing will be
+-- handled in the application layer when document upload is implemented.
 
 -- Foundation document storage is private and user-scoped. Future organization/project
 -- policies can extend this boundary; they must not weaken it.
