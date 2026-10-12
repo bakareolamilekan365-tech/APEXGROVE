@@ -4,6 +4,8 @@ Atexgrove is a prototype specification for a trusted digital ecosystem for land 
 
 This folder contains the focused markdown specifications required to build the first end-to-end prototype.
 
+For founder, partner, and non-engineering explanations, start with [`non-technical/README.md`](non-technical/README.md). The plain-language library summarizes the project story, product, security approach, roadmap, current progress, decisions, and working method without replacing these detailed specifications.
+
 ## Current delivery journey
 
 The current proposed delivery order puts the verification service before a land-discovery marketplace. It remains subject to the founder decisions recorded in `OPEN-QUESTIONS-FOUNDER.md` and `DECISIONS.md`.
