@@ -6,6 +6,10 @@ Design decisions should be settled before feature implementation. This plan defi
 
 Free tiers are suitable for development and demonstration when quotas, attribution, privacy, and rate limits are respected. The application must keep providers behind adapters so changing a provider does not require rewriting domain logic.
 
+### Supabase plan boundary
+
+The first prototype remains on the Supabase Free plan. Leaked-password protection requires Supabase Pro and is therefore a documented, accepted limitation for the prototype rather than a release gate. Any future feature that requires Pro must be labelled **PRO PLAN REQUIRED** in the relevant checklist before it becomes a commitment; upgrading the plan requires a separate cost decision.
+
 ## Integration inventory
 
 ### Current / near-term
