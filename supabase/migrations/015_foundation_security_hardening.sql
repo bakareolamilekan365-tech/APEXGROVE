@@ -272,8 +272,6 @@ insert into storage.buckets (id, name, public)
 values ('documents', 'documents', false)
 on conflict (id) do update set public = false;
 
-alter table storage.objects enable row level security;
-
 drop policy if exists "Users can read their private documents" on storage.objects;
 create policy "Users can read their private documents"
   on storage.objects for select
