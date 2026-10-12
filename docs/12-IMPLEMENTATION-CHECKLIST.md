@@ -9,6 +9,15 @@ Use this as an engineering gate, not a list of screens. Every item should be mar
 - **IMPLEMENTED** — real behavior is connected to its intended persistence/security boundary.
 - **VERIFIED** — implementation passes relevant tests/review, including failure and authorization cases.
 
+## Current evidence snapshot — 2026-10-12
+
+On branch `fix/security-pass-2`:
+
+- **IMPLEMENTED IN CODE:** password recovery request, PKCE callback, safe internal redirects, authenticated password update, profile onboarding fields, role-aware dashboard copy, server authorization helpers, synthetic fixture tooling, migrations `015`–`017`, private `documents` storage policy, membership-owner protection, security-advisor fixes, pgTAP suites, and the database-test GitHub Actions workflow.
+- **VERIFIED LOCALLY:** lint, typecheck, security guardrails, 11 unit tests, 9 non-database integration tests, and the production build.
+- **NOT YET VERIFIED:** clean execution of migrations `015`–`017`, the pgTAP suites, three credential-dependent integration tests, hosted Auth email/redirect behavior, hosted security advisors, and the complete E2E journey.
+- **EXECUTION PLAN:** run database reset/tests in GitHub Actions or another Docker-capable environment. Kubernetes is not required. Do not treat the presence of SQL or CI files as proof that database behavior passed.
+
 ## Foundation
 
 - [ ] **NOT STARTED / IN PROGRESS / IMPLEMENTED / VERIFIED** — requirements, prototype journey, design tokens and current-vs-future labels are approved.

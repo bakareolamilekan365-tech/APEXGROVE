@@ -59,7 +59,7 @@ After each milestone:
 - fix broken navigation/data flow before starting the next milestone
 - review authorization, persistence, error states and auditability for the changed path
 
-## First implementation milestone
+## Foundation milestone
 Deliver:
 - Next.js app shell
 - Supabase connection
@@ -68,7 +68,7 @@ Deliver:
 - profiles/roles
 - base dashboard
 
-Only then proceed to land/GIS.
+After the foundation gates pass, proceed to the verification/feasibility case and Land & Development Report workflow. Use mapping only to locate a site inside the case until the controlled workflow is proven; public land discovery/GIS follows later. Run migrations and pgTAP tests in GitHub Actions or another Docker-capable environment when the local machine cannot host the Supabase stack. Kubernetes is not required.
 
 ## Decision and cost discipline
 

@@ -41,12 +41,12 @@ Create low-fidelity flows before polished implementation for:
 
 - Registration, role selection, and onboarding
 - Role-aware dashboard
-- Land list, filters, map, and parcel detail
-- Verification checklist and document upload
-- Project creation and workspace navigation
-- Professional search and project membership
-- Feasibility scenario entry and comparison
-- Admin management and audit review
+- Verification/feasibility case request and private document submission
+- Internal work queue, assignment, handover, evidence review, and audit history
+- Land & Development Report review and delivery
+- Site-location map within a case, followed later by land list, filters, map, and parcel detail
+- Project creation, workspace navigation, professional search, and project membership after the first report workflow
+- Admin/reviewer management and audit review
 
 For each flow, specify loading, empty, error, permission-denied, not-found, and success states. Planning and other future modules must show an honest planned state rather than an interactive fake.
 

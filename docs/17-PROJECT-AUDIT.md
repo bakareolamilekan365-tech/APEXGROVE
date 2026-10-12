@@ -315,3 +315,35 @@ This update does not certify legal compliance, official land status, security re
 ### Known risks and boundaries
 
 This checkpoint does not claim production readiness, legal compliance, official land status, or completion of Land/GIS, Projects, Professionals, Feasibility, Payments or AI. The existing dependency advisory state remains a separate tested upgrade decision; no framework major upgrade was included. A feature is not foundation-complete until deployment evidence, authorization behavior, persistence, tests and failure handling are verified together.
+
+## Audit Update — 2026-10-12 Security Pass 2 Integration
+
+**Update type:** Local integration and documentation checkpoint on `fix/security-pass-2`.
+**Historical boundary:** Earlier audit sections remain unchanged as dated records. This section is the current branch snapshot.
+
+### Evidence completed locally
+
+- The foundation-security change is integrated on top of current `main` as commit `097d039`.
+- Security pass 2 is recorded separately as commit `2f8f8b6`.
+- Migration `016_membership_owner_protection.sql` prevents organization admins from updating an existing owner row while retaining owner/admin management of eligible non-owner rows.
+- Migration `017_advisor_fixes.sql` enables RLS on `spatial_ref_sys` with read-only access, reduces public execution of application security-definer functions, and pins the `set_updated_at` search path.
+- `safeInternalPath` rejects protocol-relative, backslash and control-character redirect bypasses; six focused unit tests pass.
+- `membership_behavior.sql` adds 19 pgTAP allow/deny assertions covering owners, organization admins, members, outsiders and anonymous access.
+- `.github/workflows/db-tests.yml` starts the Supabase stack and runs `supabase test db` on pushes to `main` and pull requests.
+- Local verification passed: lint, typecheck, security guardrails, 11 unit tests, 9 non-database integration tests, and the production build. Three database-credential-dependent integration tests were skipped by configuration.
+
+### Evidence still required
+
+- Migrations `015`–`017` have not been executed against a fresh local stack or disposable remote branch.
+- `foundation_security.sql` and `membership_behavior.sql` have not been executed. Their presence is not a passing database test result.
+- Docker is not installed on the current development machine. GitHub Actions is the preferred database-test environment; Kubernetes is not required.
+- Hosted Supabase Auth settings, recovery email behavior, migration state and security advisors remain unchanged and require explicit verification after the database tests pass.
+- The branch has not been pushed and no pull request exists yet because the current network resets GitHub HTTPS/device-login requests; the local commits remain intact.
+
+### Product-order correction
+
+Current planning documents now describe the proposed Abuja verification-and-feasibility case workflow before public land discovery. The map is contextual within a case until the controlled Land & Development Report workflow is proven. This ordering remains subject to the founder decisions listed in `OPEN-QUESTIONS-FOUNDER.md` and must not be represented as implemented behavior.
+
+### Audit boundary
+
+This update records repository and local-test evidence only. It does not certify database migration safety, deployed authorization behavior, production readiness, official land status, legal compliance or completion of the verification/report product.

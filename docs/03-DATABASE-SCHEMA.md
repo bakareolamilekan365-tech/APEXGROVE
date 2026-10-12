@@ -6,7 +6,7 @@ PostgreSQL with PostGIS.
 
 ## Schema status and implementation boundary
 
-This document describes the current prototype’s domain contract and the reserved shape of the future architecture; it is not a claim that every table listed below exists in the live database. In the repository, the foundational migrations currently create `profiles`, `organizations`, `organization_members` and `audit_logs`; several later domain migrations are explicit placeholders. Do not infer production behavior from this documentation alone, and do not add migrations as part of this documentation update.
+This document describes the current prototype’s domain contract and the reserved shape of the future architecture; it is not a claim that every table listed below exists in the live database. In the repository, migrations `001`–`014` create and harden the foundation around `profiles`, `organizations`, `organization_members` and `audit_logs`; several domain migrations remain explicit placeholders. Branch `fix/security-pass-2` adds migrations `015`–`017` for foundation security, private document storage, membership-owner protection and advisor fixes. As of 2026-10-12, those three migrations exist in source but have not passed a clean database reset/pgTAP run and have not been applied to the hosted project. Do not infer deployed behavior from this document or from the presence of migration files alone.
 
 ## Conventions
 

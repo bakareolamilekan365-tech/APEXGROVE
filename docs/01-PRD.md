@@ -1,16 +1,23 @@
 # Atexgrove — Prototype PRD
 
 ## 1. Objective
-Build a credible, usable first version that demonstrates how land discovery can flow into verification and then into a structured development project.
+Build a credible, usable first commercial slice for land verification and development feasibility in Abuja. A customer submits a controlled case and private evidence; authorized staff review sources and produce a Land & Development Report whose findings, estimates, authority and limitations are explicit.
+
+Land discovery, marketplace behavior, project workspaces and the wider ecosystem remain follow-on capabilities. A contextual map may help locate a site inside a case, but it must not imply cadastral or legal authority.
 
 ## 2. Target users for prototype
 - Land buyers/investors
 - Landowners
 - Developers
 - Professionals
-- Administrators
+- Verification/review staff
+- Scoped operations administrators
 
 Other future roles may exist in the schema but do not need full workflows yet.
+
+## Delivery priority
+
+The proposed first delivery sequence is authentication/onboarding → verification and feasibility case → private evidence → staff assignment/review → Land & Development Report. Land discovery and map browsing follow after this controlled workflow is proven. This ordering is pending the founder confirmations recorded in `OPEN-QUESTIONS-FOUNDER.md`.
 
 ## Product model and access principles
 

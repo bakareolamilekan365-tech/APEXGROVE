@@ -7,11 +7,11 @@ Atexgrove is a Next.js prototype for a trusted digital ecosystem for land develo
 |---|---|
 | Registration, login, role selection, session-protected dashboard | Implemented |
 | Database foundation: profiles, organizations, memberships, audit logs, RLS, 14 migrations applied | Implemented |
-| Security hardening (migrations 015-017, auth additions) | In progress, not merged, not applied |
+| Security hardening (migrations 015-017, auth additions) | Implemented on `fix/security-pass-2`; code checks pass, database execution and merge pending |
 | Land, verification, documents, projects, professionals, feasibility | Placeholder only |
 | Tailwind | Documented, not installed |
 | Map / GIS UI, 3D, payments, AI | Not started |
-| CI on main | Lint and typecheck (fix branch adds tests, build, guardrails) |
+| CI on main | Lint and typecheck (fix branch adds tests, build, guardrails, and Supabase pgTAP CI) |
 
 ## How this was built
 Built with AI assistants (OpenCode, Codex, Claude) under my review. The original product specifications were AI-generated and are being revised.
