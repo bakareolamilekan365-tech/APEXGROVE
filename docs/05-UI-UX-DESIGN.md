@@ -5,14 +5,20 @@ Corporate, architectural, technical, trustworthy and modern.
 
 ## Palette direction
 
-Status: tentative until the founder resolves the palette/logo question in `OPEN-QUESTIONS-FOUNDER.md`.
+Status: pilot palette, existing web-ready Atexgrove logo assets and Figtree interface font accepted on 2026-10-14. A true editable logo vector remains desirable for professional print/large-format production but does not block the application.
 
-- Deep navy
-- Near-black
-- White
+- Deep navy/blue for navigation and primary actions
+- Near-black/charcoal for text
+- White, ivory or light grey for surfaces
+- Forest green for confirmed/success states
+- Warm gold for warnings and review-needed states
 - Cool blue accents used sparingly
 
+Use Figtree at weights 400, 500, 600, 700 and 800 for the application interface, matching the approved customer and staff dashboard references. Serve it through the application build rather than adding a browser-side Google Fonts stylesheet.
+
 Avoid excessive gradients, gaming aesthetics, oversized illustrations, childish colors and generic real-estate template layouts.
+
+For the controlled pilot, use an authenticated in-app notification centre plus email for important events such as action required or report ready. Email must not include sensitive document contents or detailed findings; it should direct the user back to the authenticated application. SMS and WhatsApp are future options requiring consent, provider and cost decisions.
 
 ## Layout
 - Desktop-first information density with excellent tablet/mobile adaptation
@@ -26,7 +32,7 @@ Avoid excessive gradients, gaming aesthetics, oversized illustrations, childish 
 
 ## Primary navigation
 
-For the proposed verification-first release:
+For the accepted controlled-pilot direction:
 
 - Overview
 - Verification cases

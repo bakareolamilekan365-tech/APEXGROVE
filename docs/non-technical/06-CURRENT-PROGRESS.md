@@ -8,7 +8,7 @@
 - Protected routes and server-side account checks.
 - Hosted Supabase database migrations `001`-`017`.
 - Local code-quality checks, unit tests, non-database integration tests, and production builds.
-- GitHub workflow capable of starting a temporary Supabase environment and running database tests.
+- Successful [general CI](https://github.com/bakareolamilekan365-tech/ATEXGROVE/actions/runs/38276873401) and [temporary Supabase database-security](https://github.com/bakareolamilekan365-tech/ATEXGROVE/actions/runs/38276873408) workflow runs for PR #9 head commit `c259db0`.
 
 ## Merged through PR #9
 
@@ -23,9 +23,9 @@
 
 ## Current verification boundary
 
-PR #9 is merged and the hosted migration list is current through `017`. The private bucket, user-scoped storage policies and foundation-table RLS configuration were confirmed on 2026-10-14.
+PR #9 is merged and the hosted migration list is current through `017`. The private bucket, user-scoped storage policies and foundation-table RLS configuration were confirmed on 2026-10-14. The pgTAP database allow/deny tests also passed in GitHub Actions using a temporary Supabase environment.
 
-Still missing are a recorded passing pgTAP/database-test run for the final implementation, hosted email-confirmation/password-recovery evidence, and resolution or explicit acceptance of the live Supabase advisor findings. Deployed does not mean fully verified.
+Still missing are hosted email-confirmation/password-recovery evidence, a realistic hosted cross-user document-access test, resolution or explicit acceptance of the live Supabase advisor findings, and a forward migration/test removing anonymous execute access from `organization_actor_role`. A successful temporary CI database does not prove the hosted environment or complete application journey. Deployed does not mean fully verified.
 
 ## Not built yet
 
@@ -36,17 +36,17 @@ Still missing are a recorded passing pgTAP/database-test run for the final imple
 - Land & Development Report creation and delivery.
 - Land discovery and working GIS experience.
 - Project workspaces and professional participation.
-- Payments, mobile/offline work, and AI-assisted analysis.
+- Payments, mobile/offline work, and AI-assisted analysis. AI processing of real pilot documents is expressly excluded.
 
 ## Known accepted or deferred items
 
 - PostGIS is installed in the public database area and produces advisor warnings. Changing the extension location is disruptive and is deferred.
 - Supabase-managed tables must not be altered by Atexgrove migrations.
-- Leaked-password protection requires Supabase Pro; the prototype remains on Free.
-- Three helpful database indexes and four policy-performance improvements can be added later without delaying Phase 2.
-- The supplied logo is prepared for web use, but a true vector master is still needed for professional print work.
+- The prototype remains on Supabase Free. The dashboard must confirm whether leaked-password protection requires a paid plan before the finding is formally accepted as a plan limitation.
+- Previously reported index and policy-performance findings must be checked against the current live advisors before their exact number or priority is treated as confirmed.
+- The existing logo assets under `public/brand/` are accepted for the application, and the interface now uses Figtree to match the approved dashboard references. A true vector master is still desirable for professional print/large-format work.
 
 ## Simple status
 
-The project has a stronger deployed foundation but not yet a complete commercial journey or production-ready security posture. First close the remaining foundation evidence; the next product proof is then a customer submitting a synthetic demonstration verification case and authorized staff processing it securely.
+The project has a stronger deployed foundation but not yet a complete commercial journey or production-ready security posture. The controlled Abuja/FCT pilot direction is approved, including its six stages, customer/staff-assisted entry, human-led assignment, specialist second review, trust labels, no-payment rule and real-document policy gate. First close the remaining foundation evidence; the next product proof is then a customer submitting a synthetic/redacted verification case and authorized staff processing it securely.
 

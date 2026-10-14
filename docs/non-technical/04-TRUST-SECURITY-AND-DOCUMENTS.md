@@ -6,17 +6,13 @@ Atexgrove should help people understand what is known, who supplied it, who revi
 
 ## Different kinds of trust
 
-Information may be:
+Trust must not be compressed into one general "Verified" badge. Important information should show three separate things:
 
-- supplied by a customer;
-- observed by Atexgrove staff;
-- reviewed by a professional;
-- obtained from an external source;
-- confirmed by an official authority;
-- estimated from assumptions;
-- unresolved or disputed.
+- **Source:** who or what supplied it, such as a customer, seller, professional, external provider or official source.
+- **Review state:** not reviewed, under review, clarification required, reviewed, rejected or inconclusive.
+- **Authority level:** user-submitted, automated check, Atexgrove review, professional review, authoritative third-party confirmation or official/statutory confirmation.
 
-These labels must remain visible throughout the case and report.
+The outcome may separately say that information is consistent, contains a discrepancy, is confirmed within a stated scope or is not confirmed. These labels, limitations and dates must remain visible throughout the case and report.
 
 ## Access rules
 
@@ -41,11 +37,11 @@ The security work prevents common abuses such as:
 
 ## Private documents
 
-The hosted `documents` bucket is private and currently has user-scoped rules for reading, uploading, updating and deleting objects. This proves the configuration exists; it does not yet prove every allowed and forbidden action. The database tests must still demonstrate that one user cannot reach another user's objects. The completed document product must also check permission before preview/download, preserve versions and create application audit events.
+The hosted `documents` bucket is private and currently has user-scoped rules for reading, uploading, updating and deleting objects. The automated database-security workflow has passed the policy allow/deny tests in a temporary Supabase environment. A real hosted-session test must still confirm that one user cannot reach another user's objects. The completed document product must also check permission before preview/download, preserve versions and create application audit events.
 
 ## Current security boundary
 
-Migrations `001`-`017` are deployed, but Supabase still reports open findings involving a PostGIS-managed table/functions, security-definer function reachability and leaked-password protection. These are recorded risks, not hidden failures and not evidence of production readiness.
+Migrations `001`-`017` are deployed, but security follow-up remains. The `organization_actor_role` helper still needs anonymous execute access removed through a new forward migration and a database test. Supabase also reports findings involving PostGIS-managed objects and leaked-password protection. These are recorded risks, not hidden failures and not evidence of production readiness.
 
 ## Audit history
 
@@ -53,9 +49,19 @@ Sensitive actions should leave a useful history: who acted, what changed, when i
 
 ## Free-plan limitation
 
-The first prototype remains on Supabase Free. Supabase's leaked-password protection requires Pro, so that warning is documented as an accepted prototype limitation. Any future feature that requires a paid plan must be clearly labelled before it becomes a commitment.
+The first prototype remains on Supabase Free. The exact availability and cost of leaked-password protection must be confirmed in the connected Supabase dashboard before the finding is formally accepted as a plan limitation. Any future feature that requires a paid plan must be clearly labelled before it becomes a commitment.
 
 ## Real documents
 
-The team must decide whether the first prototype will store real customer documents. If it will, privacy, retention, deletion, staff access, legal terms, and incident responsibilities must be agreed before those documents are accepted.
+The decision is to begin with synthetic or properly redacted evidence. Real customer documents may be accepted later only after Atexgrove has implemented and appropriately reviewed:
+
+- a Privacy Notice and Terms of Service;
+- explicit pilot/document-processing consent and a record of what was accepted;
+- disclosure of essential cookies and opt-in choice for any optional cookies;
+- minimum-necessary staff access;
+- retention, deletion and backup-handling rules;
+- complaints, data-request and security-incident processes; and
+- clear professional, verification and authority limitations.
+
+AI will not process real pilot documents. Storing or reviewing a document does not make it legally valid or officially confirmed.
 

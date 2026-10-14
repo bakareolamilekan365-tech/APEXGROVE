@@ -47,15 +47,17 @@ Two database changes initially failed because they attempted to change tables ow
 
 PR #9 has been merged into `main`. The hosted Supabase project records migrations `001`-`017`. A read-only check confirms that the document bucket is private, user-path storage policies exist, and the main foundation tables use row-level security.
 
-This does not mean all security work has passed. The database behavior tests still need a recorded green run, the real email-confirmation/password-recovery journey still needs testing, and Supabase continues to report security and performance findings. GitHub Actions is configured to create the temporary Docker-based database environment needed for the database tests.
+The automated evidence is now recorded. On 2026-10-14, the [general CI workflow](https://github.com/bakareolamilekan365-tech/ATEXGROVE/actions/runs/38276873401) and [database-security workflow](https://github.com/bakareolamilekan365-tech/ATEXGROVE/actions/runs/38276873408) both passed for PR #9 head commit `c259db0`. The database workflow created a temporary Supabase environment and ran the pgTAP allow/deny tests.
+
+That automated result is not the same as testing real user sessions against the hosted project. Hosted cross-user document access, real email confirmation/password recovery and the remaining Supabase advisor findings still require operational verification. One application helper, `organization_actor_role`, also still needs its anonymous execute permission removed and tested in a forward migration.
 
 ## Product direction changed
 
-The original plan leaned toward land discovery and maps as the next major feature. The roadmap was later reorganized around a more controlled first commercial service:
+The original plan leaned toward land discovery and maps as the next major feature. On 2026-10-14, the roadmap was confirmed around a controlled Abuja/FCT pilot:
 
-> A customer requests land verification and development-feasibility work for an Abuja site, submits private evidence, staff review the case, and Atexgrove delivers a reviewed Land & Development Report.
+> A customer or authorized staff member opens a case for an Abuja/FCT site, evidence is checked through a six-stage journey, and a limited report clearly separates Atexgrove review, specialist review, official-source evidence and unresolved questions.
 
-Public land discovery and mapping now come after this controlled case workflow has been proven.
+Public land discovery and mapping now come after this controlled case workflow has been proven. The early pilot uses synthetic or redacted evidence. Real documents are blocked until the required terms, privacy, consent, access, retention, deletion and incident processes are implemented and professionally reviewed.
 
 ## Brand preparation
 
@@ -63,5 +65,5 @@ The project name is Atexgrove. Supplied logo images have been preserved and conv
 
 ## Where the project stands
 
-The groundwork is stronger, but foundation verification is not completely closed. The immediate milestone is to record the database-test and Auth-flow evidence, address or accept the remaining advisor findings, and then begin a working verification case with private evidence and a staff work queue. It is not another collection of placeholder screens.
+The groundwork is stronger, but foundation verification is not completely closed. The immediate milestone is to verify the hosted Auth and cross-user storage journeys, close or accept the remaining advisor findings, add the required anonymous-helper permission fix, and complete the real-document policy gate. The next product proof is then a working synthetic/redacted verification case and staff work queue—not another collection of placeholder screens.
 

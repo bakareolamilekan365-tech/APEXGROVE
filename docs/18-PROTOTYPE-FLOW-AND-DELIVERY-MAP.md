@@ -38,7 +38,7 @@ flowchart TD
     T -->|No| F
 ```
 
-This is the proposed verification-first delivery flow. It is not a claim that the case or report workflow is already implemented.
+This is the accepted controlled-pilot delivery direction. It is not a claim that the case or report workflow is already implemented.
 
 ## System Boundary Flow
 

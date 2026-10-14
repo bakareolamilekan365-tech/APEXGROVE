@@ -6,7 +6,7 @@
 }
 body {
   margin: 0;
-  font-family: Georgia, serif;
+  font-family: var(--font-figtree), Arial, sans-serif;
   color: #17352f;
   background: #f4f1e8;
 }

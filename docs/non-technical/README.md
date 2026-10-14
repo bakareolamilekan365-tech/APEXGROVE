@@ -4,7 +4,7 @@ This folder explains Atexgrove for founders, partners, advisers, future team mem
 
 The files in the parent `docs/` folder remain the detailed source of truth. These versions explain the same direction in simpler language and must never be used to exaggerate what has been built.
 
-**Status date: 2026-10-14.** PR #9 and hosted migrations `001`-`017` are complete. Database behavior tests, real account-email recovery/confirmation and remaining Supabase advisor findings are still open, so the foundation is deployed but not production-ready.
+**Status date: 2026-10-14.** PR #9 and hosted migrations `001`-`017` are complete. The [general CI run](https://github.com/bakareolamilekan365-tech/ATEXGROVE/actions/runs/38276873401) and [database-security test run](https://github.com/bakareolamilekan365-tech/ATEXGROVE/actions/runs/38276873408) passed for the merged PR head. Real hosted-user authorization, account-email recovery/confirmation and remaining Supabase advisor findings are still open, so the foundation is deployed but not production-ready.
 
 ## Suggested reading order
 
@@ -14,7 +14,7 @@ The files in the parent `docs/` folder remain the detailed source of truth. Thes
 4. [04-TRUST-SECURITY-AND-DOCUMENTS.md](04-TRUST-SECURITY-AND-DOCUMENTS.md) — how access, evidence, and private documents should be handled.
 5. [05-ROADMAP-AND-NEXT-STEPS.md](05-ROADMAP-AND-NEXT-STEPS.md) — the delivery order and the next real feature.
 6. [06-CURRENT-PROGRESS.md](06-CURRENT-PROGRESS.md) — what works, what is waiting, and what is not built.
-7. [07-DECISIONS-NEEDED.md](07-DECISIONS-NEEDED.md) — founder decisions still needed.
+7. [07-DECISIONS-NEEDED.md](07-DECISIONS-NEEDED.md) — approved pilot decisions and the questions still open.
 8. [08-HOW-WE-WORK.md](08-HOW-WE-WORK.md) — how changes are planned, tested, and accepted.
 9. [GLOSSARY.md](GLOSSARY.md) — simple definitions of common project terms.
 

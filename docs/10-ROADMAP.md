@@ -2,7 +2,7 @@
 
 The roadmap separates the working prototype from future architecture. A phase is not complete because a screen exists: the relevant persistence, authorization, failure handling, tests and trust boundaries must work together.
 
-**Planning status (2026-10-12):** phases 2 onward reflect the proposed verification-first Abuja delivery order recorded in `DECISIONS.md`. Founder answers may refine scope, but new implementation should not revert to a marketplace-first sequence without recording a replacement decision.
+**Planning status (updated 2026-10-14):** the verification-first Abuja/FCT controlled-pilot order is accepted in `DECISIONS.md`. Open questions may refine staffing, report wording, policy and data sources, but new implementation should not revert to a marketplace-first sequence without recording a replacement decision.
 
 ## Phase 0 — Architecture / Design Lock
 

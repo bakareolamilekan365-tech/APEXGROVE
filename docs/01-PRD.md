@@ -17,7 +17,7 @@ Other future roles may exist in the schema but do not need full workflows yet.
 
 ## Delivery priority
 
-The proposed first delivery sequence is authentication/onboarding → verification and feasibility case → private evidence → staff assignment/review → Land & Development Report. Land discovery and map browsing follow after this controlled workflow is proven. This ordering is pending the founder confirmations recorded in `OPEN-QUESTIONS-FOUNDER.md`.
+The accepted pilot delivery sequence is authentication/onboarding → verification and feasibility case → private evidence → staff assignment/review → limited, qualified report. Land discovery and map browsing follow after this controlled workflow is proven. The named reviewers, final report template, real-document policy details and licensed data sources remain open in `OPEN-QUESTIONS-FOUNDER.md`.
 
 ## Product model and access principles
 

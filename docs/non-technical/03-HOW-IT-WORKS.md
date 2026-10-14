@@ -29,9 +29,19 @@ Many future areas—land cases, evidence, reports, projects, professionals, and 
 
 The hosted foundation now has a private document-storage area with paths scoped to each user. This is the security base, not a finished document feature. Upload screens, case/project sharing, version history and document audit events still need to be built and tested. Staff access must depend on assigned responsibility, not simply on knowing a file address.
 
+The pilot begins with synthetic or properly redacted evidence. Before real documents are accepted, Atexgrove needs approved terms and privacy information, explicit consent, minimum-necessary access, a retention/deletion process, an incident process and appropriate professional review of those rules.
+
+Important evidence will use versions rather than silent replacement. If a customer supplies a clearer document, the new copy becomes the current version while the earlier copy and the review linked to it remain available to authorized reviewers until the applicable retention rule permits deletion.
+
 ## Testing and deployment
 
-Connecting to hosted Supabase and applying reviewed migrations does not require Docker. Docker is used to create a temporary local Supabase system for database permission tests. GitHub Actions can run that Docker-based test system automatically when changes are proposed or pushed.
+Connecting to hosted Supabase and applying reviewed migrations does not require Docker. Docker is used to create a temporary local Supabase system for database permission tests. GitHub Actions ran that test system successfully for PR #9. This proves the migrations and automated allow/deny tests in a temporary environment; separate hosted-user testing is still required.
+
+## The controlled case journey
+
+The accepted pilot journey has six understandable stages: request received, documents in, document checks, site and map, development options, and report. These stages are approved requirements, not functionality that already exists in the application.
+
+A customer may start a case, or authorized staff may assist with recorded consent. A human lead controls assignment; automation may only recommend. Important conclusions require review by a suitably qualified second person, while government or statutory evidence remains a separate authority level.
 
 ## Maps
 

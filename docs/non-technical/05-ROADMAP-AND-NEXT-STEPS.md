@@ -6,13 +6,13 @@ The roadmap has been reorganized around a verification-first service:
 
 ### Phase 0 — Agree the direction
 
-Confirm the first journey, responsibilities, trust labels, important decisions, and evidence required to call a feature complete.
+The controlled Abuja/FCT pilot, six-stage journey, responsibility boundaries, trust-label structure, no-payment rule and real-document readiness gate are agreed. Named reviewers, report wording, retention periods, company details and licensed data sources remain open.
 
 ### Phase 1 — Foundation
 
 Accounts, profiles, organizations, database protection, private-storage rules, tests, and a basic dashboard.
 
-This phase is near completion. PR #9 is merged and migrations `001`-`017` are deployed, but database permission tests, hosted account-email flows and remaining Supabase advisor findings still require closure or an explicit risk decision.
+This phase is near completion. PR #9 is merged, migrations `001`-`017` are deployed, and both general CI and temporary-database pgTAP workflows passed for the merged PR head. Hosted-user document isolation, hosted account-email flows, the remaining Supabase advisor findings and the `organization_actor_role` anonymous-permission fix still require closure or an explicit risk decision.
 
 ### Phase 2 — Verification case and private evidence
 
@@ -27,11 +27,13 @@ Build the first real business journey:
 - status history and review notes;
 - permission checks and audit history.
 
+The case follows six customer-facing stages: request received, documents in, document checks, site and map, development options, and report. A customer may start it directly or receive audited staff assistance. A human lead controls assignment, and a suitably qualified second reviewer is required for consequential conclusions.
+
 This is the next implementation phase.
 
 ### Phase 3 — Feasibility and report
 
-Add clear assumptions, repeatable calculations, review, approval, and delivery of the Land & Development Report.
+Add clear assumptions, repeatable calculations, discipline-appropriate second review, and delivery of a deliberately limited report. The report must separate Atexgrove review, professional conclusions, official-source evidence, estimates and unresolved matters.
 
 ### Phase 4 — Controlled land discovery and maps
 
@@ -47,12 +49,14 @@ Complete full user-journey testing, accessibility, failure states, operational c
 
 ## What happens immediately
 
-1. Record a green GitHub Actions database-security test run for the merged implementation.
+1. Add and test a forward migration that removes anonymous execute access from `organization_actor_role`.
 2. Test real email confirmation and password recovery, including invalid/expired links.
-3. Review the remaining Supabase security and performance findings and either fix or explicitly accept each one.
-4. Confirm no exposed service-role secret remains in use and rotate any credential that was shared outside secure storage.
-5. Agree the minimum founder decisions needed for Phase 2.
-6. Design and build the Phase 2 journey from database rules to a simple working interface.
+3. Test hosted cross-user document isolation using realistic authenticated sessions.
+4. Review the remaining Supabase security and performance findings and either fix or explicitly accept each one.
+5. Confirm no exposed service-role secret remains in use and rotate any credential that was shared outside secure storage.
+6. Complete and professionally review the terms, privacy, consent, retention/deletion and incident rules before accepting real evidence.
+7. Identify the first pilot participants and qualified second reviewers.
+8. Design and build the Phase 2 journey from database rules to a simple working interface using synthetic/redacted evidence first.
 
 ## What should not happen next
 
@@ -60,6 +64,7 @@ Complete full user-journey testing, accessibility, failure states, operational c
 - polished disconnected screens;
 - public land marketplace work before the case workflow;
 - payments;
+- AI processing of real pilot documents;
 - Kubernetes or complex infrastructure;
 - claims that planned features already work.
 
