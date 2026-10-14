@@ -420,3 +420,44 @@ The security foundation is now installed in the online database, and sensitive f
 ### Audit boundary
 
 This addendum records merge state, migration history, read-only hosted configuration and current advisor output. It does not certify legal compliance, official land status, complete authorization behavior, recovery-email delivery, incident readiness, database backup/recovery, production readiness or any planned domain feature.
+
+## Audit Addendum — 2026-10-14 Pilot Decisions and Operational Reminder
+
+**Update type:** Product-decision and operational-readiness reminder after the controlled-pilot review.
+
+**Historical boundary:** Earlier audit sections remain unchanged as dated records. This addendum records later decisions and evidence; it does not rewrite what was known at those earlier checkpoints.
+
+### Evidence correction since the preceding addendum
+
+The preceding addendum states that a successful database-test run had not been recorded. That statement is now superseded:
+
+- [General CI run 38276873401](https://github.com/bakareolamilekan365-tech/ATEXGROVE/actions/runs/38276873401) passed for PR #9 head commit `c259db0`.
+- [Database security run 38276873408](https://github.com/bakareolamilekan365-tech/ATEXGROVE/actions/runs/38276873408) passed for the same commit and executed the pgTAP suites in a temporary Supabase environment.
+
+These automated results are recorded foundation evidence. They do not replace hosted-user authorization tests, real confirmation/recovery email tests, hosted cross-user document-access checks or review of the live Supabase advisors.
+
+### Controlled-pilot direction now accepted
+
+The approved direction is a controlled Abuja/FCT pilot using the six-stage case journey recorded in `DECISIONS.md`. Customers may create cases directly or receive audited staff assistance. Assignment is human-led, automation may recommend, and consequential conclusions require a genuinely separate discipline-appropriate reviewer. Atexgrove review, professional review and official/statutory confirmation remain different authority levels.
+
+The pilot begins with synthetic or properly redacted evidence. It collects no payments and does not use AI to process real documents. Real evidence remains blocked until the privacy/legal readiness gate is implemented and appropriately reviewed.
+
+### Operational decision reminder
+
+These items must remain visible in planning. They do not prevent design and synthetic workflow implementation, but the relevant items must be closed before real clients, real evidence or production dependence:
+
+| # | Reminder | Current status | Required before |
+| --- | --- | --- | --- |
+| 1 | Name the first pilot participants and the qualified survey, legal or planning specialists available for second review. | **Open** | Scheduling real pilot cases and making discipline-specific conclusions. |
+| 2 | Approve the final report name, template, permitted conclusions and named signatories. | **Open** | Delivering a consequential report to a real client. |
+| 3 | Approve the exact document-retention period, deletion exceptions and backup treatment. | **Open — legal/privacy input required** | Accepting real client documents. |
+| 4 | Record the company/legal identity, business contact, support contact and accountable privacy contact. | **Open** | Publishing final terms/privacy notices and onboarding real clients. |
+| 5 | Approve each survey, zoning, land-use or market dataset, including source, licence/permission, jurisdiction and update date. | **Open** | Using non-synthetic external data in a case or report. |
+| 6 | Use the existing `public/brand/` logo assets and Figtree weights 400-800 for the application. Obtain a true editable vector only when professional print/large-format production requires it. | **Resolved for the application** | Vector master remains a future print-production need, not an application blocker. |
+| 7 | Decide and document account/infrastructure ownership and recovery administrators for GitHub, Supabase, hosting, domain/DNS, operational email providers and billing. | **Open before production** | Removing single-person dependency and operating production accounts safely. |
+
+The detailed answers and remaining questions live in `OPEN-QUESTIONS-FOUNDER.md`; accepted decisions live in `DECISIONS.md`; the plain-language reminder lives in `non-technical/07-DECISIONS-NEEDED.md`.
+
+### Audit boundary
+
+This reminder does not claim that the verification case, report, document lifecycle, GIS, payments or AI features are implemented. It does not certify legal compliance, official land status, professional conclusions or production readiness. Audit status changes only when supported by implementation or operational evidence.
