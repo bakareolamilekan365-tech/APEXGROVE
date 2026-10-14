@@ -37,7 +37,7 @@ Different checks answer different questions:
 - Connected tests check that application parts work together.
 - Database-security tests prove allowed and forbidden access.
 - Full journey tests imitate a person using the application.
-- GitHub Actions provides the temporary database environment that the current computer cannot run locally.
+- Docker provides a temporary local Supabase environment when available; GitHub Actions can provide the same kind of Docker-capable environment automatically.
 
 Tests must not be weakened simply to create a green result.
 

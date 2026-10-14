@@ -9,14 +9,17 @@ Use this as an engineering gate, not a list of screens. Every item should be mar
 - **IMPLEMENTED** — real behavior is connected to its intended persistence/security boundary.
 - **VERIFIED** — implementation passes relevant tests/review, including failure and authorization cases.
 
-## Current evidence snapshot — 2026-10-12
+## Current evidence snapshot — 2026-10-14
 
-On branch `fix/security-pass-2`:
+On `main` after PR #9:
 
-- **IMPLEMENTED IN CODE:** password recovery request, PKCE callback, safe internal redirects, authenticated password update, profile onboarding fields, role-aware dashboard copy, server authorization helpers, synthetic fixture tooling, migrations `015`–`017`, private `documents` storage policy, membership-owner protection, security-advisor fixes, pgTAP suites, and the database-test GitHub Actions workflow.
-- **VERIFIED LOCALLY:** lint, typecheck, security guardrails, 11 unit tests, 9 non-database integration tests, and the production build.
-- **NOT YET VERIFIED:** clean execution of migrations `015`–`017`, the pgTAP suites, three credential-dependent integration tests, hosted Auth email/redirect behavior, hosted security advisors, and the complete E2E journey.
-- **EXECUTION PLAN:** run database reset/tests in GitHub Actions or another Docker-capable environment. Kubernetes is not required. Do not treat the presence of SQL or CI files as proof that database behavior passed.
+- **DEPLOYED/CONFIGURATION VERIFIED:** hosted migration history contains `001`-`017`; the `documents` bucket is private; user-scoped SELECT/INSERT/UPDATE/DELETE storage policies exist; RLS is enabled on `profiles`, `organizations`, `organization_members` and `audit_logs`.
+- **IMPLEMENTED IN CODE:** password recovery request, PKCE callback, safe internal redirects, authenticated password update, profile onboarding fields, role-aware dashboard copy, server authorization helpers, synthetic fixture tooling, membership-owner protection, security guardrails, pgTAP suites, and Docker-backed database-test CI.
+- **PREVIOUSLY VERIFIED LOCALLY:** lint, typecheck, security guardrails, focused unit/integration tests and production build passed on the security branch before merge.
+- **NOT YET VERIFIED/RECORDED:** pgTAP execution against a fresh stack, credential-dependent integration tests, hosted email confirmation/recovery, complete E2E journey and a green database-test workflow result for the final merged commit.
+- **OPEN HOSTED FINDINGS:** `spatial_ref_sys` RLS, security-definer API reachability, PostGIS placement/functions, leaked-password protection, three unindexed foreign keys and four RLS policy performance findings.
+
+Migration deployment is complete, but the foundation is not fully **VERIFIED** until behavioral and operational evidence closes the remaining gates.
 
 ## Foundation
 
@@ -108,6 +111,19 @@ Track these items from implementation evidence, not documentation alone:
 - **Private storage:** the foundation `documents` bucket is private and object paths are scoped to `documents/<user-id>/...`.
 - **Synthetic fixtures:** demo users/organizations are reproducible, synthetic and labelled `DEMO DATA / NOT OFFICIAL`.
 - **Requirement-specific tests:** behavior, persistence, denial paths and recovery states are covered; smoke/source-text checks do not substitute for them.
+
+Current gate state:
+
+| Gate | Status | Evidence / remaining work |
+| --- | --- | --- |
+| Migrations `015`-`017` deployed | **IMPLEMENTED** | Present in hosted migration history. |
+| Application foundation RLS enabled | **IMPLEMENTED** | Read-only hosted inspection confirms RLS on four application tables. |
+| Private documents bucket/policies | **IMPLEMENTED** | Bucket is private and four per-operation policies exist; cross-user behavior test evidence remains pending. |
+| Organization/profile hardening | **IMPLEMENTED** | Policies/triggers are deployed; pgTAP ALLOW/DENY execution remains pending. |
+| Recovery and email confirmation | **IN PROGRESS** | Code exists; hosted email, redirect, expiry and error behavior remain unverified. |
+| Database security tests | **IN PROGRESS** | pgTAP files and CI workflow exist; a final green execution result has not been recorded. |
+| Synthetic fixtures | **IMPLEMENTED** | Deterministic tooling exists; use only synthetic identities and non-sensitive files. |
+| Production readiness | **NOT STARTED** | Security findings, operations, monitoring, recovery and complete journeys remain open. |
 
 ## Definition of done
 

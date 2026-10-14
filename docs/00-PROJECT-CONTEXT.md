@@ -43,7 +43,7 @@ The first commercial slice is a controlled land-verification and development-fea
 - Admin/reviewer management limited to granted scope
 - Database/API integration
 
-The list above describes the target first commercial slice, not the current implementation. As of 2026-10-12, the repository has the authentication/foundation work and security migrations on a branch; the case, report, GIS, and feasibility behavior is not yet implemented.
+The list above describes the target first commercial slice, not the current implementation. As of 2026-10-14, the authentication/foundation work is merged and migrations `001`-`017` are recorded on hosted Supabase. This establishes foundation controls; it does not prove every RLS behavior or Auth email flow, and the case, report, GIS, and feasibility behavior is not yet implemented.
 
 ### Architect but do not fake
 - Planning intelligence

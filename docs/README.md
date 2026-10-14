@@ -49,6 +49,6 @@ The original master prompt can remain as a product-vision document. These files 
 
 ## Status
 
-As of 2026-10-12, the repository contains a partial working foundation: registration, login, role selection, session-protected dashboard behavior, password recovery/callback code, profile onboarding, and migrations through `017` on `fix/security-pass-2`. The application checks pass locally, but migrations `015`–`017` and the pgTAP suites have not been executed because a Docker-capable database environment is not currently available. Land verification, reports, GIS, projects, professionals, and feasibility remain planned rather than implemented.
+As of 2026-10-14, PR #9 is merged into `main` and the hosted Supabase migration history contains `001` through `017`. Read-only verification confirms the private `documents` bucket, its SELECT/INSERT/UPDATE/DELETE policies, and RLS on `profiles`, `organizations`, `organization_members`, and `audit_logs`. The pgTAP suites, hosted Auth confirmation/recovery flow, and complete user journeys still need recorded execution evidence. The live security advisor also retains unresolved findings documented in the latest audit addendum. Land verification, reports, GIS, projects, professionals, and feasibility remain planned rather than implemented.
 
 Historical sections in `17-PROJECT-AUDIT.md` retain the status that was true on their stated dates. Use the latest dated audit addendum and the implementation itself for current status.

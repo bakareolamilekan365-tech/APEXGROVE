@@ -347,3 +347,76 @@ Current planning documents now describe the proposed Abuja verification-and-feas
 ### Audit boundary
 
 This update records repository and local-test evidence only. It does not certify database migration safety, deployed authorization behavior, production readiness, official land status, legal compliance or completion of the verification/report product.
+
+## Audit Addendum — 2026-10-14 Hosted Foundation Deployment and Documentation Reconciliation
+
+**Update type:** Post-merge, hosted-database and documentation checkpoint.
+
+**Historical boundary:** Every audit section above remains unchanged as a record of what was known on its stated date. This addendum supersedes earlier statements only for the current status of PR #9, migrations `015`-`017`, hosted storage/RLS configuration and advisor results.
+
+### Executive summary
+
+PR #9 is merged into `main` at commit `712e824`. The linked hosted Supabase project records migrations `001` through `017`. Read-only checks confirm the private `documents` bucket, four user-scoped storage policies and RLS on the four application foundation tables.
+
+This closes the deployment/configuration part of the foundation work. It does **not** close the behavioral, operational or production-readiness gates. The pgTAP suites do not yet have a recorded green execution result for the final implementation, hosted email confirmation/password recovery remains unverified end to end, and the live Supabase advisors retain findings.
+
+### Evidence recorded
+
+| Evidence | Result |
+| --- | --- |
+| Repository state | PR #9 is merged; `main` points to `712e824 fix/security pass 2 (#9)`. |
+| Hosted migration history | `001`-`017` present, including foundation hardening, membership-owner protection and advisor fixes. |
+| Application-table RLS | Enabled on `profiles`, `organizations`, `organization_members` and `audit_logs`. |
+| Private Storage | Bucket `documents` exists with `public = false`. |
+| Storage policies | SELECT, INSERT, UPDATE and DELETE policies exist for the foundation user-path convention. |
+| Repository secrets check | Only `.env.example` is tracked; `.env.local` is ignored; no tracked service-role key pattern was found. |
+| CI configuration | Application CI and Docker-backed Supabase database-test workflows are present on `main`. |
+
+The storage/RLS inspection proves that configuration objects exist. It does not replace user-to-user ALLOW/DENY tests, object retrieval tests or application-level audit verification.
+
+### Live advisor results after deployment
+
+| Finding | Current state | Required treatment |
+| --- | --- | --- |
+| `public.spatial_ref_sys` has RLS disabled | **ERROR — OPEN** | Treat as a PostGIS/system-boundary decision; do not claim migration 017 resolved it. |
+| `organization_actor_role` and PostGIS `st_estimatedextent` functions reported callable by `anon` | **WARN — OPEN** | Review effective grants/API exposure. Application helpers must not be anonymously callable; PostGIS-owned functions require a deliberate extension decision. |
+| Application RLS helpers and PostGIS functions reported callable by authenticated users | **WARN — REVIEW REQUIRED** | Confirm the minimum grants needed for RLS evaluation without exposing unnecessary RPC surfaces. |
+| PostGIS installed in `public` | **WARN — ACCEPTED TEMPORARILY** | Revisit before GIS work; moving an extension is disruptive and must be separately tested. |
+| Leaked-password protection disabled | **WARN — ACCEPTED FREE-PLAN LIMITATION** | Reassess before production or when the plan changes. |
+| Three unindexed foreign keys | **INFO — OPEN** | Add indexes only through a reviewed migration based on access patterns. |
+| Four RLS policies re-evaluate Auth functions per row | **WARN — OPEN** | Optimize with the documented init-plan pattern in a later reviewed migration and rerun tests/advisors. |
+
+Earlier documentation described migration 017 as enabling RLS on `spatial_ref_sys`. The deployed migration does not do that, and the live advisor confirms the table remains without RLS. The current documents now record the live result rather than the earlier intended fix.
+
+### Foundation gate status
+
+| Gate | Status on 2026-10-14 |
+| --- | --- |
+| PR #9 merged | **Complete** |
+| Migrations `015`-`017` deployed | **Complete** |
+| Private bucket and storage policies present | **Configuration complete; behavioral verification pending** |
+| Application foundation tables have RLS enabled | **Configuration complete; behavioral verification pending** |
+| Organization/profile hardening deployed | **Complete; pgTAP evidence pending** |
+| Password recovery and email-confirmation code | **Implemented; hosted end-to-end verification pending** |
+| Database/RLS pgTAP suites | **Implemented; recorded execution pending** |
+| GitHub Actions database-test workflow | **Configured; final green run not recorded in this audit** |
+| Live security/performance advisors | **Run; unresolved findings remain** |
+| Land verification, reports, GIS, projects, professionals and feasibility | **Not implemented** |
+| Production readiness | **Not claimed** |
+
+### Plain-language meaning
+
+The security foundation is now installed in the online database, and sensitive files are configured to be private by default. The remaining work is to prove the rules with real allowed/forbidden tests, confirm the complete account-email flows, and deal with the remaining database warnings. A deployed foundation is stronger than source code alone, but it is not yet a finished customer service or a production-security certification.
+
+### Immediate follow-up
+
+1. Run `supabase test db` in Docker or the GitHub Actions database-test workflow and retain the passing run.
+2. Test sign-up confirmation and password recovery with the hosted redirect allowlist, including invalid and expired links.
+3. Review each live advisor finding; fix it in a new forward migration or record a scoped acceptance with rationale.
+4. Rotate any privileged credential that was shared outside approved secret storage; never place it in client code or git.
+5. Re-run advisors and update this audit only after new evidence exists.
+6. Do not start representing verification, GIS, reports or document workflows as working merely because the foundation schema and bucket exist.
+
+### Audit boundary
+
+This addendum records merge state, migration history, read-only hosted configuration and current advisor output. It does not certify legal compliance, official land status, complete authorization behavior, recovery-email delivery, incident readiness, database backup/recovery, production readiness or any planned domain feature.

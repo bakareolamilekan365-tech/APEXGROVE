@@ -23,7 +23,7 @@ All demo records must display **DEMO DATA / NOT OFFICIAL**. Planned features mus
 
 Requirements must also preserve the V2 boundaries: platform role, professional discipline, organization/project role, permission, subscription and entitlement are distinct; verification authority and provenance are explicit; GIS geometry is not automatically legal; private documents are protected; AI is advisory; and payments remain out of prototype scope.
 
-The requirement order above is the proposed 2026-10-12 delivery priority, not an implementation claim. Current branch evidence and remaining verification gaps are recorded in `12-IMPLEMENTATION-CHECKLIST.md` and the latest section of `17-PROJECT-AUDIT.md`.
+The requirement order above is the proposed delivery priority, not an implementation claim. As of 2026-10-14, foundation security code is merged and migrations `001`-`017` are hosted, but pgTAP execution, hosted Auth recovery/confirmation and the complete E2E journey still lack recorded passing evidence. Current evidence and gaps are recorded in `12-IMPLEMENTATION-CHECKLIST.md` and the latest section of `17-PROJECT-AUDIT.md`.
 
 ## Test Layers
 
@@ -44,6 +44,8 @@ Integration tests must clean up fixtures and must not depend on execution order.
 Integration coverage should include provider timeouts/outages, bounded retries, idempotent repeated operations and safe error responses. Document tests must verify authorization before retrieval rather than only checking that a link renders.
 
 ### 2a. Database/RLS and authorization tests
+
+The repository currently contains `supabase/tests/foundation_security.sql` and `supabase/tests/membership_behavior.sql`, and `.github/workflows/db-tests.yml` is configured to start a local Supabase stack and run them. Until a green run is recorded, these tests are **implemented but not verified**.
 
 Test the same decisions at the server and database boundaries:
 

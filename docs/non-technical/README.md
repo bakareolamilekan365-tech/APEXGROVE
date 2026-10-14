@@ -4,6 +4,8 @@ This folder explains Atexgrove for founders, partners, advisers, future team mem
 
 The files in the parent `docs/` folder remain the detailed source of truth. These versions explain the same direction in simpler language and must never be used to exaggerate what has been built.
 
+**Status date: 2026-10-14.** PR #9 and hosted migrations `001`-`017` are complete. Database behavior tests, real account-email recovery/confirmation and remaining Supabase advisor findings are still open, so the foundation is deployed but not production-ready.
+
 ## Suggested reading order
 
 1. [01-PROJECT-STORY.md](01-PROJECT-STORY.md) — what has happened since the project began.

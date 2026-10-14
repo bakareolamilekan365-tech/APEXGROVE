@@ -41,7 +41,11 @@ The security work prevents common abuses such as:
 
 ## Private documents
 
-Documents must not use public links. The system must check permission before upload, preview, download, replacement, or deletion. Important evidence should keep its history instead of being silently overwritten.
+The hosted `documents` bucket is private and currently has user-scoped rules for reading, uploading, updating and deleting objects. This proves the configuration exists; it does not yet prove every allowed and forbidden action. The database tests must still demonstrate that one user cannot reach another user's objects. The completed document product must also check permission before preview/download, preserve versions and create application audit events.
+
+## Current security boundary
+
+Migrations `001`-`017` are deployed, but Supabase still reports open findings involving a PostGIS-managed table/functions, security-definer function reachability and leaked-password protection. These are recorded risks, not hidden failures and not evidence of production readiness.
 
 ## Audit history
 
