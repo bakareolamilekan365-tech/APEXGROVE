@@ -79,8 +79,10 @@ Before implementing a module, define:
 | Service           | Use                                        | Free-first decision                                                                                                                                       | Signup timing             |
 | ----------------- | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
 | GitHub            | Source control and GitHub Actions          | Already configured. Public repository Actions are suitable for CI.                                                                                        | Complete                  |
-| Supabase          | PostgreSQL, PostGIS, Auth, private Storage | Use the free project for development/demo. Keep service-role keys server-side.                                                                            | Phase 0                   |
+| Supabase          | PostgreSQL, PostGIS, Auth, private Storage | Linked hosted project has migrations `001`-`017`; private bucket and foundation RLS configuration are present. Keep service-role keys server-side.      | Connected; verification gaps remain |
 | Map tile provider | Basemap/vector tiles for MapLibre          | Use a free developer tier such as MapTiler Cloud, or a compliant no-signup public provider for local development. Keep the provider behind a map adapter. | Before map implementation |
+
+Docker is required only to run the local Supabase stack and pgTAP database tests; it is not required to connect to or push reviewed migrations to hosted Supabase. GitHub Actions supplies a Docker-capable runner for those database tests. Neither mechanism replaces hosted configuration checks or end-to-end Auth email testing.
 
 ### Useful later, not required for the first design or database work
 

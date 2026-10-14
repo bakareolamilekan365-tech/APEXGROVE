@@ -6,11 +6,11 @@
 - Account registration and login foundation.
 - Profile onboarding and basic role-aware dashboard behavior.
 - Protected routes and server-side account checks.
-- Hosted Supabase database migrations `001`–`014`.
+- Hosted Supabase database migrations `001`-`017`.
 - Local code-quality checks, unit tests, non-database integration tests, and production builds.
 - GitHub workflow capable of starting a temporary Supabase environment and running database tests.
 
-## Built on PR #9
+## Merged through PR #9
 
 - Password-recovery request and callback handling.
 - Safer internal redirects.
@@ -23,9 +23,9 @@
 
 ## Current verification boundary
 
-The latest GitHub Actions result must be recorded after the final Storage compatibility correction. Passing an earlier commit does not automatically prove a later commit.
+PR #9 is merged and the hosted migration list is current through `017`. The private bucket, user-scoped storage policies and foundation-table RLS configuration were confirmed on 2026-10-14.
 
-PR #9 remains unmerged. Migrations `015`–`017` remain unapplied to the hosted Supabase project.
+Still missing are a recorded passing pgTAP/database-test run for the final implementation, hosted email-confirmation/password-recovery evidence, and resolution or explicit acceptance of the live Supabase advisor findings. Deployed does not mean fully verified.
 
 ## Not built yet
 
@@ -48,5 +48,5 @@ PR #9 remains unmerged. Migrations `015`–`017` remain unapplied to the hosted 
 
 ## Simple status
 
-The project has a strong foundation but not yet a complete commercial journey. The next proof of progress is a customer submitting a real demonstration verification case and authorized staff processing it securely.
+The project has a stronger deployed foundation but not yet a complete commercial journey or production-ready security posture. First close the remaining foundation evidence; the next product proof is then a customer submitting a synthetic demonstration verification case and authorized staff processing it securely.
 

@@ -27,7 +27,11 @@ Many future areas—land cases, evidence, reports, projects, professionals, and 
 
 ## Private files
 
-Supporting documents will be stored privately. A signed-in customer should only reach files inside that customer's permitted area. Staff access must depend on their assigned responsibility, not simply on knowing a file address.
+The hosted foundation now has a private document-storage area with paths scoped to each user. This is the security base, not a finished document feature. Upload screens, case/project sharing, version history and document audit events still need to be built and tested. Staff access must depend on assigned responsibility, not simply on knowing a file address.
+
+## Testing and deployment
+
+Connecting to hosted Supabase and applying reviewed migrations does not require Docker. Docker is used to create a temporary local Supabase system for database permission tests. GitHub Actions can run that Docker-based test system automatically when changes are proposed or pushed.
 
 ## Maps
 

@@ -2,16 +2,18 @@
 
 Atexgrove is a Next.js prototype for a trusted digital ecosystem for land development in Africa.
 
-## Current status (verified on main as of 2026-10-11)
+## Current status (verified on main and hosted Supabase as of 2026-10-14)
 | Area | Status |
 |---|---|
 | Registration, login, role selection, session-protected dashboard | Implemented |
-| Database foundation: profiles, organizations, memberships, audit logs, RLS, 14 migrations applied | Implemented |
-| Security hardening (migrations 015-017, auth additions) | Implemented on `fix/security-pass-2`; code checks pass, database execution and merge pending |
+| Database foundation: profiles, organizations, memberships, audit logs, RLS | Implemented; migrations `001`-`017` are recorded on hosted Supabase |
+| Security hardening (migrations `015`-`017`, Auth additions) | Merged through PR #9 and deployed; private bucket/policies verified, database behavior tests and hosted Auth email flows still require evidence |
 | Land, verification, documents, projects, professionals, feasibility | Placeholder only |
 | Tailwind | Documented, not installed |
 | Map / GIS UI, 3D, payments, AI | Not started |
-| CI on main | Lint and typecheck (fix branch adds tests, build, guardrails, and Supabase pgTAP CI) |
+| CI on main | Application validation and a Docker-backed Supabase database-test workflow are configured; latest database-test run must still be recorded |
+
+The live Supabase security advisor still reports unresolved findings. Deployment of a migration is not the same as proof that every policy and workflow behaves correctly; see the latest addendum in `docs/17-PROJECT-AUDIT.md`.
 
 ## How this was built
 Built with AI assistants (OpenCode, Codex, Claude) under my review. The original product specifications were AI-generated and are being revised.

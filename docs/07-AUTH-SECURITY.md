@@ -13,7 +13,7 @@ The prototype uses Supabase Auth, PostgreSQL Row Level Security (RLS) and server
 - Supabase Auth provides the identity provider.
 - The current user journey includes email/password sign-up and sign-in, with server-side user lookup through the Supabase SSR client.
 - Session cookies and refresh handling are mediated by the application’s Supabase server/middleware integration where present.
-- Branch `fix/security-pass-2` implements a generic forgot-password response, PKCE callback exchange, hardened same-app redirect validation and an authenticated password-update page. The code and unit tests pass locally; hosted redirect settings and real recovery email/link behavior are not yet verified.
+- `main` implements a generic forgot-password response, PKCE callback exchange, hardened same-app redirect validation and an authenticated password-update page. Focused code tests exist; hosted redirect settings and real recovery email/link behavior are not yet verified end to end.
 
 ### Required flow model
 
@@ -26,6 +26,14 @@ The authentication boundary must account for:
 - safe redirect and callback handling
 
 Logout completeness and session-revocation administration remain **Planned**. Password recovery is **Implemented in code / operational verification pending** until hosted redirect settings, email delivery, expired/invalid links and end-to-end recovery are tested.
+
+### Current database-security evidence (2026-10-14)
+
+- Hosted migration history contains `001`-`017`.
+- RLS is enabled on `profiles`, `organizations`, `organization_members` and `audit_logs`.
+- The `documents` bucket is private and has user-scoped SELECT, INSERT, UPDATE and DELETE policies.
+- The live security advisor still reports `spatial_ref_sys` without RLS, API reachability warnings for security-definer helpers, PostGIS-in-public warnings and leaked-password protection disabled.
+- These checks confirm configuration state, not the full ALLOW/DENY behavior. The pgTAP suites and real Auth email flows remain verification gates.
 
 ### Future authentication hardening
 

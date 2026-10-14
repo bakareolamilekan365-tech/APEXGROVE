@@ -16,7 +16,7 @@ The first working user journey became:
 4. Save profile information.
 5. Reach a protected dashboard.
 
-The hosted Supabase project received the first fourteen database changes. Those changes created the early profile, organization, membership, and audit foundations.
+The hosted Supabase project first received fourteen database changes. On 2026-10-14, changes `015`-`017` were also recorded remotely, adding stronger organization/member protections and the private-document storage foundation.
 
 ## Why the audit became necessary
 
@@ -43,11 +43,11 @@ The security branch strengthened the existing foundation. It added or improved:
 
 Two database changes initially failed because they attempted to change tables owned by Supabase itself. Those statements were removed. Audit triggers were also removed from Supabase's managed Storage table; document audit events will instead be added in Atexgrove's application workflow when document uploading is built.
 
-## Current branch and PR
+## Current repository and database state
 
-PR #9 contains the security foundation work. It is intentionally not being squash-merged until the audit and checks are complete. The hosted Supabase project still has migrations `001`–`014`; migrations `015`–`017` have not been deployed there.
+PR #9 has been merged into `main`. The hosted Supabase project records migrations `001`-`017`. A read-only check confirms that the document bucket is private, user-path storage policies exist, and the main foundation tables use row-level security.
 
-The project now uses GitHub Actions as the database-test environment because the current development computer cannot run Docker comfortably. This avoids making the local machine a blocker.
+This does not mean all security work has passed. The database behavior tests still need a recorded green run, the real email-confirmation/password-recovery journey still needs testing, and Supabase continues to report security and performance findings. GitHub Actions is configured to create the temporary Docker-based database environment needed for the database tests.
 
 ## Product direction changed
 
@@ -63,5 +63,5 @@ The project name is Atexgrove. Supplied logo images have been preserved and conv
 
 ## Where the project stands
 
-The groundwork is now sufficient to begin the first real product feature after PR #9 passes its final checks. The next milestone is not another general audit or another collection of placeholder screens. It is a working verification case with private evidence and a staff work queue.
+The groundwork is stronger, but foundation verification is not completely closed. The immediate milestone is to record the database-test and Auth-flow evidence, address or accept the remaining advisor findings, and then begin a working verification case with private evidence and a staff work queue. It is not another collection of placeholder screens.
 

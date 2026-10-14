@@ -4,7 +4,7 @@
 
 Documents are sensitive assets connected to users, organizations, land parcels, verification records and projects. This specification keeps the current prototype model while defining the controls needed for the future architecture. It does not claim that every lifecycle stage is fully implemented today.
 
-The current prototype supports document-oriented workflows and metadata such as type, related entity, uploader, version, status and verification state. Private storage enforcement, malware scanning, advanced retention policy, immutable audit infrastructure and automated analysis must be verified or delivered as **Planned/Future** work rather than inferred from this document.
+The current foundation now includes a hosted private `documents` bucket and user-scoped object policies using the `documents/<user-id>/...` convention. This is a storage-security foundation, not a completed document product: upload UI, metadata persistence, version lineage, application-level document audit events, case/project authorization, malware scanning, retention policy and automated analysis remain **Planned/Future** until implemented and tested.
 
 ## Supported prototype types
 
@@ -136,4 +136,4 @@ Long-running work should expose durable states such as queued, running, succeede
 
 ## Current prototype boundary
 
-The prototype scope is the existing web workflow, supported types, basic metadata/version/status concepts and connected application/database behavior that is actually present in the repository. Private retrieval policy, complete RLS coverage, malware scanning, immutable audit guarantees, jurisdiction-specific retention, background processing and AI analysis are architectural requirements or future work unless independently verified in the implementation. No database migration or application code change is implied by this documentation update.
+The current prototype boundary includes the private hosted bucket and foundation user-path policies described above. It does not yet include a complete upload/retrieval journey, document metadata records, version-aware review, project/organization document access, application audit events, malware scanning, immutable audit guarantees, jurisdiction-specific retention, background processing or AI analysis. Database policy behavior still requires recorded ALLOW/DENY test evidence; a private bucket existing is necessary but not sufficient proof of the document lifecycle.

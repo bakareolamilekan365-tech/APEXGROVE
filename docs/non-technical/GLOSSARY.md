@@ -12,7 +12,7 @@
 | GitHub Actions | Automated checks that run when code is proposed or updated. |
 | GIS | Technology used to store, display, and work with location and map information. |
 | Hosted project | The online Supabase environment connected to the application. |
-| Migration `015`–`017` | The unmerged database changes that strengthen security, private storage, and organization-owner protection. |
+| Migrations `015`-`017` | The merged and hosted database changes that strengthen foundation security, private storage and organization-owner protection; their behavioral tests and remaining advisor findings are still open. |
 | pgTAP | A tool for testing database behavior, including what users are allowed or forbidden to do. |
 | PostGIS | A database extension that adds map and geographic capabilities. |
 | PR | A pull request: a proposed group of changes reviewed before joining the main codebase. |

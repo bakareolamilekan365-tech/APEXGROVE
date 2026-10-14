@@ -5,6 +5,8 @@ Provide enough realistic-looking but explicitly synthetic data for demonstration
 
 Demo data is for development, tests and demonstrations only. Never use real sensitive personal information, real identity documents, real payment details or unredacted third-party records.
 
+**Current status (2026-10-14):** `scripts/seed-fixtures.mjs` provides deterministic foundation fixture tooling for synthetic users, profiles, organizations and memberships. The richer land, professional, project, document and GIS examples below remain planned until their domains exist. Running fixture tooling is an operator action and must target an isolated development/test environment, never production customer data.
+
 ## Seed entities
 ### Users
 - Demo buyer

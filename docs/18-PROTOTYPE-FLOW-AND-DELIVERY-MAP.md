@@ -38,7 +38,7 @@ flowchart TD
     T -->|No| F
 ```
 
-This is the proposed verification-first delivery flow as of 2026-10-12. It is not a claim that the case or report workflow is already implemented.
+This is the proposed verification-first delivery flow. It is not a claim that the case or report workflow is already implemented.
 
 ## System Boundary Flow
 
@@ -87,9 +87,11 @@ Every vertical slice must pass through the relevant server/business, database/RL
 
 **Status:** foundation migrations and the first auth flow are working and manually verified.
 
-**Implemented on `fix/security-pass-2`:** password recovery/callback code, profile onboarding details, private-storage migration, security guardrails, synthetic fixture tooling, migrations `015`–`017`, pgTAP files, and a database-test GitHub Actions workflow.
+**Implemented and merged:** password recovery/callback code, profile onboarding details, private-storage migration, security guardrails, synthetic fixture tooling, migrations `015`-`017`, pgTAP files, and a database-test GitHub Actions workflow.
 
-**Still unverified:** migrations `015`–`017` applying cleanly, pgTAP behavior, hosted Auth redirect/settings, hosted security advisors, and end-to-end email recovery. Local Docker/database execution is pending; GitHub Actions is the intended database-test runner once the branch is pushed.
+**Hosted evidence (2026-10-14):** migrations `001`-`017` are recorded remotely; the `documents` bucket is private; foundation table RLS and storage policies are present.
+
+**Still unverified/open:** pgTAP behavior on a fresh stack, final database-test CI evidence, hosted Auth redirect/email behavior, end-to-end recovery and unresolved security/performance advisor findings. Docker is only needed for local Supabase testing; GitHub Actions can provide that environment.
 
 ### Phase 2 - Verification case and private evidence
 

@@ -12,7 +12,7 @@ Confirm the first journey, responsibilities, trust labels, important decisions, 
 
 Accounts, profiles, organizations, database protection, private-storage rules, tests, and a basic dashboard.
 
-This phase is near completion. PR #9 must finish its review and automated checks before merge or hosted deployment.
+This phase is near completion. PR #9 is merged and migrations `001`-`017` are deployed, but database permission tests, hosted account-email flows and remaining Supabase advisor findings still require closure or an explicit risk decision.
 
 ### Phase 2 — Verification case and private evidence
 
@@ -47,12 +47,12 @@ Complete full user-journey testing, accessibility, failure states, operational c
 
 ## What happens immediately
 
-1. Confirm the latest PR #9 GitHub Actions results.
-2. Update the audit with that evidence.
-3. Finish the PR review without deploying the migrations to the hosted project.
-4. Agree the minimum founder decisions needed for Phase 2.
-5. Design the Phase 2 information and permission rules.
-6. Build the Phase 2 journey from database rules to a simple working interface.
+1. Record a green GitHub Actions database-security test run for the merged implementation.
+2. Test real email confirmation and password recovery, including invalid/expired links.
+3. Review the remaining Supabase security and performance findings and either fix or explicitly accept each one.
+4. Confirm no exposed service-role secret remains in use and rotate any credential that was shared outside secure storage.
+5. Agree the minimum founder decisions needed for Phase 2.
+6. Design and build the Phase 2 journey from database rules to a simple working interface.
 
 ## What should not happen next
 
