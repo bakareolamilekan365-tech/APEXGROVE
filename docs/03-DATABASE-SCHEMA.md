@@ -6,7 +6,7 @@ PostgreSQL with PostGIS.
 
 ## Schema status and implementation boundary
 
-This document describes the current prototype's domain contract and the reserved shape of the future architecture; it is not a claim that every table listed below exists in the live database. Migrations `001`-`014` create and harden the foundation around `profiles`, `organizations`, `organization_members` and `audit_logs`; migrations `004`-`011` remain domain placeholders rather than proof that their named modules exist. Migrations `015`-`017` add foundation security, private document storage, membership-owner protection and advisor-oriented permission fixes. As of 2026-10-16, migrations `001`-`017` are recorded on hosted Supabase. Migration `018_verification_case_slice_1.sql` is a **repository implementation pending review and CI**; it must not be described as hosted until it is approved and deliberately applied. Read-only inspection confirms RLS on the four hosted application foundation tables and a private `documents` bucket with per-operation policies. Earlier pgTAP ALLOW/DENY tests passed in a temporary Supabase environment through GitHub Actions; migration `018` adds its own disposable-environment pgTAP gate.
+This document describes the current prototype's domain contract and the reserved shape of the future architecture; it is not a claim that every table listed below exists in the live database. Migrations `001`-`014` create and harden the foundation around `profiles`, `organizations`, `organization_members` and `audit_logs`; migrations `004`-`011` remain domain placeholders rather than proof that their named modules exist. Migrations `015`-`017` add foundation security, private document storage, membership-owner protection and advisor-oriented permission fixes. As of 2026-10-16, migrations `001`-`017` are recorded on hosted Supabase. Migration `018_verification_case_slice_1.sql` is a **repository implementation with green disposable-environment CI**; it must not be described as hosted until it is approved and deliberately applied. General CI [run 38886399935](https://github.com/bakareolamilekan365-tech/ATEXGROVE/actions/runs/38886399935) and database-security [run 38886400039](https://github.com/bakareolamilekan365-tech/ATEXGROVE/actions/runs/38886400039) passed for the Slice 1 branch. Read-only hosted inspection still covers only the `001`-`017` foundation state.
 
 ## Conventions
 
@@ -72,7 +72,7 @@ Audit records are required for important mutations, verification decisions, docu
 
 The first commercial workflow starts with a verification case, not a marketplace listing. A case may be created from site/request details before any `land_parcels` record exists. Any later parcel/listing link must be optional and follow-on.
 
-The Slice 1 tables below are defined by migration `018`, but remain **NOT HOSTED / NOT OPERATIONALLY VERIFIED** until the migration and CI are approved. Evidence, report and feasibility tables remain **TARGET SCHEMA / PLANNED**.
+The Slice 1 tables below are defined by migration `018` and have passed disposable-environment migration/pgTAP CI, but remain **NOT HOSTED / NOT OPERATIONALLY VERIFIED** until separately approved and applied. Evidence, report and feasibility tables remain **TARGET SCHEMA / PLANNED**.
 
 ### staff_members (Slice 1 repository implementation)
 

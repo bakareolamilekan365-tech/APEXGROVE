@@ -54,18 +54,18 @@ Migration deployment and temporary-environment automated database tests are comp
 
 ## Verification case and private evidence (Phase 2)
 
-- [x] **IMPLEMENTED IN BRANCH / CI PENDING — Slice 1:** a customer can submit a synthetic Abuja/FCT case without an existing parcel/listing and see their own cases. Staff-assisted creation remains later work.
-- [x] **IMPLEMENTED IN BRANCH / CI PENDING — Slice 1:** `submitted → assigned → in_review → needs_customer_info → in_review → closed/cancelled` is enforced through transactional RPCs with actor, note and timestamp events. `closed` is labelled “Completed” in the UI.
-- [x] **IMPLEMENTED IN BRANCH / CI PENDING — Slice 1:** an active department lead assigns manually; non-leads and cross-department leads are denied. Acceptance/decline/handover and preparer/approver separation remain Slice 3.
-- [x] **IMPLEMENTED IN BRANCH / CI PENDING — Slice 1:** RLS limits customers to their own cases/customer-safe timeline and staff to department-lead or active-assignment scope; status events are append-only.
-- [ ] Migration `018` passes the disposable Supabase pgTAP workflow and is reviewed before any hosted application. Hosted migration remains deliberately unapplied.
+- [x] **IMPLEMENTED / AUTOMATED VERIFIED IN TEMPORARY CI — Slice 1:** a customer can submit a synthetic Abuja/FCT case without an existing parcel/listing and see their own cases. Staff-assisted creation remains later work.
+- [x] **IMPLEMENTED / AUTOMATED VERIFIED IN TEMPORARY CI — Slice 1:** `submitted → assigned → in_review → needs_customer_info → in_review → closed/cancelled` is enforced through transactional RPCs with actor, note and timestamp events. `closed` is labelled “Completed” in the UI.
+- [x] **IMPLEMENTED / AUTOMATED VERIFIED IN TEMPORARY CI — Slice 1:** an active department lead assigns manually; non-leads and cross-department leads are denied. Acceptance/decline/handover and preparer/approver separation remain Slice 3.
+- [x] **IMPLEMENTED / AUTOMATED VERIFIED IN TEMPORARY CI — Slice 1:** RLS limits customers to their own cases/customer-safe timeline and staff to department-lead or active-assignment scope; status events are append-only.
+- [x] Migration `018` and its 36-assertion pgTAP suite passed database-security [run 38886400039](https://github.com/bakareolamilekan365-tech/ATEXGROVE/actions/runs/38886400039). Hosted review/application remains a separate, deliberately incomplete gate.
 - [ ] Verification records have explicit type, status, evidence, source, reviewer, authority and dates.
 - [ ] Authority hierarchy is visible; internal review is not represented as official certification.
 - [ ] Documents use private storage, authorization before retrieval, validation and controlled access.
 - [ ] Version lineage is preserved; important evidence is not silently overwritten.
 - [ ] Draft/Submitted/Under Review/Approved/Rejected/Archived transitions are validated and audited.
 
-**Slice 1 local evidence:** lint, typecheck, 23 unit tests, 12 configured integration tests, the eight-table RLS guardrail and the production build pass locally. Three hosted-environment integration tests remain intentionally skipped without test credentials. Docker is not installed on this workstation, so the new 36-assertion pgTAP suite must pass `db-tests.yml` in GitHub Actions before migration `018` is eligible for hosted review/application.
+**Slice 1 evidence:** lint, typecheck, 23 unit tests, 12 configured integration tests, the eight-table RLS guardrail and the production build pass locally. General CI [run 38886399935](https://github.com/bakareolamilekan365-tech/ATEXGROVE/actions/runs/38886399935) and database-security [run 38886400039](https://github.com/bakareolamilekan365-tech/ATEXGROVE/actions/runs/38886400039) are green; the latter applied migration `018` and ran pgTAP in a disposable Supabase environment. Three hosted-environment integration tests remain intentionally skipped without test credentials. Hosted migration/application and realistic hosted sessions remain unverified.
 
 ## Feasibility
 
