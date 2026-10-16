@@ -50,28 +50,17 @@ Atexgrove must not depend on one unrestricted “God Admin”. The future admini
 - Progressive role-specific fields
 
 ### Dashboard
-Show role-specific summary cards, recent activity, active projects and useful actions.
-
-### Land discovery
-- Search
-- Basic filters
-- List/map toggle
-- Parcel cards
-- Parcel detail page
-
-### Maps
-- Interactive map
-- Demo parcels
-- Selectable parcel geometry
-- Basic contextual layers
-- Fit map to selected parcel
+Show role-specific summary cards, recent activity, active cases and useful actions without implying that planned modules are implemented.
 
 ### Verification
-- Verification record per parcel
+- Case creation that does not require an existing land listing or parcel
+- Customer-created and authorized staff-assisted cases
+- Six-stage workflow: Request received, Documents in, Document checks, Site and map, Development options, Report
+- Human-led assignment/handover and capacity-aware acceptance/decline
 - Status lifecycle
-- Checklist items
-- Supporting documents
+- Synthetic/redacted private evidence for the initial pilot
 - Reviewer notes
+- Separate discipline-appropriate review for consequential conclusions
 - Audit trail
 
 Verification is a structured trust system, not one generic badge. Future verification types may include identity, organization, professional, land/document, survey-related, title/ownership and planning-related verification. A verification record should be able to capture status, evidence, reviewer, source, date, expiry and confidence.
@@ -88,8 +77,19 @@ Statuses:
 - Rejected
 - Expired
 
-### Projects
-A land parcel can be converted into a development project.
+### Land discovery and maps (Phase 4 / Planned)
+- Search
+- Basic filters
+- List/map toggle
+- Parcel cards
+- Parcel detail page
+- Interactive MapLibre map
+- Demo parcels and contextual layers
+
+Before Phase 4, a verification case may use only a limited contextual site map. Case creation must not depend on a marketplace parcel, and the map must not imply cadastral, survey, title, legal, planning or statutory authority.
+
+### Projects (Later phase)
+A completed case or land parcel may later become a development project.
 
 Project sections:
 - Overview

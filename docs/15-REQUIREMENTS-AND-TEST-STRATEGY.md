@@ -23,7 +23,7 @@ All demo records must display **DEMO DATA / NOT OFFICIAL**. Planned features mus
 
 Requirements must also preserve the V2 boundaries: platform role, professional discipline, organization/project role, permission, subscription and entitlement are distinct; verification authority and provenance are explicit; GIS geometry is not automatically legal; private documents are protected; AI is advisory; and payments remain out of prototype scope.
 
-The requirement order above is the proposed delivery priority, not an implementation claim. As of 2026-10-14, foundation security code is merged and migrations `001`-`017` are hosted, but pgTAP execution, hosted Auth recovery/confirmation and the complete E2E journey still lack recorded passing evidence. Current evidence and gaps are recorded in `12-IMPLEMENTATION-CHECKLIST.md` and the latest section of `17-PROJECT-AUDIT.md`.
+The requirement order above is the accepted delivery priority, not an implementation claim. As of 2026-10-16, foundation security code is merged and migrations `001`-`017` are hosted. General CI and database-security GitHub Actions have passed, including pgTAP in a temporary Supabase environment. Hosted-user authorization/document isolation, hosted Auth recovery/confirmation and the complete E2E journey still lack passing evidence. Current evidence and gaps are recorded in `12-IMPLEMENTATION-CHECKLIST.md` and the latest section of `17-PROJECT-AUDIT.md`.
 
 ## Test Layers
 
@@ -37,7 +37,7 @@ Test pure logic without Next.js, Supabase, the network, or a browser. Cover feas
 
 Location: `tests/integration/`
 
-Test one module across its service, database, storage, or API boundary using isolated fixtures. Cover auth/profile creation, land search, verification and audit persistence, private document access, project creation, and professional membership.
+Test one module across its service, database, storage, or API boundary using isolated fixtures. Cover auth/profile creation, verification-case persistence, evidence/audit persistence, private document access, staff assignment/review and deterministic feasibility/report behavior. Add land search, project creation and professional membership when their later phases are implemented.
 
 Integration tests must clean up fixtures and must not depend on execution order.
 
@@ -45,7 +45,7 @@ Integration coverage should include provider timeouts/outages, bounded retries, 
 
 ### 2a. Database/RLS and authorization tests
 
-The repository currently contains `supabase/tests/foundation_security.sql` and `supabase/tests/membership_behavior.sql`, and `.github/workflows/db-tests.yml` is configured to start a local Supabase stack and run them. Until a green run is recorded, these tests are **implemented but not verified**.
+The repository contains `supabase/tests/foundation_security.sql` and `supabase/tests/membership_behavior.sql`, and `.github/workflows/db-tests.yml` starts a temporary Supabase stack and runs them. Database-security [run 38276873408](https://github.com/bakareolamilekan365-tech/ATEXGROVE/actions/runs/38276873408) passed for PR #9 head commit `c259db0`. This is valid automated pgTAP evidence, but it does not verify the linked hosted project or realistic hosted-user sessions.
 
 Test the same decisions at the server and database boundaries:
 
@@ -78,16 +78,23 @@ Authentication recovery tests should cover the generic forgot-password response,
 
 ### 4. Journey integration gate
 
-The final release gate combines the modules in this order:
+The accepted verification-first journey gate combines the modules in this order:
 
 1. Register and select a role.
 2. Sign in and load the role-aware dashboard.
-3. Discover and open a demo parcel.
-4. Start verification and attach a document.
-5. Create a project from the parcel.
-6. Add a professional and upload a project document.
-7. Enter feasibility assumptions and compare scenarios.
-8. Navigate the workspace without dead ends.
+3. Start a verification/development-feasibility case without requiring an existing listing or parcel.
+4. Record Abuja/FCT site and request details.
+5. Upload synthetic or properly redacted private evidence.
+6. Submit the case.
+7. Confirm that authorized staff can see the case in the work queue while unauthorized users cannot.
+8. Have a human lead assign or hand over the case; automation may recommend but must not silently assign.
+9. Record evidence source, review state and authority level; request clarification where needed.
+10. Enter validated, explicit feasibility assumptions.
+11. Generate a draft Land & Development Report with exact evidence/version lineage.
+12. Require genuinely separate discipline-appropriate review for consequential conclusions.
+13. Deliver the report with limitations, unresolved matters, source/authority labels and audit history.
+14. Verify permission-denied, safe-error, not-found and expired-session states.
+15. Test land discovery/GIS later as a separate Phase 4 gate after the case/report workflow is proven.
 
 This gate uses real application boundaries and seeded demo data. It fails on fake success states, unauthorized access, missing persistence, broken navigation, or unlabeled synthetic data.
 

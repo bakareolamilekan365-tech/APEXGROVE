@@ -32,8 +32,9 @@ Logout completeness and session-revocation administration remain **Planned**. Pa
 - Hosted migration history contains `001`-`017`.
 - RLS is enabled on `profiles`, `organizations`, `organization_members` and `audit_logs`.
 - The `documents` bucket is private and has user-scoped SELECT, INSERT, UPDATE and DELETE policies.
-- The live security advisor still reports `spatial_ref_sys` without RLS, API reachability warnings for security-definer helpers, PostGIS-in-public warnings and leaked-password protection disabled.
-- These checks confirm configuration state, not the full ALLOW/DENY behavior. The pgTAP suites and real Auth email flows remain verification gates.
+- General CI [run 38276873401](https://github.com/bakareolamilekan365-tech/ATEXGROVE/actions/runs/38276873401) and database-security [run 38276873408](https://github.com/bakareolamilekan365-tech/ATEXGROVE/actions/runs/38276873408) passed for PR #9 head commit `c259db0`; the database workflow executed pgTAP ALLOW/DENY tests in a temporary Supabase environment.
+- This is valid automated database evidence, but it is not hosted-environment verification. Hosted cross-user authorization, hosted document isolation and real Auth confirmation/recovery email flows remain open.
+- The live security advisor still reports unresolved findings, and `organization_actor_role` anonymous execute exposure requires a new forward migration and test. PostGIS/system-managed findings require deliberate treatment rather than an unsafe rewrite of old migrations.
 
 ### Future authentication hardening
 
@@ -100,7 +101,7 @@ RLS policies and server checks should be tested together. A client can be modifi
 
 Documents follow the lifecycle specified in [08-DOCUMENTS-SPEC.md](08-DOCUMENTS-SPEC.md): upload → validate → security check → private storage → metadata → version → access control → review → verification status → audit → retention/deletion.
 
-Storage must use private buckets/paths by default. Retrieval requires an authorization decision for the related land, project, organization or user, followed by a short-lived signed or otherwise controlled response. URLs must not be guessable, reusable without authorization, or treated as proof of legal validity. Metadata, version lineage and access/review events should be auditable.
+Storage must use private buckets/paths by default. During Phase 2, retrieval requires authorization against the related verification case, customer relationship, assignment or scoped administrative permission, followed by a short-lived signed or otherwise controlled response. Later land, project and organization scopes may extend this model. URLs must not be guessable, reusable without authorization, or treated as proof of legal validity. Metadata, version lineage and access/review events should be auditable.
 
 ## Verification trust and authority
 
@@ -171,7 +172,7 @@ This is architectural guidance, not a claim that a complete incident-response se
 
 ## AI security and governance
 
-AI document or data analysis is **Future** and should run through an isolated provider adapter/background job. Uploaded documents, extracted text and user prompts are untrusted input. AI must:
+AI document or data analysis is **Future** and should run through an isolated provider adapter/background job. AI must not process real controlled-pilot documents; the initial pilot uses synthetic or properly redacted evidence. Uploaded documents, extracted text and user prompts are untrusted input. AI must:
 
 - distinguish facts from estimates and communicate uncertainty
 - avoid inventing missing information

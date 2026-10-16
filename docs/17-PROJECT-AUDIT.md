@@ -461,3 +461,42 @@ The detailed answers and remaining questions live in `OPEN-QUESTIONS-FOUNDER.md`
 ### Audit boundary
 
 This reminder does not claim that the verification case, report, document lifecycle, GIS, payments or AI features are implemented. It does not certify legal compliance, official land status, professional conclusions or production readiness. Audit status changes only when supported by implementation or operational evidence.
+
+## Audit Addendum — 2026-10-16 Verification-First Documentation Reconciliation
+
+**Update type:** Documentation architecture reconciliation on branch `docs/reconcile-verification-first-architecture`.
+
+**Historical boundary:** Every earlier audit section remains unchanged as a dated record. In particular, earlier references to a proposed roadmap or missing pgTAP evidence describe what was known at that time; the current status below supersedes them without rewriting history.
+
+### Repository and decision state
+
+- PR #10 is merged into `main` as commit `294c6c6`.
+- This documentation branch was created from current `main` commit `2dc5fbc`.
+- `DECISIONS.md` records the verification-first Abuja/FCT controlled pilot as accepted.
+- The accepted order is Foundation → Verification Case + Private Evidence → Development Feasibility + Land & Development Report → Controlled Land Discovery + GIS → Projects + Professionals → Integration/Release Confidence.
+- Open founder/CTO questions refine staffing, named reviewers, report signatories/template, real-document policy, data licences and operational ownership. They do not reopen the roadmap order.
+
+### Automated evidence now recorded consistently
+
+- [General CI run 38276873401](https://github.com/bakareolamilekan365-tech/ATEXGROVE/actions/runs/38276873401) passed for PR #9 head commit `c259db0`.
+- [Database security run 38276873408](https://github.com/bakareolamilekan365-tech/ATEXGROVE/actions/runs/38276873408) passed for the same commit and executed pgTAP ALLOW/DENY tests in a temporary Supabase environment.
+- This is valid automated evidence, not proof of the linked hosted environment.
+
+Hosted email confirmation, password recovery including invalid/expired links, realistic hosted cross-user document isolation, remaining Supabase advisor findings, `organization_actor_role` anonymous execute exposure, the complete hosted user journey and production readiness remain open.
+
+### Documentation reconciled in this branch
+
+- Current context, README and historical revision brief now treat the verification-first order as accepted rather than proposed.
+- The target Phase 2/3 schema is case-first: a verification case may exist before any listing or parcel, and any later parcel/project link is optional.
+- Logical API boundaries now center cases, evidence, assignments, reviews, history, feasibility, reports and the staff work queue; land/GIS APIs are later-phase guidance.
+- GIS remains Phase 4. A Phase 2/3 map is limited contextual site support and carries no cadastral, survey, title, legal, planning or statutory implication.
+- Test strategy, implementation checklist, security, documents, integration order and delivery map now record successful temporary-environment pgTAP evidence while preserving hosted verification gaps.
+- The plain-language documentation was reviewed; already-aligned wording was not expanded merely for cosmetic consistency.
+
+### Change boundary
+
+This reconciliation changes documentation only. It does not change application code, tests, dependencies, package configuration, Supabase migrations or hosted Supabase state. It does not implement verification cases, evidence handling, work queues, assignment/handover, feasibility, report generation, land discovery, GIS, projects or professional workflows.
+
+### Audit boundary
+
+The accepted roadmap is a build priority, not implementation evidence. A private bucket is not a finished document product; a GIS specification is not a working map; placeholder migration filenames do not create domain tables. Production readiness, legal compliance, official land status and professional conclusions remain unclaimed.

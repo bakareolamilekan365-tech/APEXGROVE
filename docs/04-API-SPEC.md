@@ -11,7 +11,7 @@
 
 ## Prototype boundary
 
-The API areas below describe logical boundaries for the current web prototype. They are not a claim that every route is implemented. Current UI and server code plus the database migrations are the implementation source of truth. Future planning, approvals, construction, billing, advanced GIS and AI endpoints remain planned until implemented and tested.
+The API areas below describe logical boundaries, not implemented routes. The current repository has authentication/profile/foundation server behavior but no complete verification-case API. Phase 2/3 is case-first: creating a case must not require a marketplace listing or existing parcel. Planning, approvals, construction, billing, public land discovery/GIS and AI endpoints remain later work until implemented and tested.
 
 ## Request security pipeline
 
@@ -27,32 +27,51 @@ For every protected request:
 Frontend route guards and hidden controls are not authorization. Server-side checks and database RLS must remain the security boundary.
 
 ## API areas
-/api/auth
-/api/profile
-/api/organizations
-/api/land
-/api/land/[id]
-/api/land/[id]/verification
-/api/properties
-/api/projects
-/api/projects/[id]
-/api/projects/[id]/documents
-/api/projects/[id]/professionals
-/api/professionals
-/api/feasibility
-/api/documents
-/api/notifications
-/api/admin
+
+### Current foundation boundaries
+
+- `/api/auth` or equivalent Supabase SSR/server actions
+- `/api/profile`
+- `/api/organizations`
+
+The exact implementation may use Next.js server actions rather than route handlers. The security contract is the same.
+
+### Phase 2/3 case-first boundaries (Planned)
+
+- `/api/cases`
+- `/api/cases/[id]`
+- `/api/cases/[id]/submit`
+- `/api/cases/[id]/evidence`
+- `/api/cases/[id]/assignments`
+- `/api/cases/[id]/reviews`
+- `/api/cases/[id]/history`
+- `/api/cases/[id]/feasibility`
+- `/api/cases/[id]/report`
+- `/api/staff/work-queue`
+
+These names are conceptual and may be adapted to the existing Next.js modular-monolith architecture. Case creation accepts customer/request, jurisdiction and site details directly. Any later `land_parcel` or listing relationship is optional and must not become a hidden prerequisite.
+
+Each case boundary must enforce authentication, server-side authorization, object-level authorization, validated state transitions, RLS, audit events for sensitive operations and safe errors. Staff-assisted creation also records customer, staff actor, channel and consent. Assignment is confirmed by a human lead; automation may recommend but must not silently assign or approve.
+
+### Later-phase boundaries (Planned/Future)
+
+- `/api/land` and `/api/land/[id]` (Phase 4 discovery/GIS)
+- `/api/properties`
+- `/api/projects` and project subresources
+- `/api/professionals`
+- `/api/notifications`
+- scoped `/api/admin` capabilities
+
+Phase 2 does not require a map provider. A limited contextual site map may be added through a replaceable adapter when genuinely useful, without introducing parcel discovery or implying cadastral/legal authority.
 
 ## Example
-### POST /api/projects
+### POST /api/cases (Planned)
 Request:
 ```json
 {
-  "name": "Sample Residential Development",
-  "project_type": "residential",
-  "parcel_id": "uuid",
-  "description": "Demo project"
+  "jurisdiction": "NG-FC",
+  "site_description": "DEMO DATA / NOT OFFICIAL — Kuje site",
+  "request_summary": "Document intake and development-feasibility review"
 }
 ```
 
@@ -61,7 +80,8 @@ Response:
 {
   "data": {
     "id": "uuid",
-    "name": "Sample Residential Development"
+    "current_stage": "request_received",
+    "workflow_status": "draft"
   },
   "error": null
 }
@@ -97,7 +117,7 @@ AI document analysis, large GIS processing, report generation, bulk imports, not
 
 ## Sensitive resources
 
-Document endpoints must authorize the related user, organization, project or verification record before retrieval. Use private storage and short-lived signed/controlled access; never return guessable public URLs. Verification and administrative operations should include reviewer/actor context and audit metadata.
+Document endpoints must authorize the related verification case first during Phase 2, including customer relationship, assigned responsibility and administrative scope. Later organization, project or parcel relationships may extend that decision. Use private storage and short-lived signed/controlled access; never return guessable public URLs. Verification and administrative operations should include reviewer/actor context and audit metadata.
 
 ## Integration interfaces
 Future external providers should be accessed through adapters, for example:

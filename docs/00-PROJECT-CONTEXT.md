@@ -17,17 +17,17 @@ LAND → VERIFICATION → PLANNING → DESIGN → APPROVAL → CONSTRUCTION → 
 
 The current prototype proves only the beginning of this journey. The later stages are architectural direction, not claims about functionality already implemented in this repository.
 
-## Current proposed prototype journey
+## Accepted controlled-pilot journey
 
-The first commercial slice is a controlled land-verification and development-feasibility service for Abuja. This ordering is proposed pending the founder answers in `OPEN-QUESTIONS-FOUNDER.md`; it deliberately places the case workflow before a public land-discovery experience.
+The first commercial slice is a controlled land-verification and development-feasibility service for Abuja/FCT. The verification-first order is accepted in `DECISIONS.md`: the case/evidence workflow and limited report come before public land discovery and GIS. Open questions refine staffing, named reviewers, report signatories/template, real-document policy, data licences and operational ownership; they do not reopen the delivery order.
 
 1. User registers and selects a role.
 2. User signs in and sees a role-aware dashboard.
-3. User opens a land-verification and development-feasibility case.
-4. User records the Abuja site and submits private supporting documents.
+3. User opens a land-verification and development-feasibility case, without needing an existing listing or marketplace parcel.
+4. User records the Abuja/FCT site and submits synthetic or properly redacted private supporting evidence during the initial pilot.
 5. Authorized staff assign, review, and hand over the case while preserving evidence sources, notes, status history, and audit events.
 6. Qualified review produces a Land & Development Report that clearly separates supplied information, professional checks, authoritative confirmation, and unresolved matters.
-7. A map may locate the site within the case, but it must not imply cadastral or legal authority.
+7. A limited contextual map may locate the site within the case, but it must not imply cadastral, survey, title, legal, planning or statutory authority.
 8. Land discovery, project workspaces, professionals, and broader development features follow after this controlled service is proven.
 
 ## Prototype scope
@@ -43,7 +43,7 @@ The first commercial slice is a controlled land-verification and development-fea
 - Admin/reviewer management limited to granted scope
 - Database/API integration
 
-The list above describes the target first commercial slice, not the current implementation. As of 2026-10-14, the authentication/foundation work is merged and migrations `001`-`017` are recorded on hosted Supabase. This establishes foundation controls; it does not prove every RLS behavior or Auth email flow, and the case, report, GIS, and feasibility behavior is not yet implemented.
+The list above describes the target first commercial slice, not the current implementation. As of 2026-10-16, the authentication/foundation work is merged and migrations `001`-`017` are recorded on hosted Supabase. General CI and temporary-environment pgTAP database-security tests have passed. This establishes valid automated evidence, but does not prove hosted cross-user authorization or hosted Auth email flows; the case, report, GIS and feasibility behavior is not yet implemented.
 
 ### Architect but do not fake
 - Planning intelligence
