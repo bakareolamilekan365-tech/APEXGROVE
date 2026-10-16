@@ -6,7 +6,7 @@ PostgreSQL with PostGIS.
 
 ## Schema status and implementation boundary
 
-This document describes the current prototype's domain contract and the reserved shape of the future architecture; it is not a claim that every table listed below exists in the live database. Migrations `001`-`014` create and harden the foundation around `profiles`, `organizations`, `organization_members` and `audit_logs`; migrations `004`-`011` remain domain placeholders rather than proof that their named modules exist. Migrations `015`-`017` add foundation security, private document storage, membership-owner protection and advisor-oriented permission fixes. As of 2026-10-16, all seventeen migrations are recorded on hosted Supabase. Read-only inspection confirms RLS on the four application foundation tables and a private `documents` bucket with per-operation policies. pgTAP ALLOW/DENY tests have passed in a temporary Supabase environment through GitHub Actions; hosted cross-user authorization and remaining live advisor findings are still open.
+This document describes the current prototype's domain contract and the reserved shape of the future architecture; it is not a claim that every table listed below exists in the live database. Migrations `001`-`014` create and harden the foundation around `profiles`, `organizations`, `organization_members` and `audit_logs`; migrations `004`-`011` remain domain placeholders rather than proof that their named modules exist. Migrations `015`-`017` add foundation security, private document storage, membership-owner protection and advisor-oriented permission fixes. As of 2026-10-16, migrations `001`-`017` are recorded on hosted Supabase. Migration `018_verification_case_slice_1.sql` is a **repository implementation pending review and CI**; it must not be described as hosted until it is approved and deliberately applied. Read-only inspection confirms RLS on the four hosted application foundation tables and a private `documents` bucket with per-operation policies. Earlier pgTAP ALLOW/DENY tests passed in a temporary Supabase environment through GitHub Actions; migration `018` adds its own disposable-environment pgTAP gate.
 
 ## Conventions
 
@@ -68,48 +68,55 @@ The current live application tables are `profiles`, `organizations`, `organizati
 
 Audit records are required for important mutations, verification decisions, document access/review, administrative actions and permission-sensitive changes. They should preserve actor, action, target, scope, time and relevant metadata without turning the audit log into an unbounded dump of sensitive document contents.
 
-## Target Phase 2/3 case-first schema (Planned)
+## Phase 2/3 case-first schema
 
 The first commercial workflow starts with a verification case, not a marketplace listing. A case may be created from site/request details before any `land_parcels` record exists. Any later parcel/listing link must be optional and follow-on.
 
-The names below are conceptual table boundaries for design and migration planning. They are **TARGET SCHEMA / NOT IMPLEMENTED** and may be refined before forward migrations are written.
+The Slice 1 tables below are defined by migration `018`, but remain **NOT HOSTED / NOT OPERATIONALLY VERIFIED** until the migration and CI are approved. Evidence, report and feasibility tables remain **TARGET SCHEMA / PLANNED**.
 
-### verification_cases
+### staff_members (Slice 1 repository implementation)
+
+- user_id (primary key, linked to Supabase Auth)
+- department (`Verification`, `Feasibility` or `Operations`)
+- is_lead
+- active
+- created_at / updated_at
+
+Slice 1 permits one active lead per department. Staff rows are provisioned only through a trusted database-operator/service-role path; account type does not create staff access. Customers cannot assign themselves staff or lead responsibility.
+
+### verification_cases (Slice 1 repository implementation)
 
 - id
 - customer_user_id
 - created_by_user_id
 - creation_channel (`customer` or authorized staff-assisted channel)
-- assisted_by_user_id nullable
-- consent record/reference nullable
 - jurisdiction
-- site description and structured location fields
-- site_geometry nullable, contextual only
-- current_stage (Request received, Documents in, Document checks, Site and map, Development options, Report)
-- workflow_status
+- department
+- site description
+- Abuja area/LGA
+- customer notes nullable
+- contact preference
+- current_stage (fixed at `Request received` in Slice 1)
+- workflow_status (`draft`, `submitted`, `assigned`, `in_review`, `needs_customer_info`, `closed`, `cancelled`)
 - assigned_lead_user_id nullable
+- is_demo_data (fixed true for the controlled synthetic pilot)
 - created_at
 - updated_at
 
-The customer, staff actor, channel and consent/audit context must be retained for assisted creation. `current_stage` is journey progress; it must not be overloaded as verification authority or legal status.
+Slice 1 supports customer creation only. Staff-assisted creation, its consent record and related actor/channel metadata remain later work. `current_stage` is journey progress; it must not be overloaded as verification authority or legal status. A case does not require a parcel or listing.
 
-### case_assignments
+### case_assignments (Slice 1 repository implementation)
 
 - id
 - verification_case_id
 - assignee_user_id
 - assigned_by_user_id
-- assignment role/scope
-- status
-- accepted_at nullable
-- declined_at nullable
-- decline_reason nullable
-- handover/predecessor reference nullable
-- created_at / updated_at
+- status (`active`, `completed`, `cancelled`)
+- created_at
 
-A human lead confirms assignment or handover. Automated recommendations may be retained separately but must not silently assign or approve work. Capacity decline and handover history must remain auditable.
+A human department lead assigns manually in Slice 1. Acceptance/decline, capacity reasons and handover history remain Slice 3 work. Automation must not silently assign or approve.
 
-### case_evidence
+### case_evidence (Planned — Slice 2)
 
 - id
 - verification_case_id
@@ -126,7 +133,7 @@ A human lead confirms assignment or handover. Automated recommendations may be r
 
 Evidence storage remains private. A case-evidence record refers to the exact document/evidence version considered; it does not turn receipt into authentication or official confirmation.
 
-### case_evidence_reviews or case_findings
+### case_evidence_reviews or case_findings (Planned)
 
 - id
 - verification_case_id
@@ -141,7 +148,7 @@ Evidence storage remains private. A case-evidence record refers to the exact doc
 
 Source, review state and authority level are separate. Authority levels must preserve user-submitted, automated check, Atexgrove review, professional review, authoritative-third-party confirmation and official/statutory confirmation.
 
-### case_status_events / case_history
+### case_status_events (Slice 1 repository implementation)
 
 - id
 - verification_case_id
@@ -149,9 +156,10 @@ Source, review state and authority level are separate. Authority levels must pre
 - from_stage/status nullable
 - to_stage/status
 - reason
+- customer_visible
 - created_at
 
-Status history is append-oriented and auditable. It should not silently erase an earlier assignment, decision or unresolved state.
+Status history is append-only: authenticated clients receive no update or delete privilege. Customers can read only events deliberately marked customer-visible; permitted staff can read the complete case timeline. Assignment and status RPCs write their event within the same transaction as the state change.
 
 ### feasibility_scenarios (Phase 3 target)
 
@@ -167,7 +175,7 @@ Status history is append-oriented and auditable. It should not silently erase an
 
 The Phase 3 relationship is case-first. A later project link may be supported, but a project must not be required to calculate or explain the controlled pilot scenario.
 
-### reports
+### reports (Planned — Phase 3)
 
 - id
 - verification_case_id
@@ -180,7 +188,7 @@ The Phase 3 relationship is case-first. A later project link may be supported, b
 - exact evidence/version lineage used
 - created_at / updated_at
 
-### report_reviews
+### report_reviews (Planned — Phase 3)
 
 - id
 - report_id

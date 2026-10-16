@@ -1,47 +1,94 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
+import { CaseStatusBadge } from "@/components/cases/CaseStatusBadge";
+import styles from "@/components/cases/case-workflow.module.css";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import type { VerificationCase } from "@/types/verification";
 
 export const dynamic = "force-dynamic";
 
-export default async function DashboardPage() {
+export default async function DashboardPage({
+  searchParams,
+}: Readonly<{ searchParams: Promise<{ request?: string }> }>) {
   const supabase = await createSupabaseServerClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) {
-    redirect("/login");
-  }
+  if (!user) redirect("/login");
 
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("full_name, account_type, location_text, bio")
-    .eq("user_id", user.id)
-    .maybeSingle();
+  const [{ data: profile }, { data: cases, error: casesError }] = await Promise.all([
+    supabase
+      .from("profiles")
+      .select("full_name, account_type, location_text, bio")
+      .eq("user_id", user.id)
+      .maybeSingle(),
+    supabase
+      .from("verification_cases")
+      .select("id, customer_user_id, created_by_user_id, creation_channel, jurisdiction, department, site_description, area_lga, customer_notes, contact_preference, current_stage, workflow_status, assigned_lead_user_id, is_demo_data, created_at, updated_at")
+      .order("created_at", { ascending: false }),
+  ]);
 
   const role = profile?.account_type ?? "buyer";
   const roleCopy: Record<string, string> = {
-    buyer: "Explore opportunities and keep your next property decision organized.",
-    landowner: "Prepare your land information for future discovery and verification workflows.",
-    developer: "Plan your future project workspace and connect the right professionals.",
-    professional: "Prepare your professional profile for future project collaboration.",
-    admin: "Review foundation activity and security responsibilities within your assigned scope.",
+    buyer: "Submit and follow your land-verification requests in plain English.",
+    landowner: "Submit and follow requests without claiming ownership has been verified.",
+    developer: "Track early verification requests before later development workflows begin.",
+    professional: "Your platform role is not professional verification. Staff access is granted separately.",
+    admin: "Administrative account type is separate from the scoped staff work queue.",
   };
+  const { request } = await searchParams;
+  const ownCases = (cases ?? []) as VerificationCase[];
 
   return (
-    <main>
-      <h1>Dashboard</h1>
-      <p>Welcome{profile?.full_name ? `, ${profile.full_name}` : ""}.</p>
-      <p>Platform role: {role}</p>
-      <p>{roleCopy[role] ?? "Your role-aware workspace is being prepared."}</p>
-      <section aria-label="Planned modules">
-        <h2>Coming next</h2>
-        <ul>
-          <li>Land discovery and GIS: planned foundation work</li>
-          <li>Verification and private documents: planned trust workflows</li>
-          <li>Projects and professionals: planned collaboration workflows</li>
-        </ul>
-      </section>
+    <main className={styles.shell}>
+      <div className={styles.headerRow}>
+        <div>
+          <p className={styles.eyebrow}>Customer dashboard</p>
+          <h1>Welcome{profile?.full_name ? `, ${profile.full_name}` : ""}</h1>
+          <p className={styles.muted}>{roleCopy[role] ?? "Your customer workspace."}</p>
+        </div>
+        <Link className={styles.button} href="/dashboard/cases/new">Start a new request</Link>
+      </div>
+
+      {request === "submitted" ? (
+        <p className={styles.success} role="status">
+          Request received. It is not yet verified and will enter the staff queue.
+        </p>
+      ) : null}
+
+      <div className={styles.cardHeader}>
+        <h2>My cases</h2>
+        <span className={styles.demo}>Demo data · not official</span>
+      </div>
+
+      {casesError ? (
+        <p className={styles.error} role="alert">We could not load your cases.</p>
+      ) : ownCases.length === 0 ? (
+        <div className={styles.empty}>
+          <h2>No requests yet</h2>
+          <p>Start with an Abuja/FCT plot description. Document upload comes in a later slice.</p>
+          <Link className={styles.button} href="/dashboard/cases/new">Start a new request</Link>
+        </div>
+      ) : (
+        <div className={styles.grid}>
+          {ownCases.map((item) => (
+            <article className={styles.card} key={item.id}>
+              <div className={styles.cardHeader}>
+                <span className={styles.demo}>Demo</span>
+                <CaseStatusBadge status={item.workflow_status} />
+              </div>
+              <p className={styles.eyebrow}>Case {item.id.slice(0, 8)}</p>
+              <h2>{item.area_lga}, Abuja</h2>
+              <p>{item.site_description}</p>
+              <p className={`${styles.muted} ${styles.small}`}>
+                Received {new Intl.DateTimeFormat("en-NG", { dateStyle: "medium" }).format(new Date(item.created_at))}
+              </p>
+              <Link className={styles.link} href={`/dashboard/cases/${item.id}`}>See case timeline</Link>
+            </article>
+          ))}
+        </div>
+      )}
     </main>
   );
 }

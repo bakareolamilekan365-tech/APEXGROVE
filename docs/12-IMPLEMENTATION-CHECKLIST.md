@@ -11,13 +11,13 @@ Use this as an engineering gate, not a list of screens. Every item should be mar
 
 ## Current evidence snapshot — 2026-10-16
 
-On `main` after PRs #9 and #10:
+On `main` after PR #11 (`3946841`), before the unmerged Slice 1 branch:
 
 - **DEPLOYED/CONFIGURATION VERIFIED:** hosted migration history contains `001`-`017`; the `documents` bucket is private; user-scoped SELECT/INSERT/UPDATE/DELETE storage policies exist; RLS is enabled on `profiles`, `organizations`, `organization_members` and `audit_logs`.
 - **IMPLEMENTED IN CODE:** password recovery request, PKCE callback, safe internal redirects, authenticated password update, profile onboarding fields, role-aware dashboard copy, server authorization helpers, synthetic fixture tooling, membership-owner protection, security guardrails, pgTAP suites, and Docker-backed database-test CI.
 - **AUTOMATED VERIFIED:** general CI [run 38276873401](https://github.com/bakareolamilekan365-tech/ATEXGROVE/actions/runs/38276873401) and database-security [run 38276873408](https://github.com/bakareolamilekan365-tech/ATEXGROVE/actions/runs/38276873408) passed for PR #9 head commit `c259db0`; pgTAP executed in a temporary Supabase environment.
 - **NOT YET HOSTED/OPERATIONALLY VERIFIED:** realistic hosted-user authorization and document isolation, hosted email confirmation/recovery including invalid/expired links, complete E2E journey and production readiness.
-- **OPEN HOSTED FINDINGS:** live Supabase advisor findings remain; `organization_actor_role` anonymous execute exposure requires a new forward migration and test.
+- **OPEN HOSTED FINDINGS:** live Supabase advisor findings remain. Migration `018` contains the forward revocation and pgTAP assertion for `organization_actor_role` anonymous execute exposure, but the fix remains unapplied to hosted Supabase until review and green CI.
 
 Migration deployment and temporary-environment automated database tests are complete, but the foundation is not fully **VERIFIED** until hosted behavioral and operational evidence closes the remaining gates.
 
@@ -54,14 +54,18 @@ Migration deployment and temporary-environment automated database tests are comp
 
 ## Verification case and private evidence (Phase 2)
 
-- [ ] A customer can create a case without an existing marketplace parcel/listing; authorized staff-assisted creation records customer, actor, channel, consent and audit history.
-- [ ] The six stages and status transitions are validated and audited without overloading workflow status as legal/verification authority.
-- [ ] A human lead confirms assignment/handover; automated recommendations cannot silently assign or approve; capacity declines record a reason.
+- [x] **IMPLEMENTED IN BRANCH / CI PENDING — Slice 1:** a customer can submit a synthetic Abuja/FCT case without an existing parcel/listing and see their own cases. Staff-assisted creation remains later work.
+- [x] **IMPLEMENTED IN BRANCH / CI PENDING — Slice 1:** `submitted → assigned → in_review → needs_customer_info → in_review → closed/cancelled` is enforced through transactional RPCs with actor, note and timestamp events. `closed` is labelled “Completed” in the UI.
+- [x] **IMPLEMENTED IN BRANCH / CI PENDING — Slice 1:** an active department lead assigns manually; non-leads and cross-department leads are denied. Acceptance/decline/handover and preparer/approver separation remain Slice 3.
+- [x] **IMPLEMENTED IN BRANCH / CI PENDING — Slice 1:** RLS limits customers to their own cases/customer-safe timeline and staff to department-lead or active-assignment scope; status events are append-only.
+- [ ] Migration `018` passes the disposable Supabase pgTAP workflow and is reviewed before any hosted application. Hosted migration remains deliberately unapplied.
 - [ ] Verification records have explicit type, status, evidence, source, reviewer, authority and dates.
 - [ ] Authority hierarchy is visible; internal review is not represented as official certification.
 - [ ] Documents use private storage, authorization before retrieval, validation and controlled access.
 - [ ] Version lineage is preserved; important evidence is not silently overwritten.
 - [ ] Draft/Submitted/Under Review/Approved/Rejected/Archived transitions are validated and audited.
+
+**Slice 1 local evidence:** lint, typecheck, 23 unit tests, 12 configured integration tests, the eight-table RLS guardrail and the production build pass locally. Three hosted-environment integration tests remain intentionally skipped without test credentials. Docker is not installed on this workstation, so the new 36-assertion pgTAP suite must pass `db-tests.yml` in GitHub Actions before migration `018` is eligible for hosted review/application.
 
 ## Feasibility
 
