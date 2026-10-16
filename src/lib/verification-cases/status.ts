@@ -6,7 +6,7 @@ export const caseStatusLabels: Record<VerificationCaseStatus, string> = {
   assigned: "Assigned — not yet verified",
   in_review: "In review — not yet verified",
   needs_customer_info: "More information needed",
-  closed: "Completed",
+  closed: "Closed — no verification result issued",
   cancelled: "Cancelled",
 };
 

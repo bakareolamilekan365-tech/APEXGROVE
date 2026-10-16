@@ -103,7 +103,7 @@ Slice 1 permits one active lead per department. Staff rows are provisioned only 
 - created_at
 - updated_at
 
-Slice 1 supports customer creation only. Staff-assisted creation, its consent record and related actor/channel metadata remain later work. `current_stage` is journey progress; it must not be overloaded as verification authority or legal status. A case does not require a parcel or listing.
+Slice 1 supports customer creation only. Staff-assisted creation, its consent record and related actor/channel metadata remain later work. `current_stage` is journey progress; it must not be overloaded as verification authority or legal status. A case does not require a parcel or listing. Customer and actor Auth references currently use restrictive deletion behavior; retention, anonymization and account-deletion handling require an explicit policy before customer deletion is offered.
 
 ### case_assignments (Slice 1 repository implementation)
 
@@ -114,7 +114,7 @@ Slice 1 supports customer creation only. Staff-assisted creation, its consent re
 - status (`active`, `completed`, `cancelled`)
 - created_at
 
-A human department lead assigns manually in Slice 1. Acceptance/decline, capacity reasons and handover history remain Slice 3 work. Automation must not silently assign or approve.
+A human department lead assigns manually in Slice 1. Acceptance/decline, capacity reasons and handover history remain Slice 3 work. A deactivated assignee cannot change case status, but lead-driven reassignment is not yet implemented; affected cases require controlled operator handling until Slice 3. Automation must not silently assign or approve.
 
 ### case_evidence (Planned — Slice 2)
 
@@ -159,7 +159,7 @@ Source, review state and authority level are separate. Authority levels must pre
 - customer_visible
 - created_at
 
-Status history is append-only: authenticated clients receive no update or delete privilege. Customers can read only events deliberately marked customer-visible; permitted staff can read the complete case timeline. Assignment and status RPCs write their event within the same transaction as the state change.
+Status history is append-only for application clients: `anon` has no table access and `authenticated` receives no insert, update or delete privilege. The privileged `service_role`/database-operator boundary retains maintenance capability and must be tightly controlled and audited. Customers can read only events deliberately marked customer-visible; internal assignment/status notes default to hidden. Permitted staff can read the complete case timeline. Assignment and status RPCs write their event within the same transaction as the state change.
 
 ### feasibility_scenarios (Phase 3 target)
 

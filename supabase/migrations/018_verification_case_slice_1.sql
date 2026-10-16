@@ -388,7 +388,7 @@ create or replace function public.transition_verification_case(
   p_case_id uuid,
   p_to_status text,
   p_reason text,
-  p_customer_visible boolean default true
+  p_customer_visible boolean default false
 )
 returns uuid
 language plpgsql
@@ -402,6 +402,9 @@ declare
 begin
   if actor_id is null then
     raise exception 'Authentication is required' using errcode = '42501';
+  end if;
+  if not public.is_active_staff() then
+    raise exception 'Active staff access is required' using errcode = '42501';
   end if;
   if char_length(btrim(coalesce(p_reason, ''))) not between 2 and 2000 then
     raise exception 'A status note is required' using errcode = '22023';

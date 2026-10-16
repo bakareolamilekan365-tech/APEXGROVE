@@ -1,7 +1,7 @@
 -- Behavioural allow/deny tests for Phase 2, Slice 1.
 -- Runs only against the disposable local/CI Supabase database.
 begin;
-select plan(36);
+select plan(45);
 
 select ok((select relrowsecurity from pg_class where oid = 'public.staff_members'::regclass), 'staff_members has RLS enabled');
 select ok((select relrowsecurity from pg_class where oid = 'public.verification_cases'::regclass), 'verification_cases has RLS enabled');
@@ -197,6 +197,79 @@ select throws_ok(
 );
 reset role;
 
+update public.staff_members
+set active = false
+where user_id = 'd4000000-0000-0000-0000-000000000004';
+
+select set_config('request.jwt.claims', '{"sub":"d4000000-0000-0000-0000-000000000004","role":"authenticated"}', true);
+set local role authenticated;
+select throws_ok(
+  format(
+    'select public.transition_verification_case(%L::uuid, %L, %L, false)',
+    (select id from pg_temp.slice_1_case_ids),
+    'needs_customer_info',
+    'Attempt by a deactivated assignee'
+  ),
+  '42501',
+  'Active staff access is required',
+  'deactivated assignee cannot change case status'
+);
+reset role;
+
+update public.staff_members
+set active = true
+where user_id = 'd4000000-0000-0000-0000-000000000004';
+
+select set_config('request.jwt.claims', '{"sub":"d4000000-0000-0000-0000-000000000004","role":"authenticated"}', true);
+set local role authenticated;
+select lives_ok(
+  format(
+    'select public.transition_verification_case(%L::uuid, %L, %L, false)',
+    (select id from pg_temp.slice_1_case_ids),
+    'needs_customer_info',
+    'Customer clarification is needed.'
+  ),
+  'active assignee can request customer information'
+);
+select lives_ok(
+  format(
+    'select public.transition_verification_case(%L::uuid, %L, %L, false)',
+    (select id from pg_temp.slice_1_case_ids),
+    'in_review',
+    'Review resumed after clarification.'
+  ),
+  'active assignee can resume review after customer information'
+);
+reset role;
+
+select set_config('request.jwt.claims', '{"sub":"c3000000-0000-0000-0000-000000000003","role":"authenticated"}', true);
+set local role authenticated;
+select throws_ok(
+  format(
+    'select public.transition_verification_case(%L::uuid, %L, %L, false)',
+    (select id from pg_temp.slice_1_case_ids),
+    'cancelled',
+    'Lead attempted to bypass the active assignee.'
+  ),
+  '42501',
+  'Only the active assignee can move this case',
+  'department lead who is not the assignee cannot change case status'
+);
+reset role;
+
+select set_config('request.jwt.claims', '{"sub":"d4000000-0000-0000-0000-000000000004","role":"authenticated"}', true);
+set local role authenticated;
+select lives_ok(
+  format(
+    'select public.transition_verification_case(%L::uuid, %L, %L, false)',
+    (select id from pg_temp.slice_1_case_ids),
+    'cancelled',
+    'Synthetic request cancelled without a verification result.'
+  ),
+  'active assignee can cancel a case from review'
+);
+reset role;
+
 select set_config('request.jwt.claims', '{"sub":"a1000000-0000-0000-0000-000000000001","role":"authenticated"}', true);
 set local role authenticated;
 select is((select count(*)::int from public.case_status_events), 1, 'customer sees only customer-visible events');
@@ -208,6 +281,30 @@ select is((select count(*)::int from public.case_status_events), 0, 'another cus
 reset role;
 
 set local role anon;
+select throws_ok(
+  $$select count(*) from public.staff_members$$,
+  '42501',
+  null,
+  'anonymous user cannot select staff members'
+);
+select throws_ok(
+  $$select count(*) from public.verification_cases$$,
+  '42501',
+  null,
+  'anonymous user cannot select verification cases'
+);
+select throws_ok(
+  $$select count(*) from public.case_assignments$$,
+  '42501',
+  null,
+  'anonymous user cannot select case assignments'
+);
+select throws_ok(
+  $$select count(*) from public.case_status_events$$,
+  '42501',
+  null,
+  'anonymous user cannot select case status events'
+);
 select throws_ok(
   $$select public.create_verification_case('Anonymous plot description', 'Kuje', null, 'email')$$,
   '42501',

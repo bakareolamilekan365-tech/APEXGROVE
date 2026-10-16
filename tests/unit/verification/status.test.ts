@@ -38,5 +38,6 @@ describe("verification case status transitions", () => {
   it("keeps the submitted label honest", () => {
     expect(caseStatusLabels.submitted).toBe("Received — not yet verified");
     expect(caseStatusLabels.submitted.toLowerCase()).not.toBe("verified");
+    expect(caseStatusLabels.closed).toBe("Closed — no verification result issued");
   });
 });

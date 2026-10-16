@@ -43,7 +43,7 @@ export function StatusTransitionForm({
         <textarea id="statusNote" name="note" minLength={2} maxLength={2000} rows={4} required />
       </div>
       <label className={styles.checkbox}>
-        <input type="checkbox" name="customerVisible" defaultChecked /> Show this note to the customer
+        <input type="checkbox" name="customerVisible" /> Show this note to the customer
       </label>
       {state.error ? <p className={styles.error} role="alert">{state.error}</p> : null}
       {state.success ? <p className={styles.success} role="status">{state.success}</p> : null}
