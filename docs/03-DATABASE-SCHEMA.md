@@ -6,7 +6,7 @@ PostgreSQL with PostGIS.
 
 ## Schema status and implementation boundary
 
-This document describes the current prototype's domain contract and the reserved shape of the future architecture; it is not a claim that every table listed below exists in the live database. Migrations `001`-`014` create and harden the foundation around `profiles`, `organizations`, `organization_members` and `audit_logs`; several domain migrations remain explicit placeholders. Migrations `015`-`017` add foundation security, private document storage, membership-owner protection and advisor-oriented permission fixes. As of 2026-10-14, all seventeen migrations are recorded on hosted Supabase. Read-only inspection confirms RLS on the four application foundation tables and a private `documents` bucket with per-operation policies. Behavioral pgTAP results are not yet recorded, and live advisor findings remain open; migration presence or deployment alone is not proof of correct authorization behavior.
+This document describes the current prototype's domain contract and the reserved shape of the future architecture; it is not a claim that every table listed below exists in the live database. Migrations `001`-`014` create and harden the foundation around `profiles`, `organizations`, `organization_members` and `audit_logs`; migrations `004`-`011` remain domain placeholders rather than proof that their named modules exist. Migrations `015`-`017` add foundation security, private document storage, membership-owner protection and advisor-oriented permission fixes. As of 2026-10-16, all seventeen migrations are recorded on hosted Supabase. Read-only inspection confirms RLS on the four application foundation tables and a private `documents` bucket with per-operation policies. pgTAP ALLOW/DENY tests have passed in a temporary Supabase environment through GitHub Actions; hosted cross-user authorization and remaining live advisor findings are still open.
 
 ## Conventions
 
@@ -18,9 +18,9 @@ This document describes the current prototype's domain contract and the reserved
 - Timestamps stored consistently in UTC
 - Geometry columns use an explicitly documented spatial reference system
 
-## Core tables
+## Current live application tables
 
-The core table list preserves the prototype concepts while leaving room for more granular future authorization, verification and provenance. Where a future concept is not mature enough to have a confirmed table design, it is described as a reserved concept rather than an invented production schema.
+The current live application tables are `profiles`, `organizations`, `organization_members` and `audit_logs`. The hosted private `documents` bucket and Storage policies are configuration, not a completed document metadata schema.
 
 ### profiles
 
@@ -55,6 +55,146 @@ The core table list preserves the prototype concepts while leaving room for more
 - created_at
 
 `organization_members.role` is an organization-scoped relationship, not a platform role or a profession. Future permissions should be evaluated from the user’s ownership, organization membership, project membership, administrative permissions and scope, with least privilege and RLS rather than one global role check.
+
+### audit_logs
+
+- id
+- actor_user_id
+- action
+- entity_type
+- entity_id
+- metadata jsonb
+- created_at
+
+Audit records are required for important mutations, verification decisions, document access/review, administrative actions and permission-sensitive changes. They should preserve actor, action, target, scope, time and relevant metadata without turning the audit log into an unbounded dump of sensitive document contents.
+
+## Target Phase 2/3 case-first schema (Planned)
+
+The first commercial workflow starts with a verification case, not a marketplace listing. A case may be created from site/request details before any `land_parcels` record exists. Any later parcel/listing link must be optional and follow-on.
+
+The names below are conceptual table boundaries for design and migration planning. They are **TARGET SCHEMA / NOT IMPLEMENTED** and may be refined before forward migrations are written.
+
+### verification_cases
+
+- id
+- customer_user_id
+- created_by_user_id
+- creation_channel (`customer` or authorized staff-assisted channel)
+- assisted_by_user_id nullable
+- consent record/reference nullable
+- jurisdiction
+- site description and structured location fields
+- site_geometry nullable, contextual only
+- current_stage (Request received, Documents in, Document checks, Site and map, Development options, Report)
+- workflow_status
+- assigned_lead_user_id nullable
+- created_at
+- updated_at
+
+The customer, staff actor, channel and consent/audit context must be retained for assisted creation. `current_stage` is journey progress; it must not be overloaded as verification authority or legal status.
+
+### case_assignments
+
+- id
+- verification_case_id
+- assignee_user_id
+- assigned_by_user_id
+- assignment role/scope
+- status
+- accepted_at nullable
+- declined_at nullable
+- decline_reason nullable
+- handover/predecessor reference nullable
+- created_at / updated_at
+
+A human lead confirms assignment or handover. Automated recommendations may be retained separately but must not silently assign or approve work. Capacity decline and handover history must remain auditable.
+
+### case_evidence
+
+- id
+- verification_case_id
+- document/evidence reference
+- evidence_type
+- source
+- source_type
+- supplied_by_user_id nullable
+- version / version-lineage reference
+- jurisdiction
+- received_at
+- current_review_state
+- created_at / updated_at
+
+Evidence storage remains private. A case-evidence record refers to the exact document/evidence version considered; it does not turn receipt into authentication or official confirmation.
+
+### case_evidence_reviews or case_findings
+
+- id
+- verification_case_id
+- case_evidence_id nullable
+- reviewer_user_id
+- review_state
+- authority_level
+- result
+- notes
+- limitations
+- reviewed_at
+
+Source, review state and authority level are separate. Authority levels must preserve user-submitted, automated check, Atexgrove review, professional review, authoritative-third-party confirmation and official/statutory confirmation.
+
+### case_status_events / case_history
+
+- id
+- verification_case_id
+- actor_user_id
+- from_stage/status nullable
+- to_stage/status
+- reason
+- created_at
+
+Status history is append-oriented and auditable. It should not silently erase an earlier assignment, decision or unresolved state.
+
+### feasibility_scenarios (Phase 3 target)
+
+- id
+- verification_case_id
+- project_id nullable for later follow-on use
+- name
+- deterministic inputs and outputs
+- assumptions
+- calculation_version
+- currency
+- created_at / updated_at
+
+The Phase 3 relationship is case-first. A later project link may be supported, but a project must not be required to calculate or explain the controlled pilot scenario.
+
+### reports
+
+- id
+- verification_case_id
+- status
+- version
+- prepared_by_user_id
+- delivered_at nullable
+- limitations
+- unresolved_matters
+- exact evidence/version lineage used
+- created_at / updated_at
+
+### report_reviews
+
+- id
+- report_id
+- reviewer_user_id
+- discipline
+- decision
+- comments
+- reviewed_at
+
+Consequential conclusions require a genuinely separate discipline-appropriate review. A review row must not imply official/statutory confirmation unless that distinct authority and source evidence actually exist.
+
+## Later-phase domain tables (Planned/Reserved)
+
+The remaining table concepts support Phase 4 GIS and Phase 5 projects/professionals or the longer-term ecosystem. They are not prerequisites for creating a Phase 2 verification case and are not implemented merely because placeholder migrations exist.
 
 ### professionals
 
@@ -214,26 +354,6 @@ Evidence items should be traceable to their source and review event. A spatial p
 - added_by
 - created_at
 
-### feasibility_scenarios
-
-- id
-- project_id
-- name
-- development_type
-- land_area_sqm
-- land_cost
-- construction_cost
-- professional_fees
-- infrastructure_cost
-- finance_cost
-- taxes_charges
-- marketing_cost
-- contingency
-- expected_revenue
-- currency
-- created_at
-- updated_at
-
 ### notifications
 
 - id
@@ -243,18 +363,6 @@ Evidence items should be traceable to their source and review event. A spatial p
 - body
 - read_at nullable
 - created_at
-
-### audit_logs
-
-- id
-- actor_user_id
-- action
-- entity_type
-- entity_id
-- metadata jsonb
-- created_at
-
-Audit records are required for important mutations, verification decisions, document access/review, administrative actions and permission-sensitive changes. They should preserve actor, action, target, scope, time and relevant metadata without turning the audit log into an unbounded dump of sensitive document contents.
 
 ## Jurisdiction model
 
@@ -270,7 +378,7 @@ The prototype can seed Abuja/FCT data without encoding Abuja-specific rules into
 
 ## Security
 
-Use row-level security policies where appropriate. Private document metadata and storage paths must respect the permissions of the related land/project/entity.
+Use row-level security policies on every protected application table. Phase 2 policies must treat the verification case as the primary resource scope and combine authenticated identity, customer relationship, assigned responsibility and explicit administrative permission. Private evidence metadata and storage paths must respect the related case authorization. Later land/project policies extend this model rather than becoming prerequisites for it.
 
 ## Future authorization concepts (reserved, not new tables in this task)
 

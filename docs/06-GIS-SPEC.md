@@ -1,7 +1,13 @@
 # Atexgrove — GIS Specification
 
+## Implementation boundary and delivery phase
+
+Full GIS is **Phase 4 — Controlled Land Discovery + GIS**. It is not the next major implementation after foundation closure. Phase 2/3 may use only a limited contextual site-location map inside a verification case when useful; that map must not imply cadastral, survey, title, legal, planning or statutory authority.
+
+Parcel discovery, filters, standalone map browsing, viewport/lazy spatial loading and the wider discovery UX wait until Phase 4. The MapLibre/PostGIS design below remains accepted future technical guidance, not an instruction to build GIS before the verification-case/evidence and feasibility/report workflows.
+
 ## Purpose
-GIS is a core capability of Atexgrove. The prototype should prove that parcels and development information are spatially connected.
+GIS is a core later capability of Atexgrove. Phase 4 should prove that parcels and development information are spatially connected after the controlled case workflow is proven.
 
 GIS is a representation and analysis capability, not a promise that Atexgrove is a cadastral registry. Every geometry must preserve its source, update date, jurisdiction and verification/authority state.
 
@@ -39,7 +45,7 @@ Keep these layers separate in data, copy and UI:
 Atexgrove internal review or a third-party dataset must not be presented as official/statutory confirmation. Conflicting sources should remain visible with source, dates, jurisdiction, reviewer and uncertainty; do not silently choose a legally consequential answer.
 
 ## Data model
-`land_parcels.geometry` is the source of truth for parcel spatial representation.
+In Phase 4, `land_parcels.geometry` is the source of truth for Atexgrove's parcel spatial representation. It is not automatically the legal boundary source. Before a parcel exists, a Phase 2 case may retain a separate approximate/contextual site point or geometry with explicit provenance and authority limitations.
 
 ## Spatial operations to support initially
 - Bounding-box retrieval for map viewport

@@ -8,11 +8,11 @@ For founder, partner, and non-engineering explanations, start with [`non-technic
 
 ## Current delivery journey
 
-The current proposed delivery order puts the verification service before a land-discovery marketplace. It remains subject to the founder decisions recorded in `OPEN-QUESTIONS-FOUNDER.md` and `DECISIONS.md`.
+The accepted delivery order puts the verification service before a land-discovery marketplace. `DECISIONS.md` is the decision source of truth. The remaining items in `OPEN-QUESTIONS-FOUNDER.md` refine people, policy, data and operational details; they do not reopen whether GIS or marketplace work comes first.
 
 1. Register, choose a role, and sign in.
 2. Start a land-verification and development-feasibility case.
-3. Identify the Abuja site and submit private supporting documents.
+3. Identify the Abuja/FCT site and submit synthetic or properly redacted private supporting evidence for the initial pilot; an existing listing or parcel is not required.
 4. Route the case through assignment, evidence review, notes, status changes, and audit events.
 5. Produce a reviewed Land & Development Report with explicit source and authority labels.
 6. Add land discovery, mapping, projects, professionals, and wider development workflows only after the case workflow is proven.
@@ -49,6 +49,6 @@ The original master prompt can remain as a product-vision document. These files 
 
 ## Status
 
-As of 2026-10-14, PR #9 is merged into `main` and the hosted Supabase migration history contains `001` through `017`. Read-only verification confirms the private `documents` bucket, its SELECT/INSERT/UPDATE/DELETE policies, and RLS on `profiles`, `organizations`, `organization_members`, and `audit_logs`. The pgTAP suites, hosted Auth confirmation/recovery flow, and complete user journeys still need recorded execution evidence. The live security advisor also retains unresolved findings documented in the latest audit addendum. Land verification, reports, GIS, projects, professionals, and feasibility remain planned rather than implemented.
+As of 2026-10-16, PRs #9 and #10 are merged into `main` and the hosted Supabase migration history contains `001` through `017`. Read-only verification confirms the private `documents` bucket, its SELECT/INSERT/UPDATE/DELETE policies, and RLS on `profiles`, `organizations`, `organization_members`, and `audit_logs`. General CI and the database-security workflow have passed; the latter executed pgTAP in a temporary Supabase environment. Hosted Auth confirmation/recovery, hosted cross-user document isolation, remaining advisor findings, the `organization_actor_role` anonymous execute fix, complete user journeys and production readiness remain open. Verification cases, reports, GIS, projects, professionals and feasibility remain planned rather than implemented.
 
 Historical sections in `17-PROJECT-AUDIT.md` retain the status that was true on their stated dates. Use the latest dated audit addendum and the implementation itself for current status.

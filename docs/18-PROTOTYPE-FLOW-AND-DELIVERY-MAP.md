@@ -18,20 +18,20 @@ flowchart TD
     C --> E[Confirm email if required]
     E --> D
     D --> F[Load role-aware dashboard]
-    F --> G[Start verification and feasibility case]
+    F --> G[Stage 1: Request received / start case]
     G --> H[Record Abuja site and request details]
-    H --> I[Upload private supporting documents]
+    H --> I[Stage 2: Upload synthetic/redacted private evidence]
     I --> J[Submit case]
     J --> K[Authorized staff work queue]
     K --> L[Assign or hand over case]
-    L --> M[Review evidence and record source labels]
+    L --> M[Stage 3: Document checks and trust labels]
     M --> N{More evidence required?}
     N -->|Yes| O[Request clarification or documents]
     O --> I
-    N -->|No| P[Enter feasibility assumptions]
-    P --> Q[Generate draft Land and Development Report]
-    Q --> R[Qualified review and approval]
-    R --> S[Deliver report with findings and limitations]
+    N -->|No| P[Stage 4: Contextual site/map review]
+    P --> Q[Stage 5: Validated development options]
+    Q --> R[Generate draft report and require separate qualified review]
+    R --> S[Stage 6: Deliver report with findings and limitations]
     S --> T{Continue into later product flows?}
     T -->|Land discovery| U[Open clearly labelled demo list or map]
     T -->|Project| V[Create controlled project workspace]
@@ -63,13 +63,13 @@ flowchart LR
 | Journey stage | Boundary that matters |
 | --- | --- |
 | Login/onboarding | Supabase Auth establishes identity and session; profile/role data is not a complete permission grant. |
-| Discover land | Server/API validation, ownership/scope checks and bounded pagination; GIS is visual/platform data unless authority is explicit. |
-| View parcel/details | PostGIS/GeoJSON query plus source, jurisdiction, data-as-of and DEMO/NOT OFFICIAL labels. |
 | Verification | Structured type/status/evidence/reviewer/source; authority hierarchy remains visible and auditable. |
 | Documents | Private storage, metadata/version checks and authorization before preview/download; no guessable public URL. |
-| Project/professionals | Organization/project membership and project role checks; professional discipline is not a permission. |
 | Feasibility | Deterministic inputs/rules/outputs, reproducible scenarios and clear estimate/uncertainty labels. |
 | Admin/review | Separated responsibilities, least privilege, scope and audit logging for sensitive actions. |
+| Later land discovery | Server/API validation, bounded pagination and DEMO DATA / NOT OFFICIAL labels; GIS is visual/platform data unless authority is explicit. |
+| Later parcel/details | PostGIS/GeoJSON query plus source, jurisdiction and data-as-of; it is not a Phase 2 case prerequisite. |
+| Later project/professionals | Organization/project membership and project role checks; professional discipline is not a permission. |
 
 Every vertical slice must pass through the relevant server/business, database/RLS, storage and test boundaries. A screen alone is not a completed feature.
 
@@ -91,7 +91,9 @@ Every vertical slice must pass through the relevant server/business, database/RL
 
 **Hosted evidence (2026-10-14):** migrations `001`-`017` are recorded remotely; the `documents` bucket is private; foundation table RLS and storage policies are present.
 
-**Still unverified/open:** pgTAP behavior on a fresh stack, final database-test CI evidence, hosted Auth redirect/email behavior, end-to-end recovery and unresolved security/performance advisor findings. Docker is only needed for local Supabase testing; GitHub Actions can provide that environment.
+**Automated evidence:** general CI [run 38276873401](https://github.com/bakareolamilekan365-tech/ATEXGROVE/actions/runs/38276873401) and database-security [run 38276873408](https://github.com/bakareolamilekan365-tech/ATEXGROVE/actions/runs/38276873408) passed; pgTAP executed in a temporary Supabase environment.
+
+**Still unverified/open:** hosted-user authorization and cross-user document isolation, hosted Auth redirect/email behavior, end-to-end recovery including invalid/expired links, `organization_actor_role` anonymous execute exposure, and unresolved security/performance advisor findings. Docker is only needed for local Supabase testing; GitHub Actions can provide that temporary environment.
 
 ### Phase 2 - Verification case and private evidence
 
@@ -119,7 +121,7 @@ Every vertical slice must pass through the relevant server/business, database/RL
 
 ### Phase 6 - Integration and release confidence
 
-**Output:** replace reserved tests with real unit/integration/E2E coverage, execute migrations and pgTAP in Docker-capable CI, complete responsive/accessibility and error-state review, and produce a deployable preview.
+**Output:** replace remaining reserved tests with real unit/integration/E2E coverage, keep migrations and pgTAP green in Docker-capable CI, verify the hosted environment separately, complete responsive/accessibility and error-state review, and produce a deployable preview.
 
 **Exit gate:** `npm test`, typecheck, lint, build, and the complete Playwright journey pass without fake success states.
 

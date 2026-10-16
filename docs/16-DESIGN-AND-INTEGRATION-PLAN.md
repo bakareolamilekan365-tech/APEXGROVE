@@ -8,7 +8,7 @@ Free tiers are suitable for development and demonstration when quotas, attributi
 
 ### Supabase plan boundary
 
-The first prototype remains on the Supabase Free plan. Leaked-password protection requires Supabase Pro and is therefore a documented, accepted limitation for the prototype rather than a release gate. Any future feature that requires Pro must be labelled **PRO PLAN REQUIRED** in the relevant checklist before it becomes a commitment; upgrading the plan requires a separate cost decision.
+The first prototype remains on the Supabase Free plan. Leaked-password protection is still reported disabled; its availability and plan requirement must be confirmed in the connected dashboard before the finding is accepted as a plan limitation. Any future feature that requires Pro must be labelled **PRO PLAN REQUIRED** in the relevant checklist before it becomes a commitment; upgrading the plan requires a separate cost decision.
 
 ## Integration inventory
 
@@ -16,7 +16,7 @@ The first prototype remains on the Supabase Free plan. Leaked-password protectio
 
 - **GitHub** — source control, reviews and CI.
 - **Supabase** — PostgreSQL/PostGIS, Auth, RLS and private Storage.
-- **Map stack** — MapLibre and a replaceable tile/data provider when map implementation needs it.
+- **Map stack (Phase 4; optional earlier context only)** — MapLibre and a replaceable tile/data provider when map implementation genuinely needs it. A provider is not a prerequisite for Phase 2.
 - **Vercel** — future preview/deployment target when the local journey is ready.
 - **Email provider** — later; begin with Supabase Auth email for development.
 - **Monitoring/observability** — later, after privacy/consent and event boundaries are defined.
@@ -34,7 +34,7 @@ The prototype does not require every future API domain, external authority feed 
 ### 2. Domain and data design
 
 - Confirm ownership and membership rules for every domain.
-- Confirm the parcel-to-verification-to-project relationship.
+- Confirm the case-first relationship: a verification case starts from customer/request and site details without requiring a listing or parcel; any later parcel/project link is optional.
 - Confirm document metadata, versioning, private storage, and audit records.
 - Confirm jurisdiction, provenance, and `DEMO DATA / NOT OFFICIAL` fields for synthetic data.
 - Review migrations and RLS policies before building large screens.
@@ -80,7 +80,7 @@ Before implementing a module, define:
 | ----------------- | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
 | GitHub            | Source control and GitHub Actions          | Already configured. Public repository Actions are suitable for CI.                                                                                        | Complete                  |
 | Supabase          | PostgreSQL, PostGIS, Auth, private Storage | Linked hosted project has migrations `001`-`017`; private bucket and foundation RLS configuration are present. Keep service-role keys server-side.      | Connected; verification gaps remain |
-| Map tile provider | Basemap/vector tiles for MapLibre          | Use a free developer tier such as MapTiler Cloud, or a compliant no-signup public provider for local development. Keep the provider behind a map adapter. | Before map implementation |
+| Map tile provider | Phase 4 basemap/vector tiles for MapLibre | Do not require one for Phase 2. Use a compliant free developer/public option only when a contextual case map or Phase 4 implementation genuinely needs it, behind a map adapter. | Optional contextual map; otherwise before Phase 4 |
 
 Docker is required only to run the local Supabase stack and pgTAP database tests; it is not required to connect to or push reviewed migrations to hosted Supabase. GitHub Actions supplies a Docker-capable runner for those database tests. Neither mechanism replaces hosted configuration checks or end-to-end Auth email testing.
 
@@ -173,7 +173,10 @@ Public map keys still need domain restrictions and quota monitoring. Server-only
 3. Define migrations, RLS, storage buckets, and seed fixtures.
 4. Implement the design tokens and application shell.
 5. Implement auth and permissions with unit/integration tests.
-6. Add land and GIS using the map adapter.
-7. Add verification, documents, projects, professionals, and feasibility one module at a time.
-8. Replace reserved test placeholders with requirement-specific tests.
-9. Connect preview deployment and monitoring only after the local journey works.
+6. Close the remaining foundation operational/security evidence without reopening the accepted product order.
+7. Implement the verification-case and private-evidence vertical slice, including work queue, human-led assignment, review state/authority labels and audit history.
+8. Implement deterministic feasibility and the limited, separately reviewed Land & Development Report.
+9. Add controlled land discovery and GIS through the map adapter in Phase 4; a limited contextual case map may be added earlier only when genuinely needed.
+10. Add projects and professionals as the later Phase 5 slice.
+11. Replace reserved test placeholders with requirement-specific tests and complete integration/release-confidence gates.
+12. Connect preview deployment and monitoring only after the relevant local journey works.

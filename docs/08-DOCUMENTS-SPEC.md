@@ -2,7 +2,7 @@
 
 ## Scope and implementation boundary
 
-Documents are sensitive assets connected to users, organizations, land parcels, verification records and projects. This specification keeps the current prototype model while defining the controls needed for the future architecture. It does not claim that every lifecycle stage is fully implemented today.
+Documents are sensitive assets connected to users, organizations, verification cases, later land parcels and projects. The Phase 2 primary resource scope is the verification case; a case and its evidence must not require an existing marketplace parcel. This specification defines the target controls without claiming that every lifecycle stage is implemented today.
 
 The current foundation now includes a hosted private `documents` bucket and user-scoped object policies using the `documents/<user-id>/...` convention. This is a storage-security foundation, not a completed document product: upload UI, metadata persistence, version lineage, application-level document audit events, case/project authorization, malware scanning, retention policy and automated analysis remain **Planned/Future** until implemented and tested.
 
@@ -42,7 +42,7 @@ The document record should be capable of retaining:
 | Field/concept | Purpose |
 | --- | --- |
 | Document ID | Stable identifier independent of a filename or storage URL. |
-| Owner/entity | User, organization, land parcel, verification or project to which access is scoped. |
+| Owner/entity | Verification case and customer relationship for Phase 2; later organization, land parcel or project scope where applicable. |
 | Uploader | Authenticated actor that submitted the file. |
 | Type | Controlled document type, such as title, survey, plan, identity or project record. |
 | Filename and MIME type | Display and validation metadata; filenames are normalized before storage. |
@@ -68,7 +68,7 @@ Metadata should not contain unnecessary copies of sensitive document content. Ac
 ## Security and private storage
 
 - Use private buckets/storage paths by default.
-- Authorize the related user, organization, land, verification or project before every retrieval, download, preview or export.
+- Authorize the related verification case, customer and assigned/scoped staff responsibility before every Phase 2 retrieval, download, preview or export. Later organization, land or project relationships may extend the decision.
 - Return only short-lived signed or otherwise controlled access; do not expose guessable public document URLs.
 - Validate MIME/type, size, extension and content expectations at upload. Normalize filenames and prevent path traversal or unsafe object names.
 - Treat macros, embedded scripts, malformed files and polyglot files as malicious-file considerations.
@@ -119,7 +119,7 @@ Document access follows minimum-necessary principles. The architecture should su
 
 ## AI document analysis (Future)
 
-AI extraction or analysis is not required for the current prototype. If added, it should run asynchronously through a background job and an `AIProvider` adapter. Uploaded files and extracted text are untrusted input. AI output is advisory, must include confidence/uncertainty, must not invent missing facts or impersonate legal/professional/official authority, and requires human or professional review before consequential status changes.
+AI extraction or analysis is not required for the current prototype and must not process real controlled-pilot documents. The initial pilot uses synthetic or properly redacted evidence. If AI is added later, it should run asynchronously through a background job and an `AIProvider` adapter. Uploaded files and extracted text are untrusted input. AI output is advisory, must include confidence/uncertainty, must not invent missing facts or impersonate legal/professional/official authority, and requires human or professional review before consequential status changes.
 
 ## Scalability and resilience (Future)
 
@@ -136,4 +136,6 @@ Long-running work should expose durable states such as queued, running, succeede
 
 ## Current prototype boundary
 
-The current prototype boundary includes the private hosted bucket and foundation user-path policies described above. It does not yet include a complete upload/retrieval journey, document metadata records, version-aware review, project/organization document access, application audit events, malware scanning, immutable audit guarantees, jurisdiction-specific retention, background processing or AI analysis. Database policy behavior still requires recorded ALLOW/DENY test evidence; a private bucket existing is necessary but not sufficient proof of the document lifecycle.
+The current prototype boundary includes the private hosted bucket and foundation user-path policies described above. pgTAP ALLOW/DENY tests have passed in a temporary Supabase environment through GitHub Actions, which is valid automated evidence. Hosted cross-user document isolation with realistic authenticated sessions remains pending.
+
+The prototype still does not include a complete case-level upload/retrieval journey, document metadata records, version-aware review, case/project/organization authorization, application audit events, malware scanning, immutable audit guarantees, jurisdiction-specific retention, background processing or AI analysis. A private bucket and temporary-environment policy tests are necessary foundations, not proof of the finished document lifecycle.
